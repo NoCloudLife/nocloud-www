@@ -149,6 +149,21 @@ CONSTRAINT lifespan
 <span class="cm"># before it runs anywhere, see what it would actually change:</span>
 <span class="p">&gt;&gt;&gt;</span> curation.impact(<span class="ok">"grandpa_and_uncles_without_father"</span>, rule, corpus, ctx)
 23 photos would be reclassified — reviewable before you approve it</div>
+
+  <p style="margin-top:22px">Two more finish the vocabulary: a <code>CLASSIFIER</code> groups
+  things (it's the only one that lowers to <code>LINK</code>), and a <code>RESOLUTION</code> is
+  the tie-breaker when two rules disagree on the same fact:</p>
+  <div class="code"><span class="cm"># group photos into trip albums by place + a tight date window</span>
+CLASSIFIER trip_album
+  GROUP    photo BY place, date_cluster(±3 days)
+  PROPOSE  belongs_to(photo, album=<span class="ok">"{place} {year}"</span>)
+
+<span class="cm"># two rules can propose different dates for the same photo —</span>
+<span class="cm"># resolution is a policy, not a coin flip:</span>
+RESOLUTION min_date
+  WHEN     multiple RULEs propose date(photo)
+  ACCEPT   min(candidates) UNLESS absurd(candidate)
+<span class="cm">#   e.g. never 1970-01-01, never the day of a mass upload</span></div>
 </section>
 
 <section>
