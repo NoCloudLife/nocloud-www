@@ -132,12 +132,14 @@ run.move(<span class="ok">"Sink/IMG_0453.jpg"</span>, <span class="ok">"Photos/1
   vocabulary, one level up — a <code>RULE</code> proposes a fact, a <code>CONSTRAINT</code> vetoes
   one, never the reverse. You write them, or say them in plain language and approve what comes out:</p>
   <div class="code"><span class="cm"># a rule you wrote — or said out loud and approved:</span>
-<span class="cm"># "the grandparent's here but the parent isn't born yet"</span>
-RULE grandparent_without_parent
-  MATCH    photo WHERE depicts(grandparent)
-                 AND NOT depicts(parent)
-  PROPOSE  date(photo) &lt; parent.born
-  SOURCE   <span class="ok">"coaching: grandparent's there, parent isn't yet"</span>
+<span class="cm"># "grandpa and both my uncles are there, but not my father —</span>
+<span class="cm">#  it's before he was born"</span>
+RULE grandpa_and_uncles_without_father
+  MATCH    photo WHERE depicts(grandpa)
+                 AND depicts(uncle_1) AND depicts(uncle_2)
+                 AND NOT depicts(father)
+  PROPOSE  date(photo) &lt; father.born
+  SOURCE   <span class="ok">"coaching: grandpa + both uncles, no father yet"</span>
 
 <span class="cm"># constraints only ever veto — never propose:</span>
 CONSTRAINT lifespan
@@ -145,7 +147,7 @@ CONSTRAINT lifespan
            WHERE depicts(person)
 
 <span class="cm"># before it runs anywhere, see what it would actually change:</span>
-<span class="p">&gt;&gt;&gt;</span> curation.impact(<span class="ok">"grandparent_without_parent"</span>, rule, corpus, ctx)
+<span class="p">&gt;&gt;&gt;</span> curation.impact(<span class="ok">"grandpa_and_uncles_without_father"</span>, rule, corpus, ctx)
 23 photos would be reclassified — reviewable before you approve it</div>
 </section>
 
