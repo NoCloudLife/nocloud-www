@@ -127,6 +127,26 @@ run.move(<span class="ok">"Sink/IMG_0453.jpg"</span>, <span class="ok">"Photos/1
 <span class="cm"># any op, any time — undo is never a special case</span>
 <span class="p">$</span> nocloud journal revert a1e3f9
 ✓ reverted: MOVE Photos/1994/beach.jpg → Sink/IMG_0453.jpg</div>
+
+  <p style="margin-top:22px">The rules that decide *what* an op should be have their own small
+  vocabulary, one level up — a <code>RULE</code> proposes a fact, a <code>CONSTRAINT</code> vetoes
+  one, never the reverse. You write them, or say them in plain language and approve what comes out:</p>
+  <div class="code"><span class="cm"># a rule you wrote — or said out loud and approved:</span>
+<span class="cm"># "the grandparent's here but the parent isn't born yet"</span>
+RULE grandparent_without_parent
+  MATCH    photo WHERE depicts(grandparent)
+                 AND NOT depicts(parent)
+  PROPOSE  date(photo) &lt; parent.born
+  SOURCE   <span class="ok">"coaching: grandparent's there, parent isn't yet"</span>
+
+<span class="cm"># constraints only ever veto — never propose:</span>
+CONSTRAINT lifespan
+  REJECT   date(photo) &gt; person.died
+           WHERE depicts(person)
+
+<span class="cm"># before it runs anywhere, see what it would actually change:</span>
+<span class="p">&gt;&gt;&gt;</span> curation.impact(<span class="ok">"grandparent_without_parent"</span>, rule, corpus, ctx)
+23 photos would be reclassified — reviewable before you approve it</div>
 </section>
 
 <section>
