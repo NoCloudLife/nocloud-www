@@ -54,11 +54,18 @@ code,.cmd,.code{font-family:var(--mono)}
   padding:13px 15px;font-size:13.5px;overflow-x:auto;white-space:nowrap;color:var(--ink)}
 .cmd .p{color:var(--mut)}
 .code{display:block;background:var(--card);border:1px solid var(--line);border-radius:10px;
-  padding:16px 18px;font-size:13px;line-height:1.65;overflow-x:auto;white-space:pre;color:var(--ink);
-  margin-top:14px}
+  padding:16px 18px;font-size:13px;line-height:1.65;overflow-x:auto;white-space:pre;color:var(--ink)}
 .code .cm{color:var(--mut)}
 .code .p{color:var(--c1)}
 .code .ok{color:#34d399}
+.tabs{display:flex;flex-wrap:wrap;gap:6px;margin-top:22px 0 0}
+.tab{font:inherit;font-family:var(--mono);font-size:12.5px;font-weight:650;letter-spacing:.3px;
+  padding:7px 13px;border-radius:8px;border:1px solid var(--line);background:var(--glass);
+  color:var(--mut);cursor:pointer}
+.tab:hover{border-color:var(--brd-hi);color:var(--ink)}
+.tab.active{background:var(--grad);color:#0a0e1a;border-color:transparent}
+.tab-panel{display:none;margin-top:14px}
+.tab-panel.active{display:block}
 footer{color:var(--mut);font-size:13px;padding:14px 0 60px}
 footer .dot{opacity:.5;margin:0 7px}
 .btns{display:flex;flex-wrap:wrap;gap:10px;margin-top:26px}
@@ -116,11 +123,22 @@ footer .dot{opacity:.5;margin:0 7px}
       You can see why a file ended up where it did.</p>
     </div>
   </div>
-  <p style="margin-top:22px">Every bulk change, however it was triggered, is a sequence of ops
-  drawn from six primitives — <code>COPY</code> <code>MOVE</code> <code>ANNOTATE</code>
-  <code>RECORD</code> <code>LINK</code> <code>DELETE</code> — each with an exact inverse. One of
-  them dating a photo, with its reasoning attached, and undone with one command:</p>
-  <div class="code"><span class="cm"># dating_enrich.py moves + tags a photo, and says why</span>
+  <p style="margin-top:22px">Everything below reduces to a small, closed vocabulary: six
+  primitives for what an op <em style="font-style:normal;color:var(--ink)">does</em>
+  (<code>COPY</code> <code>MOVE</code> <code>ANNOTATE</code> <code>RECORD</code> <code>LINK</code>
+  <code>DELETE</code>, each with an exact inverse), six constructs for what
+  <em style="font-style:normal;color:var(--ink)">decides</em> it. One tab each:</p>
+
+  <div class="tab-group">
+    <div class="tabs" role="tablist">
+      <button class="tab active" data-tab="move">MOVE</button>
+      <button class="tab" data-tab="rule">RULE</button>
+      <button class="tab" data-tab="constraint">CONSTRAINT</button>
+      <button class="tab" data-tab="classifier">CLASSIFIER</button>
+      <button class="tab" data-tab="resolution">RESOLUTION</button>
+    </div>
+
+    <div class="code tab-panel active" data-panel="move"><span class="cm"># dating_enrich.py moves + tags a photo, and says why</span>
 run.move(<span class="ok">"Sink/IMG_0453.jpg"</span>, <span class="ok">"Photos/1994/beach.jpg"</span>,
          because=<span class="ok">"EXIF date + neighbor-photo evidence, high confidence"</span>)
 
@@ -128,10 +146,7 @@ run.move(<span class="ok">"Sink/IMG_0453.jpg"</span>, <span class="ok">"Photos/1
 <span class="p">$</span> nocloud journal revert a1e3f9
 ✓ reverted: MOVE Photos/1994/beach.jpg → Sink/IMG_0453.jpg</div>
 
-  <p style="margin-top:22px">The rules that decide *what* an op should be have their own small
-  vocabulary, one level up — a <code>RULE</code> proposes a fact, a <code>CONSTRAINT</code> vetoes
-  one, never the reverse. You write them, or say them in plain language and approve what comes out:</p>
-  <div class="code"><span class="cm"># a rule you wrote — or said out loud and approved:</span>
+    <div class="code tab-panel" data-panel="rule"><span class="cm"># a rule you wrote — or said out loud and approved:</span>
 <span class="cm"># "grandpa and both my uncles are there, but not my father —</span>
 <span class="cm">#  it's before he was born"</span>
 RULE grandpa_and_uncles_without_father
@@ -141,29 +156,27 @@ RULE grandpa_and_uncles_without_father
   PROPOSE  date(photo) &lt; father.born
   SOURCE   <span class="ok">"coaching: grandpa + both uncles, no father yet"</span>
 
-<span class="cm"># constraints only ever veto — never propose:</span>
-CONSTRAINT lifespan
-  REJECT   date(photo) &gt; person.died
-           WHERE depicts(person)
-
 <span class="cm"># before it runs anywhere, see what it would actually change:</span>
 <span class="p">&gt;&gt;&gt;</span> curation.impact(<span class="ok">"grandpa_and_uncles_without_father"</span>, rule, corpus, ctx)
 23 photos would be reclassified — reviewable before you approve it</div>
 
-  <p style="margin-top:22px">Two more finish the vocabulary: a <code>CLASSIFIER</code> groups
-  things (it's the only one that lowers to <code>LINK</code>), and a <code>RESOLUTION</code> is
-  the tie-breaker when two rules disagree on the same fact:</p>
-  <div class="code"><span class="cm"># group photos into trip albums by place + a tight date window</span>
+    <div class="code tab-panel" data-panel="constraint"><span class="cm"># constraints only ever veto — never propose:</span>
+CONSTRAINT lifespan
+  REJECT   date(photo) &gt; person.died
+           WHERE depicts(person)</div>
+
+    <div class="code tab-panel" data-panel="classifier"><span class="cm"># group photos into trip albums by place + a tight date window</span>
 CLASSIFIER trip_album
   GROUP    photo BY place, date_cluster(±3 days)
-  PROPOSE  belongs_to(photo, album=<span class="ok">"{place} {year}"</span>)
+  PROPOSE  belongs_to(photo, album=<span class="ok">"{place} {year}"</span>)</div>
 
-<span class="cm"># two rules can propose different dates for the same photo —</span>
+    <div class="code tab-panel" data-panel="resolution"><span class="cm"># two rules can propose different dates for the same photo —</span>
 <span class="cm"># resolution is a policy, not a coin flip:</span>
 RESOLUTION min_date
   WHEN     multiple RULEs propose date(photo)
   ACCEPT   min(candidates) UNLESS absurd(candidate)
 <span class="cm">#   e.g. never 1970-01-01, never the day of a mass upload</span></div>
+  </div>
 </section>
 
 <section>
@@ -188,5 +201,17 @@ RESOLUTION min_date
 </footer>
 
 </div>
+<script>
+document.querySelectorAll('.tab-group').forEach(function(group){
+  group.addEventListener('click', function(e){
+    var btn = e.target.closest('.tab');
+    if (!btn) return;
+    group.querySelectorAll('.tab').forEach(function(b){ b.classList.toggle('active', b === btn); });
+    group.querySelectorAll('.tab-panel').forEach(function(p){
+      p.classList.toggle('active', p.dataset.panel === btn.dataset.tab);
+    });
+  });
+});
+</script>
 </body>
 </html>
