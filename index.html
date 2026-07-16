@@ -49,10 +49,16 @@ strong{font-weight:680}
   box-shadow:var(--shadow),var(--sheen);-webkit-backdrop-filter:blur(16px);backdrop-filter:blur(16px)}
 .card h3{font-size:15px;margin:0 0 6px;font-weight:680}
 .card p{font-size:14px;color:var(--mut);margin:0}
-code,.cmd{font-family:var(--mono)}
+code,.cmd,.code{font-family:var(--mono)}
 .cmd{display:block;background:var(--card);border:1px solid var(--line);border-radius:10px;
   padding:13px 15px;font-size:13.5px;overflow-x:auto;white-space:nowrap;color:var(--ink)}
 .cmd .p{color:var(--mut)}
+.code{display:block;background:var(--card);border:1px solid var(--line);border-radius:10px;
+  padding:16px 18px;font-size:13px;line-height:1.65;overflow-x:auto;white-space:pre;color:var(--ink);
+  margin-top:14px}
+.code .cm{color:var(--mut)}
+.code .p{color:var(--c1)}
+.code .ok{color:#34d399}
 footer{color:var(--mut);font-size:13px;padding:14px 0 60px}
 footer .dot{opacity:.5;margin:0 7px}
 .btns{display:flex;flex-wrap:wrap;gap:10px;margin-top:26px}
@@ -110,6 +116,17 @@ footer .dot{opacity:.5;margin:0 7px}
       You can see why a file ended up where it did.</p>
     </div>
   </div>
+  <p style="margin-top:22px">Every bulk change, however it was triggered, is a sequence of ops
+  drawn from six primitives — <code>COPY</code> <code>MOVE</code> <code>ANNOTATE</code>
+  <code>RECORD</code> <code>LINK</code> <code>DELETE</code> — each with an exact inverse. One of
+  them dating a photo, with its reasoning attached, and undone with one command:</p>
+  <div class="code"><span class="cm"># dating_enrich.py moves + tags a photo, and says why</span>
+run.move(<span class="ok">"Sink/IMG_0453.jpg"</span>, <span class="ok">"Photos/1994/beach.jpg"</span>,
+         because=<span class="ok">"EXIF date + neighbor-photo evidence, high confidence"</span>)
+
+<span class="cm"># any op, any time — undo is never a special case</span>
+<span class="p">$</span> nocloud journal revert a1e3f9
+✓ reverted: MOVE Photos/1994/beach.jpg → Sink/IMG_0453.jpg</div>
 </section>
 
 <section>
@@ -122,10 +139,10 @@ footer .dot{opacity:.5;margin:0 7px}
 <section>
   <h2>Status</h2>
   <p>NoCloud is being built in the open-ish: it runs, every day, on the author's own Mac and
-  Raspberry Pi. It is <strong>not packaged for other people yet</strong> — there is no install
-  command to give you that would work today, and putting a fake one here would be a poor start for
-  a project whose whole pitch is that you can trust it with your past.
-  See <a href="/start.html">how it works and what you'll need</a>.</p>
+  Raspberry Pi. The install command exists (see <a href="/start.html">Getting started</a>), but the
+  source repo it pulls from is <strong>still private</strong>, so it doesn't work for anyone else
+  yet. No tagged release exists either — installing today means pulling the repo's current state
+  directly.</p>
 </section>
 
 <div class="rule"></div>
