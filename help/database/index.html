@@ -1142,7 +1142,396 @@ previous state is copied before the change and the operation is recorded, so any
 rolled back. Bulk operations on the archive are reversible too — see <a href="../concepts/">Concepts</a>.</p>
 <hr />
 <!--DYN-->
-<p><em>(The table reference is generated from the live schema when the manual is built.)</em></p>
+<table>
+<thead>
+<tr>
+<th>Table</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>APP (product: users, sections, languages)</strong></td>
+<td></td>
+</tr>
+<tr>
+<td><code>app_languages</code></td>
+<td>DIMENSION of the UI languages on offer (<code>code</code> is the BCP-47 tag). The UI is written in English and translated from it.</td>
+</tr>
+<tr>
+<td><code>app_sections</code></td>
+<td>CATALOG of everything installable on the Home: the built-in sections plus every App Store app (<code>is_app</code>). One row per section, with the URL it opens and the emoji/description shown on its tile.</td>
+</tr>
+<tr>
+<td><code>app_timezones</code></td>
+<td>DIMENSION of selectable timezones (IANA names). What turns a stored UTC timestamp into the hour you actually read.</td>
+</tr>
+<tr>
+<td><code>app_user_sections</code></td>
+<td>Which sections each user has on their Home, in which order (<code>sort_order</code>) and whether they are hidden (<code>is_active</code>=0). Hiding is NOT uninstalling: the row stays.</td>
+</tr>
+<tr>
+<td><code>app_user_widgets</code></td>
+<td>Per-user widget layout: order, size and whether it is hidden. Same shape as <code>app_user_sections</code> on purpose — a widget and a section are configured identically.</td>
+</tr>
+<tr>
+<td><code>app_users</code></td>
+<td>The people who can log in. <code>person_id</code> links an account to its row in <code>people_persons</code>, which is what ties a login to a face in the photos. The live copy of this lives in the Pi's <code>ajustes.json</code>; this table is the normalized projection of it.</td>
+</tr>
+<tr>
+<td><code>app_widgets</code></td>
+<td>CATALOG of Home widgets, with their default size in grid columns × rows (<code>default_cols</code>/<code>default_rows</code>). Adding a row here makes the widget appear for everyone.</td>
+</tr>
+<tr>
+<td><strong>FINANCE</strong></td>
+<td></td>
+</tr>
+<tr>
+<td><code>fin_accounts</code></td>
+<td>CHART OF ACCOUNTS of the double-entry ledger: assets, liabilities, income and expense, nested via <code>parent_id</code>. Derived from the raw cash book (<code>fin_movimientos</code>), which stays untouched — see docs/FIN_DOUBLE_ENTRY_PLAN.md.</td>
+</tr>
+<tr>
+<td><code>fin_cartera_fiscal</code></td>
+<td>Tax lots (basis of the capital-gains FIFO) with costs: comision/gasto_divisa/otros_gastos.</td>
+</tr>
+<tr>
+<td><code>fin_categories</code></td>
+<td>DIMENSION of income/expense categories (PK=code; ISO 20022 purpose_code + own subcode + merchant).</td>
+</tr>
+<tr>
+<td><code>fin_category_overrides</code></td>
+<td>Manual corrections to automatic categorisation, keyed by the normalised concept. A human decision that beats the rule and survives re-imports — this is what makes the classifier coachable.</td>
+</tr>
+<tr>
+<td><code>fin_cotizaciones</code></td>
+<td>Latest quote per ticker/broker. precio=fundamental (market); calc_valor_eur=derived (shares×price×fx).</td>
+</tr>
+<tr>
+<td><code>fin_cotizaciones_hist</code></td>
+<td>Close-price history downloaded from Yahoo (external source, not computed).</td>
+</tr>
+<tr>
+<td><code>fin_crypto_trades</code></td>
+<td>Crypto trades. Generic <code>exchange</code> (Kraken today; extensible to other exchanges).</td>
+</tr>
+<tr>
+<td><code>fin_cuenta_alias</code></td>
+<td>Crosswalk: statement text → fin_cuentas (per source).</td>
+</tr>
+<tr>
+<td><code>fin_cuentas</code></td>
+<td>DIMENSION of own accounts (bank</td>
+</tr>
+<tr>
+<td><code>fin_docs</code></td>
+<td>Ingested financial documents (dedupe by sha).</td>
+</tr>
+<tr>
+<td><code>fin_facturas</code></td>
+<td>Utility invoices (provider/period/amount/kwh).</td>
+</tr>
+<tr>
+<td><code>fin_manual_entries</code></td>
+<td>One-off income/expense facts with no fin_movimientos row at all (e.g. a freelance invoice paid outside the tracked accounts, an estimated tax contribution) — a transaction-shaped fact pointed at a real category, generic enough for any such one-off, not modeled around any specific source.</td>
+</tr>
+<tr>
+<td><code>fin_movimientos</code></td>
+<td>UNIFIED bank cash book (every connected account/source merged; a source's internal envelope, if any, goes in <code>origen</code>) — permanent raw import layer, unchanged by the double-entry ledger built downstream of it (fin_accounts/fin_transactions/fin_postings). Internal-transfer/broker classification is structural there now, not a stored code.</td>
+</tr>
+<tr>
+<td><code>fin_ops_broker</code></td>
+<td>Broker operations (BUY/SELL of securities), canonical (import_ops_broker.py).</td>
+</tr>
+<tr>
+<td><code>fin_posiciones</code></td>
+<td>Current portfolio positions (from connected broker/bank captures).</td>
+</tr>
+<tr>
+<td><code>fin_positions_hist</code></td>
+<td>DERIVED: monthly valuation of the portfolio (today's shares × that month's close) — what draws the net-worth chart. calc_close is the monthly rollup of fin_cotizaciones_hist (Yahoo's daily closes). Was calc_pos_hist: calc_ marks derived FIELDS, not a domain, and this is finance.</td>
+</tr>
+<tr>
+<td><code>fin_postings</code></td>
+<td>The lines of each transaction: amount (in minor units — cents, never floats) against an account. The double entry itself; a transaction's postings always balance.</td>
+</tr>
+<tr>
+<td><code>fin_rules</code></td>
+<td>Concept→category classification rules.</td>
+</tr>
+<tr>
+<td><code>fin_saldos</code></td>
+<td>Balance snapshots per account (available/booked) — from bank captures.</td>
+</tr>
+<tr>
+<td><code>fin_splits</code></td>
+<td>Stock splits (ratio per date) to adjust historical share counts.</td>
+</tr>
+<tr>
+<td><code>fin_suecia_acciones</code></td>
+<td>Sweden years: stock capital gains per year (K4). calc_resultado_sek=sale−cost.</td>
+</tr>
+<tr>
+<td><code>fin_suecia_ingresos</code></td>
+<td>Sweden years: ANNUAL tax summary from that jurisdiction's own tax authority. <em><em>sek fundamental; calc</em></em>_eur derived (×fx).</td>
+</tr>
+<tr>
+<td><code>fin_suecia_saldos</code></td>
+<td>Sweden years: balance snapshots (SEB/Avanza) at Dec-31.</td>
+</tr>
+<tr>
+<td><code>fin_transactions</code></td>
+<td>One row per economic EVENT of the ledger (date, description, origin). The amounts are not here: they live in its postings, which must sum to zero.</td>
+</tr>
+<tr>
+<td><code>fin_valor_alias</code></td>
+<td>Crosswalk: statement text → fin_valores (per source).</td>
+</tr>
+<tr>
+<td><code>fin_valores</code></td>
+<td>DIMENSION of securities (name/ticker/isin/currency/market).</td>
+</tr>
+<tr>
+<td><strong>TAXES</strong></td>
+<td></td>
+</tr>
+<tr>
+<td><code>tax_declarations</code></td>
+<td>Spain IRPF returns (Modelo 100) reconciled against form 0424. (Skatteverket lives in fin_suecia_*.)</td>
+</tr>
+<tr>
+<td><strong>HEALTH</strong></td>
+<td></td>
+</tr>
+<tr>
+<td><code>health_conditions</code></td>
+<td>Diagnosed conditions, with date, current status and who diagnosed them.</td>
+</tr>
+<tr>
+<td><code>health_documents</code></td>
+<td>Index of health documents (reports, tests) — the path on disk, never the content.</td>
+</tr>
+<tr>
+<td><code>health_measurements</code></td>
+<td>Time series of every measurement (weight, blood pressure, glucose…): <code>metric</code> says which, <code>value</code>/<code>value2</code> hold it (two for pairs like systolic/diastolic).</td>
+</tr>
+<tr>
+<td><code>health_prescriptions</code></td>
+<td>Prescribed medication: dose, schedule and whether it is still active.</td>
+</tr>
+<tr>
+<td><code>health_profile</code></td>
+<td>Key/value with the basics of the health profile (blood type, allergies…). One row per fact, so adding one needs no migration.</td>
+</tr>
+<tr>
+<td><code>health_screen_time</code></td>
+<td>Screen time per app and day, from Apple Screen Time. Seconds, per device.</td>
+</tr>
+<tr>
+<td><code>health_visits</code></td>
+<td>Medical appointments: specialty, doctor, place and reason.</td>
+</tr>
+<tr>
+<td><strong>PEOPLE &amp; GENEALOGY</strong></td>
+<td></td>
+</tr>
+<tr>
+<td><code>people_email_stats</code></td>
+<td>RAW pool: person↔addresses with mail counts (to curate → people_person_emails).</td>
+</tr>
+<tr>
+<td><code>people_entities</code></td>
+<td>RAW pool: entities (people/companies) extracted from mail.</td>
+</tr>
+<tr>
+<td><code>people_faces</code></td>
+<td>RAW pool: detected-face index (idx ↔ Immich person id).</td>
+</tr>
+<tr>
+<td><code>people_immich_counts</code></td>
+<td>RAW pool: Immich person id with photo count.</td>
+</tr>
+<tr>
+<td><code>people_name_contexts</code></td>
+<td>RAW pool: name contexts.</td>
+</tr>
+<tr>
+<td><code>people_person_emails</code></td>
+<td>1:N dimension — a person's email addresses.</td>
+</tr>
+<tr>
+<td><code>people_person_faces</code></td>
+<td>1:N dimension — Immich faces (person_id) linked to a person.</td>
+</tr>
+<tr>
+<td><code>people_person_phones</code></td>
+<td>1:N dimension — a person's phone numbers.</td>
+</tr>
+<tr>
+<td><code>people_persons</code></td>
+<td>MASTER of persons (family tree). Data: birth/death (DATE + city), profession. Aliases: main_alias + other_aliases. Tree: father_id/mother_id (self-FK). Derived: calc_main_email, calc_age (years, (death or today)−birth).</td>
+</tr>
+<tr>
+<td><code>people_work_contexts</code></td>
+<td>RAW pool: work contexts.</td>
+</tr>
+<tr>
+<td><strong>HOME (house + network)</strong></td>
+<td></td>
+</tr>
+<tr>
+<td><code>home_devices</code></td>
+<td>Network/home-automation devices (MAC, IP, kind, room).</td>
+</tr>
+<tr>
+<td><code>home_plan_arcs</code></td>
+<td>Arcs of a circle on the plan — a door's swing, mostly.</td>
+</tr>
+<tr>
+<td><code>home_plan_areas</code></td>
+<td>Polygons filled on the plan (rooms and zones drawn as an area, not as walls).</td>
+</tr>
+<tr>
+<td><code>home_plan_categories</code></td>
+<td>DIMENSION of what a plan line can be (wall, door, window…), grouped by <code>grp</code>. Drives its colour and meaning.</td>
+</tr>
+<tr>
+<td><code>home_plan_circles</code></td>
+<td>Circles on the plan (columns, round elements).</td>
+</tr>
+<tr>
+<td><code>home_plan_hinges</code></td>
+<td>Hinge points: where an arc pivots, i.e. which side a door opens from.</td>
+</tr>
+<tr>
+<td><code>home_plan_lines</code></td>
+<td>Plan SEGMENTS between two nodes: walls, doors, windows… <code>cat_code</code> says what it is and <code>layer</code> which layer it is drawn on. <code>calc_orientation</code> is derived from its angle.</td>
+</tr>
+<tr>
+<td><code>home_plan_nodes</code></td>
+<td>The plan's VERTICES (x/y in px). Everything else references these, so moving a corner moves every wall that touches it.</td>
+</tr>
+<tr>
+<td><code>home_plan_orientations</code></td>
+<td>The plan's dominant directions (degrees), used to snap walls to the flat's real orthogonal grid. <code>is_dominant</code> marks the main one.</td>
+</tr>
+<tr>
+<td><code>home_plan_points</code></td>
+<td>Points/icons positioned on the plan (px).</td>
+</tr>
+<tr>
+<td><code>home_property</code></td>
+<td>The home (global plan/surface metadata).</td>
+</tr>
+<tr>
+<td><code>home_room_sides</code></td>
+<td>Which lines make up each room's outline, in order. <code>calc_rms</code> is derived (fit against the orientation grid).</td>
+</tr>
+<tr>
+<td><code>home_rooms</code></td>
+<td>Rooms with plan polygon. plan_area_m2=FUNDAMENTAL (brochure); calc_area_m2/calc_area_delta_pct=derived.</td>
+</tr>
+<tr>
+<td><strong>PHOTOS (incl. dating + Immich mirror)</strong></td>
+<td></td>
+</tr>
+<tr>
+<td><code>photo_assets</code></td>
+<td>The photo/video INVENTORY: one row per file, with its path, size, kind and the folder it came from. The base layer everything else in the domain points at.</td>
+</tr>
+<tr>
+<td><code>photo_date_applied</code></td>
+<td>The date actually APPLIED to each photo, with its source and confidence — and <code>prev_date</code>/<code>prev_xmp_b64</code>, the previous state, which is what makes it reversible.</td>
+</tr>
+<tr>
+<td><code>photo_dating_evidence</code></td>
+<td>All the date EVIDENCE gathered per photo, each source in its own column (EXIF, Takeout, email, filename, Immich, filesystem…). Nothing decided here — this is the raw material for the rule of the minimum.</td>
+</tr>
+<tr>
+<td><code>photo_dedup</code></td>
+<td>Duplicate detection by <code>sha256</code>: which copy is kept and which zone each one lives in.</td>
+</tr>
+<tr>
+<td><code>photo_email</code></td>
+<td>Photos found as email attachments: sender, date and subject of the message that carried them — often the only surviving date for old ones.</td>
+</tr>
+<tr>
+<td><code>photo_fb_album_names</code></td>
+<td>Facebook album id → its name. Kept apart because the export splits them.</td>
+</tr>
+<tr>
+<td><code>photo_fb_albums</code></td>
+<td>Facebook albums as exported: folder, id and representative photo.</td>
+</tr>
+<tr>
+<td><code>photo_ocr</code></td>
+<td>Text read from images (OCR). What lets a screenshot be searchable by its content.</td>
+</tr>
+<tr>
+<td><code>photo_takeout_json</code></td>
+<td>RAW layer of the Google Takeout sidecars (<code>photoTakenTime</code>, coordinates). Google's own claim, imported as-is and never edited.</td>
+</tr>
+<tr>
+<td><code>photo_timeline</code></td>
+<td>Each photo's assigned period/category, with confidence. The curated result of the dating.</td>
+</tr>
+<tr>
+<td><code>photo_triage</code></td>
+<td>Photos assigned to a review album — the working queue of what still needs a human eye.</td>
+</tr>
+<tr>
+<td><strong>CHAT / MESSAGING (Matrix-normalised)</strong></td>
+<td></td>
+</tr>
+<tr>
+<td><code>chat_events</code></td>
+<td>Every message as an EVENT, the Matrix way: an append-only log rather than an editable table, so a chat's history is what happened, in order.</td>
+</tr>
+<tr>
+<td><code>chat_rooms</code></td>
+<td>The CONVERSATIONS (Matrix <code>room</code> model): one row per chat, individual or group. <code>persona_id</code> links a room to a person in <code>people_persons</code> — the only place that link is stored.</td>
+</tr>
+<tr>
+<td><code>chat_senders</code></td>
+<td>Who sends in each room. Kept apart from <code>people_persons</code> because a sender is a phone number until someone decides which person it is.</td>
+</tr>
+<tr>
+<td><strong>INVENTORY</strong></td>
+<td></td>
+</tr>
+<tr>
+<td><code>inv_inventory</code></td>
+<td>Filesystem INVENTORY: one row per file with its path, size, dates and probable type. The raw scan the archive's curation works from.</td>
+</tr>
+<tr>
+<td><strong>DECLOUD PROGRESS</strong></td>
+<td></td>
+</tr>
+<tr>
+<td><code>decloud_areas</code></td>
+<td>The decloudification areas (email, photos, calendar…), each with its weight and status. What the global percentage is computed from.</td>
+</tr>
+<tr>
+<td><code>decloud_snapshots</code></td>
+<td>Historical snapshots of that percentage, to see the trend over time.</td>
+</tr>
+<tr>
+<td><strong>DB EXPLORER (own bookkeeping)</strong></td>
+<td></td>
+</tr>
+<tr>
+<td><code>dbexp_tables</code></td>
+<td>DB Explorer's own map: row count per table and which apps own/read/write it. Recomputed from the manifests; it holds no data of yours.</td>
+</tr>
+<tr>
+<td><strong>META</strong></td>
+<td></td>
+</tr>
+<tr>
+<td><code>_dominios</code></td>
+<td>Legend: domain prefix → description and source DB.</td>
+</tr>
+</tbody>
+</table>
 <!--/DYN-->
 
 
@@ -1230,11 +1619,13 @@ rolled back. Bulk operations on the archive are reversible too — see <a href="
       <div class="md-dialog__inner md-typeset"></div>
     </div>
     
+      <div class="md-progress" data-md-component="progress" role="progressbar"></div>
+    
     
     
       
       
-      <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": ["navigation.sections", "navigation.top", "navigation.footer", "toc.integrate", "search.highlight", "search.suggest", "content.code.copy"], "search": "../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+      <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": ["navigation.sections", "navigation.top", "navigation.footer", "navigation.instant", "navigation.instant.progress", "toc.integrate", "search.highlight", "search.suggest", "content.code.copy"], "search": "../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
     
     
       <script src="../assets/javascripts/bundle.79ae519e.min.js"></script>
