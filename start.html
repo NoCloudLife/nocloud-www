@@ -114,16 +114,15 @@ ol.steps b{color:var(--ink)}
 
 <section>
   <h2>Install</h2>
-  <p>NoCloud isn't packaged for a one-command install <strong>yet</strong> — it runs, daily, on the
-  author's own Mac and Pi, and shipping a fake command here would be a poor start for a project whose
-  whole pitch is that you can trust it with your past. The source lives in the open; the install flow
-  lands when it's real.</p>
+  <p>One line, no package manager required. It downloads the <code>nocloudme</code> CLI, then the CLI
+  clones the rest of the product and sets up its own environment:</p>
+  <div class="cmd">mkdir -p ~/.local/bin <span class="p">&&</span> curl -fsSL https://raw.githubusercontent.com/NoCloudLife/nocloud-core/main/bin/nocloudme -o ~/.local/bin/nocloudme <span class="p">&&</span> chmod +x ~/.local/bin/nocloudme <span class="p">&&</span> ~/.local/bin/nocloudme init</div>
+  <p class="note">Make sure <code>~/.local/bin</code> is on your <code>PATH</code>. A Homebrew formula
+  also ships in the repo, for whenever there's a tagged release to point it at.</p>
   <div class="btns">
     <a class="btn primary" href="https://github.com/NoCloudLife">Source on GitHub →</a>
     <a class="btn" href="/">← Back to nocloud.life</a>
   </div>
-  <p class="note">Watch the <a href="https://github.com/NoCloudLife">NoCloudLife</a> org to catch the
-  first packaged release.</p>
 </section>
 
 <div class="rule"></div>
