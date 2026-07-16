@@ -3,14 +3,14 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>NoCloud — leave the clouds without losing a single byte</title>
+<title>Getting started — NoCloud</title>
 <meta name="description" content="Self-hosted layer that digests your past — 20 years of email, a Takeout export, a phone full of unsorted photos — into one normalized database you own. Reversibly.">
 <meta name="theme-color" content="#0a0e1a">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='8 10 48 44'%3E%3Cpath fill='%23fff' stroke='%23000' stroke-width='2' stroke-linejoin='round' d='M19 43 h25 a8 8 0 0 0 .7 -16 a11 11 0 0 0 -21 -3.2 a8 8 0 0 0 -4.7 19.2 z'/%3E%3Cline x1='12.5' y1='50' x2='51.5' y2='14' stroke='%23ef4444' stroke-width='5' stroke-linecap='round'/%3E%3C/svg%3E">
 <meta property="og:title" content="NoCloud">
 <meta property="og:description" content="Leave the clouds without losing a single byte, with undo.">
 <meta property="og:type" content="website">
-<meta property="og:url" content="https://nocloud.life/">
+<meta property="og:url" content="https://nocloud.life/start.html">
 <style>
 /* Same design tokens as the product's own shell, so landing and app look like one thing. */
 :root{
@@ -55,11 +55,22 @@ code,.cmd{font-family:var(--mono)}
 .cmd .p{color:var(--mut)}
 footer{color:var(--mut);font-size:13px;padding:14px 0 60px}
 footer .dot{opacity:.5;margin:0 7px}
-.btns{display:flex;flex-wrap:wrap;gap:10px;margin-top:26px}
+.btns{display:flex;flex-wrap:wrap;gap:10px;margin-top:22px}
 .btn{display:inline-block;font-size:14px;font-weight:650;padding:10px 16px;border-radius:11px;
   text-decoration:none;border:1px solid var(--brd-hi);color:var(--ink);background:var(--glass)}
 .btn.primary{background:var(--grad);color:#0a0e1a;border-color:transparent}
 .btn:hover{border-color:var(--c2)}
+.back{display:inline-block;color:var(--mut);text-decoration:none;font-size:14px;margin-top:56px}
+.back:hover{color:var(--c1)}
+ol.steps{margin:0 0 14px;padding-left:0;list-style:none;counter-reset:s}
+ol.steps li{position:relative;padding:0 0 16px 40px;counter-increment:s}
+ol.steps li::before{content:counter(s);position:absolute;left:0;top:-2px;width:26px;height:26px;
+  border-radius:50%;background:var(--glass);border:1px solid var(--brd-hi);color:var(--ink);
+  font-size:13px;font-weight:700;display:grid;place-items:center}
+ol.steps b{color:var(--ink)}
+.note{font-size:13.5px;color:var(--mut);background:var(--glass);border:1px solid var(--line);
+  border-radius:12px;padding:13px 16px;margin-top:8px}
+
 </style>
 </head>
 <body>
@@ -71,65 +82,48 @@ footer .dot{opacity:.5;margin:0 7px}
           d="M19 43 h25 a8 8 0 0 0 .7 -16 a11 11 0 0 0 -21 -3.2 a8 8 0 0 0 -4.7 19.2 z"/>
     <line x1="12.5" y1="50" x2="51.5" y2="14" stroke="#ef4444" stroke-width="5" stroke-linecap="round"/>
   </svg>
-  <h1>Leave the clouds<br><em>without losing a byte</em>.</h1>
-  <p class="tag">Bring your Takeout, your 20 years of email and your unsorted photos. With undo.</p>
-  <div class="btns">
-    <a class="btn primary" href="/start.html">Getting started →</a>
-    <a class="btn" href="https://github.com/NoCloudLife">Source on GitHub</a>
-  </div>
+  <h1>Getting <em>started</em>.</h1>
+  <p class="tag">NoCloud is self-hosted and local-first — it runs on hardware you own, not ours.</p>
 </header>
 
 <div class="rule"></div>
 
 <section>
-  <h2>What this actually is</h2>
-  <p>Self-hosted suites already exist — Nextcloud, Umbrel, CasaOS — and best-of-breed apps already
-  solve <em>today</em>: <a href="https://immich.app">Immich</a> for photos,
-  <a href="https://www.home-assistant.io">Home Assistant</a> for the house. NoCloud doesn't compete
-  with those; it runs on top of them.</p>
-  <p>What's missing everywhere else is the layer that deals with your <strong>past</strong>: two
-  decades of email, a Google Takeout export, a phone full of unsorted photos, a decade of bank
-  statements — digested once, reversibly, into <strong>one normalized database</strong> you can
-  actually query, instead of ten apps each holding a fenced-off slice of your life.</p>
-</section>
-
-<section>
-  <h2>Reversibility is the point</h2>
-  <p>Leaving a cloud is a one-way door for most people: you export, you import, and whatever got
-  mangled on the way is gone. Here the pipeline that got your data in can always be run backward.</p>
+  <h2>What you'll need</h2>
   <div class="cards">
-    <div class="card">
-      <h3>Snapshot first</h3>
-      <p>Every database write goes through an append-only ledger that snapshots before it touches
-      anything. Any change can be restored.</p>
-    </div>
-    <div class="card">
-      <h3>Nothing vanishes</h3>
-      <p>Nothing is permanently deleted without confirmation. Uninstalling an app quarantines its
-      tables — it doesn't drop them.</p>
-    </div>
-    <div class="card">
-      <h3>Glass box</h3>
-      <p>Curation runs on an explicit vocabulary of reversible operations, not an opaque classifier.
-      You can see why a file ended up where it did.</p>
-    </div>
+    <div class="card"><h3>A Mac</h3><p>Where the pipeline digests your exports and holds the one
+    database. The heavy lifting runs here.</p></div>
+    <div class="card"><h3>A Raspberry Pi</h3><p>The always-on server: it hosts the web app and your
+    photos (via Immich), reachable only over your VPN.</p></div>
+    <div class="card"><h3>Your own VPN</h3><p>WireGuard, self-hosted. Nothing of yours is exposed to
+    the internet — you reach your NoCloud from anywhere, privately.</p></div>
   </div>
 </section>
 
 <section>
-  <h2>Local-first, literally</h2>
-  <p>Not a slogan — the mechanism. Your data lives on hardware you own (a Mac and a Raspberry Pi)
-  and is reachable only over your own VPN. There is no account, no tenant, and nothing of yours
-  leaves the house.</p>
+  <h2>The shape of it</h2>
+  <ol class="steps">
+    <li><b>Bring your past.</b> Point NoCloud at a Google Takeout, two decades of email, a folder of
+    unsorted photos, a pile of bank statements.</li>
+    <li><b>Digest it once, reversibly.</b> The pipeline normalises everything into one queryable
+    database you own. Every bulk change ships an undo; nothing is deleted without confirmation.</li>
+    <li><b>Live in it.</b> The Pi serves a private web app — photos, finances, family, health — over
+    your VPN. On top of Immich and Home Assistant, not instead of them.</li>
+  </ol>
 </section>
 
 <section>
-  <h2>Status</h2>
-  <p>NoCloud is being built in the open-ish: it runs, every day, on the author's own Mac and
-  Raspberry Pi. It is <strong>not packaged for other people yet</strong> — there is no install
-  command to give you that would work today, and putting a fake one here would be a poor start for
-  a project whose whole pitch is that you can trust it with your past.
-  See <a href="/start.html">how it works and what you'll need</a>.</p>
+  <h2>Install</h2>
+  <p>NoCloud isn't packaged for a one-command install <strong>yet</strong> — it runs, daily, on the
+  author's own Mac and Pi, and shipping a fake command here would be a poor start for a project whose
+  whole pitch is that you can trust it with your past. The source lives in the open; the install flow
+  lands when it's real.</p>
+  <div class="btns">
+    <a class="btn primary" href="https://github.com/NoCloudLife">Source on GitHub →</a>
+    <a class="btn" href="/">← Back to nocloud.life</a>
+  </div>
+  <p class="note">Watch the <a href="https://github.com/NoCloudLife">NoCloudLife</a> org to catch the
+  first packaged release.</p>
 </section>
 
 <div class="rule"></div>
