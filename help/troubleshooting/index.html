@@ -487,34 +487,6 @@
   
   
     <li class="md-nav__item">
-      <a href="../floor-plan-editor/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Floor plan editor
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
       <a href="../reclassify-expenses/" class="md-nav__link">
         
   
@@ -1114,17 +1086,6 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#i-broke-something-editing-the-floor-plan" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        I broke something editing the floor plan
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
   <a href="#a-page-looks-unstyled-or-half-rendered" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -1223,9 +1184,9 @@
 <p>Almost always <strong>the VPN</strong>: turn it on and reopen the app. If it persists, delete the home-screen
 shortcut and add it again (Share → Add to Home Screen); the first open will ask you to sign in.</p>
 <h2 id="a-button-says-no-connection-to-the-mac-workstation">A button says "no connection to the Mac / workstation"</h2>
-<p>Functions that <strong>write</strong> (the floor plan editor, expense reclassification, refreshing quotes, the
-danger zone, a connector's drop area) need the machine the database lives on to be powered on. Turn
-it on and try again. Read-only pages don't need it.</p>
+<p>Functions that <strong>write</strong> (expense reclassification, refreshing quotes, the danger zone, a
+connector's drop area) need the machine the database lives on to be powered on. Turn it on and try
+again. Read-only pages don't need it.</p>
 <h2 id="im-seeing-stale-data">I'm seeing stale data</h2>
 <ul>
 <li><strong>Web</strong>: reload (the server forces revalidation; no need to clear cache).</li>
@@ -1243,9 +1204,6 @@ it on and try again. Read-only pages don't need it.</p>
 <li>Check your SSO username/password; after several failed attempts there's a brief courtesy lockout.</li>
 <li>The browser session and the installed app's session are independent: sign in to each separately.</li>
 </ul>
-<h2 id="i-broke-something-editing-the-floor-plan">I broke something editing the floor plan</h2>
-<p>↩︎ Undo reverts change by change. For anything bigger: every write left a prior database snapshot —
-any point in time can be restored (<code>dbsafe restore</code>).</p>
 <h2 id="a-page-looks-unstyled-or-half-rendered">A page looks unstyled or half-rendered</h2>
 <p>Usually a partial deployment. Rebuild and republish: <code>nocloud deploy</code> from the workstation.</p>
 <h2 id="a-connector-says-no-connection-to-the-mac">A connector says "no connection to the Mac"</h2>
