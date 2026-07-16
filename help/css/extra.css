@@ -1,0 +1,62 @@
+/* ============================================================
+   NoCloud manual styling (MkDocs Material) — same design tokens as nocloud.life's
+   landing page, so the manual reads as part of the same site instead of a bolted-on
+   docs tool. Cyan → violet → pink gradient accent, dark-first, crossed-out cloud mark.
+   ============================================================ */
+:root{
+  --nc-c1:#22d3ee; --nc-c2:#8b5cf6; --nc-c3:#f472d0;
+  --nc-grad:linear-gradient(115deg,var(--nc-c1),var(--nc-c2) 50%,var(--nc-c3));
+  --md-primary-fg-color:#8b5cf6; --md-accent-fg-color:#22d3ee;
+  --ncm-line:#8b5cf655; --ncm-line-hover:#8b5cf6;
+}
+[data-md-color-scheme="slate"]{
+  --md-default-bg-color:#0a0e1a; --md-code-bg-color:#121829;
+  --md-default-fg-color--light:#8b94ad;
+  --md-typeset-a-color:#22d3ee;
+  --ncm-card:linear-gradient(160deg,#8b5cf614,transparent);
+  --ncm-th:#121829; --ncm-th-fg:#eaeefb;
+}
+[data-md-color-scheme="default"]{
+  --md-default-bg-color:#edf0f7; --md-typeset-a-color:#7c3aed;
+  --ncm-card:linear-gradient(160deg,#8b5cf60d,#ffffff);
+  --ncm-th:#eef2f7; --ncm-th-fg:#0f1629;
+}
+
+/* Header and tabs: the same three-stop gradient as the landing page */
+.md-header{ background:linear-gradient(135deg,#0a0e1a,#1e1b4b,#0a0e1a); }
+.md-tabs{ background:linear-gradient(135deg,#1e1b4b,#0a0e1a); }
+[data-md-color-scheme="default"] .md-tabs{ background:var(--nc-grad); }
+.md-header__button.md-logo img{ height:26px; }
+.md-tabs__link{ opacity:.82; font-weight:600; }
+.md-tabs__link--active,.md-tabs__link:hover{ opacity:1; }
+
+/* Headings */
+.md-typeset h1{ font-weight:800; letter-spacing:-.01em; }
+.md-typeset h2{ font-weight:750; border-top:1px solid var(--md-default-fg-color--lightest);
+  padding-top:.7em; margin-top:1.6em; }
+
+/* Tables: rounded corners, branded header row */
+.md-typeset table:not([class]){ border-radius:12px; overflow:hidden; box-shadow:0 1px 8px #0003; }
+.md-typeset table:not([class]) th{ background:var(--ncm-th); color:var(--ncm-th-fg); font-weight:700; }
+
+/* Admonitions and details: rounded, same as the landing page's cards */
+.md-typeset .admonition, .md-typeset details{ border-radius:14px; }
+.md-typeset .admonition{ box-shadow:0 1px 8px #0002; }
+
+/* Front-page grid cards */
+.grid.cards > ul{ display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:14px;
+  list-style:none; margin:.6em 0 0; padding:0; }
+.grid.cards > ul > li{ border:1px solid var(--ncm-line); border-radius:14px; padding:18px 20px; margin:0;
+  background:var(--ncm-card); transition:transform .15s ease, border-color .15s ease, box-shadow .15s ease; }
+.grid.cards > ul > li:hover{ transform:translateY(-3px); border-color:var(--ncm-line-hover);
+  box-shadow:0 6px 20px #8b5cf630; }
+.grid.cards > ul > li > p:first-child{ font-weight:800; font-size:15.5px; margin:0 0 6px; }
+
+/* Inline code */
+.md-typeset code{ border-radius:6px; }
+
+/* Footer */
+.md-footer{ background:#0a0e1a; }
+
+/* Title text picks up the gradient, like the landing page's <h1 em> */
+.md-header__topic:first-child{ font-weight:800; }
