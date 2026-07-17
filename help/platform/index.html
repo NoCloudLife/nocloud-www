@@ -487,34 +487,6 @@
   
   
     <li class="md-nav__item">
-      <a href="../reclassify-expenses/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Reclassify expenses
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
       <a href="../settings/" class="md-nav__link">
         
   
@@ -843,10 +815,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#events-and-auditing" class="md-nav__link">
+  <a href="#events-auditing-and-triggers" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Events and auditing
+        Events, auditing and triggers
       
     </span>
   </a>
@@ -865,6 +837,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#diagnostics-nocloud-doctor" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Diagnostics: nocloud doctor
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#the-upgrade-lifecycle" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -876,10 +859,21 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#the-daemon-and-the-typing-pause" class="md-nav__link">
+  <a href="#the-daemon" class="md-nav__link">
     <span class="md-ellipsis">
       
-        The daemon and the "typing pause"
+        The daemon
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-typing-pause" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The "typing pause"
       
     </span>
   </a>
@@ -951,6 +945,34 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../connectors/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Writing a connector
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -1009,6 +1031,62 @@
 
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../cli/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    CLI
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../configuration/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Configuration
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
             
               
                 
@@ -1148,39 +1226,70 @@
 
 <h1 id="the-platform-for-whoever-operates-it">🧰 The platform (for whoever operates it)</h1>
 <p>Underneath the sections there's a platform layer that keeps everything running and audited. It's
-managed from the command line with <code>nocloudme</code>.</p>
+managed from the command line with <strong><code>nocloud</code></strong> — every command below is listed with its flags in
+the <a href="../cli/">CLI reference</a>.</p>
 <h2 id="scheduled-tasks-jobs">Scheduled tasks (jobs)</h2>
 <p>Everything that runs on its own — refreshing quotes, recalculating the home screen, backups,
 ingests — lives in a <strong>job registry</strong> (<code>config/jobs.yaml</code>) with its schedule, host, timeout and what
 it produces.</p>
-<div class="highlight"><pre><span></span><code>nocloud jobs            # list jobs and their state
-nocloud jobs run &lt;id&gt;   # trigger one by hand
+<div class="highlight"><pre><span></span><code>nocloud<span class="w"> </span><span class="nb">jobs</span><span class="w"> </span>list<span class="w">       </span><span class="c1"># list jobs and their state</span>
+nocloud<span class="w"> </span><span class="nb">jobs</span><span class="w"> </span>status<span class="w">     </span><span class="c1"># last result per job</span>
+nocloud<span class="w"> </span><span class="nb">jobs</span><span class="w"> </span>run<span class="w"> </span>&lt;id&gt;<span class="w">   </span><span class="c1"># trigger one by hand</span>
+nocloud<span class="w"> </span><span class="nb">jobs</span><span class="w"> </span><span class="nb">history</span><span class="w">    </span><span class="c1"># recent runs (add an id to filter)</span>
 </code></pre></div>
-<p>No hidden tasks in an unreadable crontab: the inventory is a single, versioned list.</p>
-<h2 id="events-and-auditing">Events and auditing</h2>
+<p>No hidden tasks in an unreadable crontab: the inventory is a single, versioned list. A job that is
+already running is locked (a second run is refused while the first one's process is alive), and a
+job that exceeds its <code>timeout</code> is stopped and recorded as <code>timeout</code>.</p>
+<h2 id="events-auditing-and-triggers">Events, auditing and triggers</h2>
 <p>Every relevant action emits an <strong>event</strong> (with severity, author, message and data) into an audit
-stream with a fixed schema.</p>
-<div class="highlight"><pre><span></span><code>nocloudme audit summary   # summary of the event stream
-nocloudme events          # latest platform events
+stream with a fixed schema (<code>config/events.yaml</code>).</p>
+<div class="highlight"><pre><span></span><code>nocloud<span class="w"> </span>audit<span class="w"> </span>summary<span class="w">   </span><span class="c1"># summary of the event stream</span>
+nocloud<span class="w"> </span>audit<span class="w"> </span>list<span class="w">      </span><span class="c1"># latest audit entries</span>
+nocloud<span class="w"> </span>events<span class="w">          </span><span class="c1"># latest platform events (--limit N)</span>
 </code></pre></div>
+<p>Events can also <em>cause</em> things: <strong>triggers</strong> (<code>config/triggers.yaml</code>) map an event kind — plus
+optional field filters — to a job, so "a WhatsApp export finished ingesting" can automatically
+queue "rebuild the messaging pages" without a human in between. The trigger engine tails the same
+audit stream, so every automated reaction is itself audited.</p>
 <h2 id="validated-configuration">Validated configuration</h2>
 <p>The instance's configuration is described by a <strong>schema</strong> (<code>config/schema.yaml</code>): the manager
 validates known keys and <strong>masks secrets</strong> in any output.</p>
-<div class="highlight"><pre><span></span><code>nocloud doctor          # installation diagnostics
+<div class="highlight"><pre><span></span><code>nocloud<span class="w"> </span>config<span class="w"> </span>list<span class="w">           </span><span class="c1"># every key, its value (secrets masked) and status</span>
+nocloud<span class="w"> </span>config<span class="w"> </span>check<span class="w">          </span><span class="c1"># validate site.env against the schema</span>
+nocloud<span class="w"> </span>config<span class="w"> </span><span class="nb">set</span><span class="w"> </span>KEY<span class="w"> </span>VALUE<span class="w">  </span><span class="c1"># write a value (backs up site.env first)</span>
 </code></pre></div>
-<p><code>doctor</code> runs well over a dozen checks — git and Python availability, the job registry, the
-configuration schema, the database and its seeded sections, module manifests, the backup contract,
-the audit event stream and the upgrade lifecycle — and reports each one individually.</p>
+<h2 id="diagnostics-nocloud-doctor">Diagnostics: <code>nocloud doctor</code></h2>
+<div class="highlight"><pre><span></span><code>nocloud<span class="w"> </span>doctor<span class="w">          </span><span class="c1"># installation diagnostics (--json for automation)</span>
+</code></pre></div>
+<p><code>doctor</code> runs <strong>16 checks</strong> and reports each one individually: git and Python availability,
+<code>config/runtime.yaml</code> and <code>config/jobs.yaml</code>, a non-empty job registry, <code>config/site.env</code>, the
+configuration schema, the SQLite catalog and its seeded sections, a known build directory, jobs
+with no recorded failures, module manifests, the backup contract, the audit event stream, the
+upgrade lifecycle and the integration adapters. It exits non-zero if any check fails — see
+<a href="../troubleshooting/#a-doctor-check-fails">Troubleshooting</a> for what each failing check means.</p>
 <h2 id="the-upgrade-lifecycle">The upgrade lifecycle</h2>
 <p>Upgrading isn't "copy and pray": it's a <strong>lifecycle</strong> with distinct phases and a point of no return.</p>
-<div class="highlight"><pre><span></span><code>preflight → backup → migrate → build → deploy → verify
+<div class="highlight"><pre><span></span><code>preflight → backup → migrate → build → [deploy] → verify
 </code></pre></div>
-<p>If a phase fails, the prior snapshot lets you roll back.</p>
-<h2 id="the-daemon-and-the-typing-pause">The daemon and the "typing pause"</h2>
-<p>A small <em>daemon</em> on the workstation orchestrates jobs and heavy work, and also serves on-demand
-requests — like a Store connector's "refresh now" button — over a local API. It follows one courtesy
-rule: it <strong>freezes intensive tasks while you're typing</strong> and resumes them once you stop, so it never
-competes with you for the machine while you're using it.</p>
+<p><code>nocloud upgrade run</code> executes the phases in that order, but <strong>skips <code>deploy</code> unless you pass
+<code>--deploy</code></strong> — so the default run upgrades the workstation without touching the server. Use
+<code>nocloud upgrade plan</code> to see every phase (including the dry-run-only <code>rollback</code> phase),
+<code>preflight</code> to check readiness (a dirty git tree blocks it; <code>--allow-dirty</code> overrides), and
+<code>--dry-run</code> to rehearse without changing anything. If a phase fails, the snapshot taken during
+<code>backup</code> lets you roll back.</p>
+<h2 id="the-daemon">The daemon</h2>
+<p>A small <em>daemon</em> on the workstation (<code>nocloud daemon</code>, port <strong>8765</strong> on <code>127.0.0.1</code> by default)
+serves the platform's state over a local read-only API — health, jobs and their history, events,
+audit, upgrade status, integrations, configuration — plus one write endpoint: triggering a job on
+demand (<code>POST /api/jobs/&lt;id&gt;/run</code>). That's what a Store connector's "refresh now" button calls.
+Protect it with a bearer token by setting <code>NOCLOUDME_DAEMON_TOKEN</code>. The full endpoint list is in
+the <a href="../cli/#nocloud-daemon">CLI reference</a>.</p>
+<h2 id="the-typing-pause">The "typing pause"</h2>
+<p>Heavy background work follows one courtesy rule on the Mac: <strong>intensive AI/curation tasks freeze
+while you're typing</strong> and resume once you stop, so they never compete with you for the machine
+while you're using it. This is handled by a pair of small launchd agents (they suspend and resume
+the worker processes on keyboard activity), independent of the daemon — jobs you trigger by hand
+run immediately.</p>
 
 
 

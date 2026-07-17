@@ -489,34 +489,6 @@
   
   
     <li class="md-nav__item">
-      <a href="../reclassify-expenses/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Reclassify expenses
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
       <a href="../settings/" class="md-nav__link">
         
   
@@ -951,6 +923,34 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../connectors/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Writing a connector
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -1009,6 +1009,62 @@
 
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../cli/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    CLI
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../configuration/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Configuration
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
             
               
                 
@@ -1155,10 +1211,15 @@
 </ol>
 <h2 id="reclassify-an-expense-and-every-one-from-the-same-merchant">Reclassify an expense (and every one from the same merchant)</h2>
 <ol>
-<li>Income &amp; expenses → click the <strong>"Other expenses"</strong> row.</li>
-<li>Find the movement (sorted by date) and <strong>drag it</strong> onto its category in the right-hand panel.</li>
-<li>The number in parentheses on each category tells you how many concepts it already has.</li>
-<li>Made a mistake? Every bulk reclassification ships an undo.</li>
+<li>Income &amp; expenses → click the <strong>"Other expenses"</strong> row: its movements expand and a category
+   panel appears. The number in parentheses on each category tells you how many concepts it
+   already has.</li>
+<li>Find the movement (sorted by date) and <strong>drag it</strong> onto its category: a rule is created for
+   that <em>concept</em> — that expense and every future one sharing the same concept moves to the
+   category from then on. The page regenerates itself within seconds, and the rules feed the web,
+   the API and the app alike.</li>
+<li>Made a mistake? Every rule is reversible: it's recorded in the overrides table (with top
+   priority over the automatic rules), and the editor ships an undo.</li>
 </ol>
 <h2 id="validate-your-email">Validate your email</h2>
 <ol>
