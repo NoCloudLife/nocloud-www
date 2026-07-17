@@ -9,10 +9,10 @@
       
       
       
-        <link rel="prev" href="../platform/">
+        <link rel="prev" href="../cli/">
       
       
-        <link rel="next" href="../network/">
+        <link rel="next" href="../database/">
       
       
         
@@ -23,7 +23,7 @@
     
     
       
-        <title>Security & privacy - NoCloudMe Docs</title>
+        <title>Configuration - NoCloudMe Docs</title>
       
     
     
@@ -76,7 +76,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#security-privacy" class="md-skip">
+        <a href="#configuration-reference" class="md-skip">
           Skip to content
         </a>
       
@@ -111,7 +111,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Security & privacy
+              Configuration
             
           </span>
         </div>
@@ -575,8 +575,6 @@
       
   
   
-    
-  
   
   
     
@@ -589,11 +587,11 @@
       
     
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
         
           
           <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
@@ -614,7 +612,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_3">
             <span class="md-nav__icon md-icon"></span>
             
@@ -769,19 +767,10 @@
                 
   
   
-    
   
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../security/" class="md-nav__link">
         
   
   
@@ -797,7 +786,6 @@
   
 
       </a>
-      
     </li>
   
 
@@ -870,8 +858,10 @@
       
   
   
+    
   
   
+  
     
     
     
@@ -882,11 +872,11 @@
       
     
     
-    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" checked>
         
           
           <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="">
@@ -907,7 +897,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_4">
             <span class="md-nav__icon md-icon"></span>
             
@@ -950,10 +940,37 @@
                 
   
   
+    
   
   
-    <li class="md-nav__item">
-      <a href="../configuration/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Configuration
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         
   
   
@@ -969,6 +986,59 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#configsiteenv-your-instance" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        config/site.env — your instance
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#configyaml-the-products-declarations" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        config/*.yaml — the product's declarations
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#default-ports" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Default ports
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -1110,28 +1180,205 @@
 
 
 
-<h1 id="security-privacy">🔒 Security &amp; privacy</h1>
-<ul>
-<li><strong>Nothing in third-party clouds.</strong> Photos, mail, finances and documents live on your own hardware.</li>
-<li><strong>Default-deny outbound:</strong> NoCloudMe's own pieces can't reach the internet unless they declare it;
-  the home server never calls out to GitHub at all. See <a href="../network/">Network &amp; outbound traffic</a>.</li>
-<li><strong>Double perimeter:</strong> LAN or VPN (WireGuard) to reach it; SSO (with optional 2FA) to get in.</li>
-<li><strong>Secrets stay out of the code:</strong> keys and tokens live in local files, never in the repository.</li>
-<li><strong>Backups and reversibility:</strong> a snapshot before every write, daily backups, replication across
-  machines. Bulk changes to your archive are one undo away and explain themselves — see
-  <a href="../curation/">Curating your archive</a>.</li>
-<li><strong>Auditing:</strong> web changes are logged with the user, the date and the details.</li>
-<li><strong>Permission panel:</strong> the AI assistant works under switches you control one by one; a permission
-  switched on is a <em>ceiling</em> (what it's allowed to do), never a command.</li>
-<li><strong>Courtesy toward your machine:</strong> heavy work <strong>freezes while you're typing</strong> and resumes once you
-  stop.</li>
-<li><strong>Point-and-count rule:</strong> with sensitive data like your <a href="../messaging/">messages</a>, the machine
-  builds the infrastructure and <strong>counts</strong>, but never reads or classifies the content — reading is
-  for you alone.</li>
-<li><strong>Connectors, disclosed and boxed in:</strong> a connector can only write the database tables its manifest
-  declares, and it never sends SQL — it hands parsed rows to a shared, safe ingest engine. See
-  <a href="../store/#connectors-modules-with-database-write-access">The Store</a>.</li>
-</ul>
+<h1 id="configuration-reference">⚙️ Configuration reference</h1>
+<p>Everything configurable lives in two places: <strong><code>config/site.env</code></strong> (your instance's values —
+hosts, URLs, keys, paths; gitignored) and <strong><code>config/*.yaml</code></strong> (the product's own declarations —
+jobs, events, schema; versioned). Validate your instance any time with <code>nocloud config check</code>.</p>
+<h2 id="configsiteenv-your-instance"><code>config/site.env</code> — your instance</h2>
+<p>Created by <code>nocloud setup</code> (or by hand from <code>config/site.env.example</code>). Read by every Python
+script via <code>scripts/site_config.py</code> and sourced by the shell scripts. The schema
+(<code>config/schema.yaml</code>) validates each key and marks which ones are secret, so <code>nocloud config
+list</code> masks them.</p>
+<table>
+<thead>
+<tr>
+<th>Key</th>
+<th>What it is</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>PI_HOST</code> / <code>PI_USER</code></td>
+<td>the Pi's LAN IP and SSH user</td>
+</tr>
+<tr>
+<td><code>PI_SSH</code></td>
+<td>optional SSH target override (default <code>PI_USER@PI_HOST</code>)</td>
+</tr>
+<tr>
+<td><code>IMMICH_URL</code> / <code>IMMICH_KEY</code></td>
+<td>Immich API base (default <code>http://PI_HOST:2283</code>) and API key</td>
+</tr>
+<tr>
+<td><code>IMMICH_PUBLIC_URL</code></td>
+<td>optional public Immich URL used for click-through links</td>
+</tr>
+<tr>
+<td><code>WEBMAIL_URL</code> / <code>WEBMAIL_PUBLIC_URL</code></td>
+<td>webmail base (default <code>http://PI_HOST:8888</code>) and its public URL</td>
+</tr>
+<tr>
+<td><code>DOMAIN</code> / <code>EMAIL</code></td>
+<td>your domain and main email address</td>
+</tr>
+<tr>
+<td><code>MAIL_DOMAIN</code> / <code>MAIL_FROM</code> / <code>MAIL_SIGNATURE</code></td>
+<td>the product's outgoing mail (validation links, notices)</td>
+</tr>
+<tr>
+<td><code>SITE_URL</code></td>
+<td>public portal URL, used in links</td>
+</tr>
+<tr>
+<td><code>MAC_API_URL</code></td>
+<td>the Mac's editor/sending API as seen from the LAN (default port 8055)</td>
+</tr>
+<tr>
+<td><code>MAC_DAEMON_URL</code> / <code>MAC_DAEMON_TOKEN</code></td>
+<td>the Mac's runtime daemon as seen from the LAN (default port 8765) and its shared token — required for the "↻ Refresh" buttons</td>
+</tr>
+<tr>
+<td><code>NOCLOUDME_TRUST_PROXY_AUTH</code></td>
+<td>trust the <code>Remote-User</code> header — only behind Authelia or equivalent forward-auth</td>
+</tr>
+<tr>
+<td><code>SMTP_HOST</code> / <code>SMTP_PORT</code> / <code>SMTP_USER</code> / <code>SMTP_PASS_FILE</code></td>
+<td>your local SMTP relay (Proton Bridge by default: <code>127.0.0.1:1025</code>)</td>
+</tr>
+<tr>
+<td><code>LOCAL_USER</code> / <code>MAC_HOME</code> / <code>NOCLOUDME_HOME</code></td>
+<td>the Mac's user and paths</td>
+</tr>
+<tr>
+<td><code>ARCHIVE_ROOT</code> / <code>IMMICH_BACKUP_DIR</code> / <code>MAIL_LOCAL_DIR</code></td>
+<td>where the ordered archive, the Immich backup and the local mail live</td>
+</tr>
+<tr>
+<td><code>PI_HOME</code> / <code>PI_PORTAL</code></td>
+<td>the Pi's home and the portal's web root</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p><code>nocloud setup</code> writes the network and path keys it can detect (including <code>MAC_DAEMON_URL</code>;
+it leaves <code>MAC_DAEMON_TOKEN</code> empty, only needed when the daemon listens beyond loopback).
+<code>PI_SSH</code>, <code>IMMICH_PUBLIC_URL</code> and <code>NOCLOUDME_TRUST_PROXY_AUTH</code> are optional keys you add by
+hand (or with <code>nocloud config set</code>) when you need them.</p>
+</div>
+<h2 id="configyaml-the-products-declarations"><code>config/*.yaml</code> — the product's declarations</h2>
+<p>These files ship with the product and are versioned; you rarely edit them, but they're where the
+platform's behavior is declared rather than hardcoded.</p>
+<table>
+<thead>
+<tr>
+<th>File</th>
+<th>What it declares</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>schema.yaml</code></td>
+<td>every valid <code>site.env</code> key: type, required, secret, group — what <code>nocloud config check</code> validates against</td>
+</tr>
+<tr>
+<td><code>jobs.yaml</code></td>
+<td>the job registry: every scheduled task with its schedule, host, timeout and output</td>
+</tr>
+<tr>
+<td><code>events.yaml</code></td>
+<td>the audit event vocabulary (kinds, severities)</td>
+</tr>
+<tr>
+<td><code>triggers.yaml</code></td>
+<td>event → job automations (<code>on: &lt;kind&gt;</code> plus optional field filters)</td>
+</tr>
+<tr>
+<td><code>runtime.yaml</code></td>
+<td>runtime knobs: state directory, daemon port, required services</td>
+</tr>
+<tr>
+<td><code>upgrade.yaml</code></td>
+<td>the upgrade lifecycle's phases, in order</td>
+</tr>
+<tr>
+<td><code>backup_manifest.yaml</code></td>
+<td>the backup contract: which items must exist in a backup for it to count</td>
+</tr>
+<tr>
+<td><code>integrations.yaml</code></td>
+<td>the third-party adapters (Immich, Home Assistant, docker, systemd…) and whether each is required</td>
+</tr>
+<tr>
+<td><code>datasets.yaml</code></td>
+<td>the dataset definitions (table, columns, conflict key) connectors write through</td>
+</tr>
+</tbody>
+</table>
+<h2 id="default-ports">Default ports</h2>
+<table>
+<thead>
+<tr>
+<th>Port</th>
+<th>Service</th>
+<th>Where</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>8765</td>
+<td><code>nocloud daemon</code> (runtime API)</td>
+<td>Mac, loopback by default</td>
+</tr>
+<tr>
+<td>8055</td>
+<td><code>MAC_API_URL</code> (editor/sending API)</td>
+<td>Mac</td>
+</tr>
+<tr>
+<td>1025</td>
+<td>SMTP relay (Proton Bridge)</td>
+<td>Mac, loopback</td>
+</tr>
+<tr>
+<td>2283</td>
+<td>Immich</td>
+<td>Pi</td>
+</tr>
+<tr>
+<td>8888</td>
+<td>Webmail</td>
+<td>Pi</td>
+</tr>
+<tr>
+<td>8123</td>
+<td>Home Assistant</td>
+<td>Pi</td>
+</tr>
+<tr>
+<td>9092 / 9093 / 9095</td>
+<td>permissions API / settings API / ingest service</td>
+<td>Pi, loopback (behind nginx)</td>
+</tr>
+<tr>
+<td>80 / 443</td>
+<td>nginx portal</td>
+<td>Pi — one of the only three public ports</td>
+</tr>
+<tr>
+<td>51820/udp</td>
+<td>WireGuard VPN</td>
+<td>Pi — public</td>
+</tr>
+<tr>
+<td>22</td>
+<td>SSH (key-only)</td>
+<td>Pi, LAN/VPN</td>
+</tr>
+</tbody>
+</table>
+<p>The security panel flags anything else listening publicly — see
+<a href="../security/">Security &amp; privacy</a>.</p>
 
 
 
@@ -1167,7 +1414,7 @@
       <nav class="md-footer__inner md-grid" aria-label="Footer" >
         
           
-          <a href="../platform/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Platform">
+          <a href="../cli/" class="md-footer__link md-footer__link--prev" aria-label="Previous: CLI">
             <div class="md-footer__button md-icon">
               
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
@@ -1177,20 +1424,20 @@
                 Previous
               </span>
               <div class="md-ellipsis">
-                Platform
+                CLI
               </div>
             </div>
           </a>
         
         
           
-          <a href="../network/" class="md-footer__link md-footer__link--next" aria-label="Next: Network &amp; outbound traffic">
+          <a href="../database/" class="md-footer__link md-footer__link--next" aria-label="Next: Database">
             <div class="md-footer__title">
               <span class="md-footer__direction">
                 Next
               </span>
               <div class="md-ellipsis">
-                Network & outbound traffic
+                Database
               </div>
             </div>
             <div class="md-footer__button md-icon">

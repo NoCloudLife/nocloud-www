@@ -569,34 +569,6 @@
   
   
     <li class="md-nav__item">
-      <a href="../reclassify-expenses/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Reclassify expenses
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
       <a href="../settings/" class="md-nav__link">
         
   
@@ -929,6 +901,34 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../connectors/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Writing a connector
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -987,6 +987,62 @@
 
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../cli/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    CLI
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../configuration/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Configuration
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
             
               
                 
@@ -1125,6 +1181,12 @@
 
 
 <h1 id="installation">📦 Installation</h1>
+<div class="admonition note">
+<p class="admonition-title">Developing, not installing?</p>
+<p>This page installs NoCloudMe <em>as a user</em> (real config, real data paths). To hack on the
+code you need none of it — see <code>CONTRIBUTING.md</code> in the repo: a plain clone plus the test
+suites, all on synthetic data.</p>
+</div>
 <p>The product runs across <strong>two machines</strong>: your workstation (macOS) does the heavy lifting —
 digesting exports, holding the one database — and a small always-on home server (a Raspberry Pi
 or similar, reachable over SSH) serves the result over your own VPN. Set up both.</p>
@@ -1142,14 +1204,14 @@ exists yet).</p>
    (your Mac's IP, router, and Raspberry Pi candidates on the LAN) and writes
    <code>~/nocloudme/config/site.env</code> for you. You can also edit that file by hand (server SSH host/user,
    service URLs, API keys) — it never travels to git either way.</li>
-<li><strong>Check</strong>: <code>nocloud doctor</code> — over a dozen checks covering git, Python, the job registry,
+<li><strong>Check</strong>: <code>nocloud doctor</code> — 16 checks covering git, Python, the job registry, the
    configuration schema, the database, seeded sections, module manifests, the backup contract, the
-   audit event stream and the upgrade lifecycle.</li>
+   audit event stream, the upgrade lifecycle and the integration adapters.</li>
 <li><strong>Bring in your data</strong>: <code>nocloud onboard &lt;folder-or-export&gt;</code> — point it at a folder of
-   photos/videos or a WhatsApp export and it copies them in (reversibly — originals are never
-   moved or edited) and builds your first populated view automatically. Anything it doesn't
-   recognize yet (Google Takeout, bank/tax statements, other connectors) it says so plainly rather
-   than guessing; install the matching connector from the Store for those instead.</li>
+   photos/videos, a WhatsApp export or a Google Takeout export and it copies them in (reversibly —
+   originals are never moved or edited) and builds your first populated view automatically.
+   Anything it doesn't recognize yet (bank/tax statements, other connectors) it says so plainly
+   rather than guessing; install the matching connector from the Store for those instead.</li>
 </ol>
 <h2 id="2-home-server-pi">2. Home server (Pi)</h2>
 <p>This side is a one-time, mostly-manual setup, run on the Pi itself. The one-time image/package
@@ -1173,6 +1235,7 @@ over your LAN/SSH instead (see <a href="../network/">Network &amp; outbound traf
 </ol>
 <h2 id="3-publish">3. Publish</h2>
 <p>Back on the Mac: <code>nocloud deploy</code> — builds every page and the API and pushes them to the server.</p>
+<p>The commands you'll use most:</p>
 <table>
 <thead>
 <tr>
@@ -1183,7 +1246,7 @@ over your LAN/SSH instead (see <a href="../network/">Network &amp; outbound traf
 <tbody>
 <tr>
 <td><code>nocloud onboard &lt;path&gt;</code></td>
-<td>bring in a folder of photos/videos or a WhatsApp export, then build</td>
+<td>bring in photos/videos, a WhatsApp export or a Takeout export, then build</td>
 </tr>
 <tr>
 <td><code>nocloud build</code></td>
@@ -1202,19 +1265,21 @@ over your LAN/SSH instead (see <a href="../network/">Network &amp; outbound traf
 <td>installation diagnostics (text or JSON)</td>
 </tr>
 <tr>
-<td><code>nocloud jobs</code></td>
-<td>job registry: list/status/run <code>&lt;id&gt;</code></td>
+<td><code>nocloud jobs list</code></td>
+<td>job registry: <code>list</code> / <code>status</code> / <code>run &lt;id&gt;</code> / <code>history</code></td>
 </tr>
 <tr>
-<td><code>nocloud upgrade</code></td>
+<td><code>nocloud upgrade run</code></td>
 <td>full lifecycle: preflight → backup → migrate → build → deploy → verify</td>
 </tr>
 <tr>
-<td><code>nocloud module</code></td>
-<td>module SDK: list, doctor, install/remove, registry</td>
+<td><code>nocloud module list</code></td>
+<td>module SDK: <code>list</code> / <code>doctor</code> / <code>install</code> / <code>remove</code> / <code>registry</code></td>
 </tr>
 </tbody>
 </table>
+<p>That's 8 of 21 commands — the complete list, with every flag, lives in the
+<a href="../cli/">CLI reference</a>.</p>
 <div class="admonition tip">
 <p class="admonition-title">Tip</p>
 <p><code>nocloud init</code> installs the <em>code and data</em>, separate from the launcher script itself.

@@ -485,34 +485,6 @@
   
   
     <li class="md-nav__item">
-      <a href="../reclassify-expenses/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Reclassify expenses
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
       <a href="../settings/" class="md-nav__link">
         
   
@@ -845,6 +817,34 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../connectors/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Writing a connector
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -905,6 +905,62 @@
 
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../cli/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    CLI
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../configuration/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Configuration
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
             
               
                 
@@ -1058,6 +1114,22 @@
 <li><strong>PWA</strong> — the installable web app, with offline caching.</li>
 <li><strong>Snapshot</strong> — a full copy of the database taken before a write; lets you roll back.</li>
 <li><strong>dbsafe</strong> — the layer every database write passes through: a prior snapshot + change ledger.</li>
+<li><strong>Journal</strong> — the single append-only log of every archive operation: what changed, from what to
+  what, and why. See <a href="../curation/">Curating your archive</a>.</li>
+<li><strong>Run / <code>op_run</code></strong> — one batch of journaled operations (an import, a bulk date fix). The unit
+  you revert: one command walks the whole batch backwards.</li>
+<li><strong>Sidecar (XMP)</strong> — a small metadata file written <em>next to</em> a photo (dates, tags, GPS) so the
+  original bytes are never edited.</li>
+<li><strong>Quarantine</strong> — where a deduplicated loser or an uninstalled app's tables go: renamed and set
+  aside, recoverable — not erased.</li>
+<li><strong>Review queue</strong> — where uncertain proposals wait for you to accept, override or reject them;
+  nothing is applied until you resolve it. See <a href="../curation/#the-review-queue-you-have-the-last-word">Curating your archive</a>.</li>
+<li><strong>Doctor</strong> — <code>nocloud doctor</code>, the 16-check diagnosis of an installation. See
+  <a href="../platform/#diagnostics-nocloud-doctor">Platform</a>.</li>
+<li><strong>Daemon</strong> — the small runtime API on the workstation that serves platform state and runs jobs
+  on demand. See <a href="../platform/#the-daemon">Platform</a>.</li>
+<li><strong>Job registry</strong> — the single versioned list (<code>config/jobs.yaml</code>) of everything that runs on a
+  schedule, with host, timeout and output.</li>
 <li><strong>Module / App Store</strong> — a section installed or removed from the <a href="../store/">App Store</a>, with its
   own permission manifest.</li>
 <li><strong>Connector</strong> — a module with disclosed, boxed-in database-write access: it parses a file you drop

@@ -489,34 +489,6 @@
   
   
     <li class="md-nav__item">
-      <a href="../reclassify-expenses/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Reclassify expenses
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
       <a href="../settings/" class="md-nav__link">
         
   
@@ -951,6 +923,34 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../connectors/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Writing a connector
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -1009,6 +1009,62 @@
 
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../cli/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    CLI
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../configuration/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Configuration
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
             
               
                 
@@ -1173,6 +1229,18 @@ needs and does:</p>
 <td>scheduled tasks it brings along (e.g. an ingest job)</td>
 </tr>
 <tr>
+<td><strong><code>migrations</code></strong></td>
+<td>database changes it needs, run exactly once at install (each behind a snapshot)</td>
+</tr>
+<tr>
+<td><strong><code>depends_on</code></strong></td>
+<td>other modules that must already be installed — enforced both ways: you can't install an app before its dependencies, or remove one something else still needs</td>
+</tr>
+<tr>
+<td><strong><code>published</code> / <code>recommended</code></strong></td>
+<td>whether it appears in the Store's grid (opt-out), and whether onboarding suggests it</td>
+</tr>
+<tr>
 <td><strong><code>assets</code> / i18n</strong></td>
 <td>translated strings it <strong>adds and removes</strong> on install/uninstall</td>
 </tr>
@@ -1206,6 +1274,17 @@ that match banks or agencies you actually use.</p>
 <p>Most sections ship with the core product. Optional apps and connectors live in a separate,
 lighter-weight companion repository dedicated to the module catalog, so the core stays focused on the
 platform itself — but they install and appear exactly the same way from the Store.</p>
+<p>Some examples from the catalog today:</p>
+<ul>
+<li><strong>Messaging (WhatsApp)</strong> — the message archive: its own <code>chat_*</code> tables, an ingest job, and the
+  export detection that lets <code>nocloud onboard</code> recognize a WhatsApp export.</li>
+<li><strong>Mailbox</strong> — ingests your mail archive and files it with <strong>readable rules</strong> you own; a
+  suggest-a-rule helper drafts a rule from a plain-language description, and you review it before
+  it ever runs.</li>
+<li><strong>Takeout</strong> — recognizes a Google Takeout export (via <code>nocloud onboard</code> or the Store) and
+  routes its contents into the archive.</li>
+<li><strong>Webmail</strong> — the Mail section itself is a Store app, not a hard-wired special case.</li>
+</ul>
 <h2 id="install-and-uninstall">Install and uninstall</h2>
 <ul>
 <li><strong>Installing</strong> adds the section to the catalog (it appears on everyone's home screen and in

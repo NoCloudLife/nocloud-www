@@ -487,34 +487,6 @@
   
   
     <li class="md-nav__item">
-      <a href="../reclassify-expenses/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Reclassify expenses
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
       <a href="../settings/" class="md-nav__link">
         
   
@@ -847,6 +819,34 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../connectors/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Writing a connector
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -907,6 +907,62 @@
 
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../cli/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    CLI
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../configuration/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Configuration
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
             
               
                 
@@ -1059,7 +1115,11 @@
 Functions that write to the database need the machine it lives on to be powered on. Read-only pages
 always work.</p>
 <p><strong>I changed something and regret it.</strong>
-↩︎ Undo in the editors; for everything else, every operation has a snapshot taken beforehand.</p>
+↩︎ Undo in the editors that have it (expense reclassification, for example). For
+everything else, every operation takes a snapshot beforehand or is journaled: an archive batch is
+reverted from the command line with <code>scripts/journal.py revert &lt;op_run&gt;</code>, and a database snapshot
+is restored with <code>scripts/dbsafe.py restore … --latest</code>. Nothing is lost either way — see
+<a href="../curation/#everything-is-one-undo-away">Curating your archive</a>.</p>
 <p><strong>Can I get in from outside the house?</strong>
 Yes, over VPN. Everything works exactly as it does at home.</p>
 <p><strong>Are the numbers on the home screen up to date?</strong>

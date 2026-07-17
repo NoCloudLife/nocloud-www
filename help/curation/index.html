@@ -487,34 +487,6 @@
   
   
     <li class="md-nav__item">
-      <a href="../reclassify-expenses/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Reclassify expenses
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
       <a href="../settings/" class="md-nav__link">
         
   
@@ -837,6 +809,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#the-review-queue-you-have-the-last-word" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The review queue: you have the last word
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#why-did-this-end-up-here" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -951,6 +934,34 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../connectors/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Writing a connector
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -1009,6 +1020,62 @@
 
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../cli/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    CLI
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../configuration/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Configuration
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
             
               
                 
@@ -1149,7 +1216,7 @@
 <h1 id="curating-your-archive">🗂️ Curating your archive</h1>
 <p>Twenty years of photos, videos, mail and documents don't arrive tidy. NoCloudMe's job is to turn that
 pile into an ordered archive — and to do it so that <strong>nothing is ever lost, everything can be undone,
-and you can always ask <em>why</em> something ended up where it did</strong>.</p>
+and why something ended up where it did stays on record</strong>.</p>
 <h2 id="your-originals-are-never-edited">Your originals are never edited</h2>
 <p>The vocabulary NoCloudMe uses to change your archive has <strong>no "edit file" operation at all</strong>. That's
 not a promise, it's an absence — there is no way to express it:</p>
@@ -1211,16 +1278,30 @@ rules</strong> over <strong>evidence</strong>:</p>
 </ul>
 <p>Nothing is invented: with no reliable signal, a photo goes to <em>undated</em> and the investigation queue,
 not to a made-up date.</p>
+<h2 id="the-review-queue-you-have-the-last-word">The review queue: you have the last word</h2>
+<p>When a rule's proposal isn't certain enough to apply on its own, it doesn't get applied — it gets
+<strong>queued for you</strong>. The review queue is a page that shows each uncertain proposal with its evidence
+and a preview of what would change, and gives you three verbs, one by one or in bulk:</p>
+<ul>
+<li><strong>Accept</strong> the proposal as-is.</li>
+<li><strong>Override</strong> it with another value — chosen from the alternatives the classifier itself weighed,
+  so reviewing is a real choice, not a free-text field.</li>
+<li><strong>Reject</strong> it — the archive stays untouched.</li>
+</ul>
+<p>A pending item is a proposal, not yet a change: nothing is journaled until you resolve it. Once
+accepted (or overridden), it goes through the same journaled, reversible pipeline as every other
+operation.</p>
 <h2 id="why-did-this-end-up-here">"Why did this end up here?"</h2>
 <p>Every accepted fact carries its <strong>derivation</strong>: the value chosen, the <strong>alternatives that were
-discarded and why</strong>, and which constraints it passed. That's the difference between a glass box and a
-black box — an answer you can read is an answer you can correct. Correcting the system means editing a
-rule, not retraining a model.</p>
+discarded and why</strong>, and which constraints it passed. Today that derivation is <strong>recorded and
+queryable</strong> — it travels with the fact in the journal; a page that displays it per photo is still
+to come. That's the difference between a glass box and a black box — an answer you can query is an
+answer you can correct. Correcting the system means editing a rule, not retraining a model.</p>
 <h2 id="it-shows-up-where-you-actually-look">It shows up where you actually look</h2>
 <p>A decision is worthless if you open your photo library and see nothing changed, so each kind of fact
 goes to the sink that surfaces it:</p>
 <ul>
-<li><strong>Dates, descriptions, tags, GPS</strong> → the XMP sidecar, which <a href="../messaging/">Immich</a> re-reads.</li>
+<li><strong>Dates, descriptions, tags, GPS</strong> → the XMP sidecar, which Immich (the photo library) re-reads.</li>
 <li><strong>Album membership and archived/hidden state</strong> → Immich's own API, because those live only in its
   database. Undoable too, by a compensating action (remove from the album, restore the previous
   visibility).</li>
