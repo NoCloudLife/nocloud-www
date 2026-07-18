@@ -66,6 +66,12 @@ code,.cmd,.code{font-family:var(--mono)}
 .tab.active{background:var(--grad);color:#0a0e1a;border-color:transparent}
 .tab-panel{display:none;margin-top:14px}
 .tab-panel.active{display:block}
+.app-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(178px,1fr));gap:10px;margin-top:14px}
+.app-card{background:var(--glass);border:1px solid var(--line);border-radius:14px;padding:14px 16px;
+  box-shadow:var(--shadow),var(--sheen);-webkit-backdrop-filter:blur(16px);backdrop-filter:blur(16px)}
+.app-card svg{width:38px;height:38px;margin-bottom:9px;display:block;border-radius:9px}
+.app-card h3{font-size:13.5px;font-weight:700;margin:0 0 4px}
+.app-card p{font-size:12.5px;color:var(--mut);margin:0;line-height:1.45}
 footer{color:var(--mut);font-size:13px;padding:14px 0 60px}
 footer .dot{opacity:.5;margin:0 7px}
 .btns{display:flex;flex-wrap:wrap;gap:10px;margin-top:26px}
@@ -125,59 +131,69 @@ footer .dot{opacity:.5;margin:0 7px}
       You can see why a file ended up where it did.</p>
     </div>
   </div>
-  <p style="margin-top:22px">Everything below reduces to a small, closed vocabulary: six
-  primitives for what an op <em style="font-style:normal;color:var(--ink)">does</em>
+  <p style="margin-top:22px">Everything in the engine reduces to a small, closed vocabulary: six
+  algebra primitives for what an op <em style="font-style:normal;color:var(--ink)">does</em>
   (<code>COPY</code> <code>MOVE</code> <code>ANNOTATE</code> <code>RECORD</code> <code>LINK</code>
-  <code>DELETE</code>, each with an exact inverse), six constructs for what
-  <em style="font-style:normal;color:var(--ink)">decides</em> it. One tab each:</p>
+  <code>DELETE</code>, each with an exact inverse), and five Python constructs for what
+  <em style="font-style:normal;color:var(--ink)">decides</em> it — wired end to end. One tab each:</p>
 
   <div class="tab-group">
     <div class="tabs" role="tablist">
-      <button class="tab active" data-tab="move">MOVE</button>
-      <button class="tab" data-tab="rule">RULE</button>
-      <button class="tab" data-tab="constraint">CONSTRAINT</button>
-      <button class="tab" data-tab="classifier">CLASSIFIER</button>
-      <button class="tab" data-tab="resolution">RESOLUTION</button>
+      <button class="tab active" data-tab="rule">@rule</button>
+      <button class="tab" data-tab="constraint">@constraint</button>
+      <button class="tab" data-tab="classifier">@classifier</button>
+      <button class="tab" data-tab="resolution">@resolution</button>
+      <button class="tab" data-tab="undo">undo</button>
     </div>
 
-    <div class="code tab-panel active" data-panel="move"><span class="cm"># dating_enrich.py moves + tags a photo, and says why</span>
-run.move(<span class="ok">"Sink/IMG_0453.jpg"</span>, <span class="ok">"Photos/1994/beach.jpg"</span>,
-         because=<span class="ok">"EXIF date + neighbor-photo evidence, high confidence"</span>)
+    <div class="code tab-panel active" data-panel="rule"><span class="cm"># a rule proposes a fact from a pattern, and always says why</span>
+@rule(<span class="ok">"exif_date"</span>)
+def exif_date(asset, ctx):
+    date = read_exif(asset.path).get(<span class="ok">"DateTimeOriginal"</span>)
+    if date:
+        yield Evidence(<span class="ok">"date"</span>, date[:10], source=<span class="ok">"EXIF"</span>, confidence=<span class="ok">"high"</span>)
 
-<span class="cm"># any op, any time — undo is never a special case</span>
+<span class="cm"># impact() shows what would change before anything runs</span>
+<span class="p">&gt;&gt;&gt;</span> curation.impact(<span class="ok">"exif_date"</span>, exif_date, corpus, ctx)
+1 847 photos would get a date fact — reviewable before you approve</div>
+
+    <div class="code tab-panel" data-panel="constraint"><span class="cm"># a constraint vetoes any candidate that can't be right</span>
+@constraint(<span class="ok">"lifespan"</span>)
+def lifespan(asset, field, value, ctx):
+    if field != <span class="ok">"date"</span>:
+        return True
+    for person in ctx.depicts(asset):
+        _, died = ctx.person_bounds(person)
+        if died and value &gt; str(died):
+            return False, <span class="ok">f"{person} died in {died}"</span>
+    return True
+<span class="cm"># runs on every candidate before any fact is written</span></div>
+
+    <div class="code tab-panel" data-panel="classifier"><span class="cm"># a classifier proposes group membership — here, an album</span>
+@classifier(<span class="ok">"coastal_trip"</span>)
+def coastal_trip(asset, ctx):
+    date = inferred_date(asset, ctx)
+    place = inferred_place(asset, ctx)
+    if place == <span class="ok">"coast"</span> and date_in(<span class="ok">"2023-08"</span>, date):
+        yield Evidence(<span class="ok">"album"</span>, <span class="ok">"Summer 2023 · Coast"</span>,
+                       source=<span class="ok">"place + date cluster"</span>, confidence=<span class="ok">"medium"</span>)</div>
+
+    <div class="code tab-panel" data-panel="resolution"><span class="cm"># when two sources disagree on a date, a policy resolves it</span>
+@resolution(<span class="ok">"date"</span>, name=<span class="ok">"min-date"</span>)
+def min_date(evidences):
+    <span class="cm"># the earliest plausible date wins — upload timestamps are almost</span>
+    <span class="cm"># always later than the actual capture date</span>
+    return sorted(evidences, key=lambda e: (e.value, -CONF[e.confidence]))
+<span class="cm"># the chosen fact records which candidates it beat and why</span></div>
+
+    <div class="code tab-panel" data-panel="undo"><span class="cm"># every write goes through the algebra — any op can be reversed</span>
+<span class="p">$</span> nocloud journal log --last 5
+a1e3f9  ANNOTATE  beach.jpg.xmp  date=1994-08-14  [exif_date · lifespan ✓]
+b4c12a  LINK      beach.jpg → belongs_to <span class="ok">"Summer 2023 · Coast"</span>  [coastal_trip]
+c7f820  MOVE      Sink/IMG_0453.jpg → Photos/1994/beach.jpg  [category]
+
 <span class="p">$</span> nocloud journal revert a1e3f9
-✓ reverted: MOVE Photos/1994/beach.jpg → Sink/IMG_0453.jpg</div>
-
-    <div class="code tab-panel" data-panel="rule"><span class="cm"># a rule you wrote — or said out loud and approved:</span>
-<span class="cm"># "grandpa and both my uncles are there, but not my father —</span>
-<span class="cm">#  it's before he was born"</span>
-RULE grandpa_and_uncles_without_father
-  MATCH    photo WHERE depicts(grandpa)
-                 AND depicts(uncle_1) AND depicts(uncle_2)
-                 AND NOT depicts(father)
-  PROPOSE  date(photo) &lt; father.born
-  SOURCE   <span class="ok">"coaching: grandpa + both uncles, no father yet"</span>
-
-<span class="cm"># before it runs anywhere, see what it would actually change:</span>
-<span class="p">&gt;&gt;&gt;</span> curation.impact(<span class="ok">"grandpa_and_uncles_without_father"</span>, rule, corpus, ctx)
-23 photos would be reclassified — reviewable before you approve it</div>
-
-    <div class="code tab-panel" data-panel="constraint"><span class="cm"># constraints only ever veto — never propose:</span>
-CONSTRAINT lifespan
-  REJECT   date(photo) &gt; person.died
-           WHERE depicts(person)</div>
-
-    <div class="code tab-panel" data-panel="classifier"><span class="cm"># group photos into trip albums by place + a tight date window</span>
-CLASSIFIER trip_album
-  GROUP    photo BY place, date_cluster(±3 days)
-  PROPOSE  belongs_to(photo, album=<span class="ok">"{place} {year}"</span>)</div>
-
-    <div class="code tab-panel" data-panel="resolution"><span class="cm"># two rules can propose different dates for the same photo —</span>
-<span class="cm"># resolution is a policy, not a coin flip:</span>
-RESOLUTION min_date
-  WHEN     multiple RULEs propose date(photo)
-  ACCEPT   min(candidates) UNLESS absurd(candidate)
-<span class="cm">#   e.g. never 1970-01-01, never the day of a mass upload</span></div>
+✓ reverted: ANNOTATE  beach.jpg.xmp  (date annotation removed)</div>
   </div>
 </section>
 
@@ -193,21 +209,17 @@ RESOLUTION min_date
   <p>Two native companions let you skip the browser entirely.</p>
   <div class="cards">
     <div class="card">
-      <h3>Desktop wrapper</h3>
-      <p>A <a href="https://tauri.app/">Tauri</a> window that opens your self-hosted instance without
-      a browser tab. Uses the OS's built-in WebView (no bundled Chromium), so the download is under
-      5&thinsp;MB and RAM use is negligible. Reads the server URL from <code>config/site.env</code>
-      and redirects the native window there on launch. Available for <strong>macOS, Windows, and
-      Linux</strong>. <a href="/download.html">Download →</a></p>
+      <h3>NoCloud Desktop</h3>
+      <p>Your self-hosted dashboard as a standalone window — no browser, no extra tabs, no hunting
+      through history. Feels like a native app because it is one. Available for
+      <strong>macOS, Windows, and Linux</strong>. <a href="/download.html">Download →</a></p>
     </div>
     <div class="card">
-      <h3>Menu bar app</h3>
-      <p>A persistent <strong>macOS/Linux tray icon</strong> that lives in the menu bar, not the
-      Dock. Shows Pi reachability, Syncthing sync status, and the health of all 14 background
-      services with a single click. Lets you connect or disconnect every service at once, trigger
-      an immediate net-worth recalculation, deploy the latest code to the Pi, or open the web
-      portal — without touching a terminal. Starts automatically at login via a
-      <code>LaunchAgent</code>. <a href="/help/desktop/">Docs →</a></p>
+      <h3>NoCloud Agent</h3>
+      <p>A persistent icon in your menu bar, not the Dock. One glance to see whether your server
+      is reachable and your services are healthy. One click to connect, disconnect, deploy new
+      code, or open your dashboard — no terminal needed. Starts automatically at
+      login. <a href="/help/desktop/">Docs →</a></p>
     </div>
   </div>
 </section>
@@ -219,20 +231,54 @@ RESOLUTION min_date
   <a href="/download.html">desktop app</a> is now available for all three platforms —
   unsigned builds, not for the faint-hearted, but real installers built from CI.</p>
 
-  <p style="margin-top:16px;color:var(--mut);font-size:15px">Recent additions:</p>
-  <ul style="margin-top:8px;padding-left:18px;color:var(--mut);font-size:15px;line-height:1.9">
-    <li><strong style="color:var(--ink)">Desktop app</strong> — native Tauri wrapper for macOS / Windows / Linux, <a href="/download.html">download here</a></li>
-    <li><strong style="color:var(--ink)">System → Sessions &amp; Resources</strong> — live user last-seen and per-component CPU/memory cards in the admin console</li>
-    <li><strong style="color:var(--ink)">Provenance endpoint</strong> — <code>/derivation?path=…</code> shows the full "why did this file end up here?" biography for any asset</li>
-    <li><strong style="color:var(--ink)">NL→DSL coach</strong> — describe a curation rule in plain language, get a reviewed, typed DSL expression back before anything runs</li>
-    <li><strong style="color:var(--ink)">Resource monitoring</strong> — <code>scripts/resource_monitor.py</code> tracks CPU/memory for every nocloud component on both machines</li>
-    <li><strong style="color:var(--ink)">Real app icons</strong> — all store apps now have proper SVG icons instead of emoji placeholders</li>
-  </ul>
+  <p style="margin-top:16px;color:var(--mut);font-size:15px">In the store:</p>
+  <div class="app-grid">
+    <div class="app-card">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"><rect width="64" height="64" rx="14" fill="#047857"/><path d="M14 28 L32 18 L50 28 V46 L32 56 L14 46 Z" fill="none" stroke="#fff" stroke-width="2.6" stroke-linejoin="round"/><path d="M14 28 L32 38 L50 28" fill="none" stroke="#fff" stroke-width="2.6" stroke-linejoin="round"/><line x1="32" y1="38" x2="32" y2="56" stroke="#fff" stroke-width="2.6"/><path d="M32 10 v14 M26 18 l6 -8 l6 8" fill="none" stroke="#fff" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      <h3>Google Takeout</h3>
+      <p>Import your photo archive from Google. Dates, descriptions, and metadata — everything intact, nothing lost.</p>
+    </div>
+    <div class="app-card">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"><rect width="64" height="64" rx="14" fill="#334155"/><path d="M32 14 c-11 0 -20 7.8 -20 17.5 c0 5 2.6 9.5 6.8 12.7 l-2 8.3 l9 -4.3 c2 0.5 4 0.8 6.2 0.8 c11 0 20 -7.8 20 -17.5 s-9 -17.5 -20 -17.5z" fill="none" stroke="#fff" stroke-width="2.6" stroke-linejoin="round" stroke-linecap="round"/><line x1="24" y1="28" x2="40" y2="28" stroke="#fff" stroke-width="2.2" stroke-linecap="round" opacity="0.8"/><line x1="24" y1="35" x2="34" y2="35" stroke="#fff" stroke-width="2.2" stroke-linecap="round" opacity="0.8"/></svg>
+      <h3>WhatsApp archive</h3>
+      <p>Years of conversations and attachments in one local, searchable archive — organized by chat room.</p>
+    </div>
+    <div class="app-card">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"><rect width="64" height="64" rx="14" fill="#0369a1"/><rect x="10" y="16" width="44" height="32" rx="4" fill="none" stroke="#fff" stroke-width="2.8"/><path d="M10 19 l22 17 l22 -17" fill="none" stroke="#fff" stroke-width="2.8" stroke-linejoin="round" stroke-linecap="round"/></svg>
+      <h3>Webmail</h3>
+      <p>Read and write email from your own mailbox — no third-party app, no subscription, no scanning.</p>
+    </div>
+    <div class="app-card">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"><rect width="64" height="64" rx="14" fill="#0e7490"/><rect x="12" y="18" width="34" height="26" rx="3" fill="none" stroke="#fff" stroke-width="2.8"/><path d="M12 20 l17 13 l17 -13" fill="none" stroke="#fff" stroke-width="2.8" stroke-linejoin="round" stroke-linecap="round"/><circle cx="48" cy="42" r="10" fill="#0e7490" stroke="#fff" stroke-width="3"/><path d="M43.5 42 l3 3.5 l6 -7.5" fill="none" stroke="#fff" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      <h3>Mailbox rules</h3>
+      <p>Route incoming email by sender or subject. Applied locally, before you open anything.</p>
+    </div>
+    <div class="app-card">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"><rect width="64" height="64" rx="14" fill="#b45309"/><rect x="17" y="14" width="30" height="38" rx="4" fill="none" stroke="#fff" stroke-width="2.8"/><rect x="25" y="10" width="14" height="8" rx="2" fill="#b45309" stroke="#fff" stroke-width="2.4"/><path d="M24 32 l6 6 l12 -14" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/><line x1="24" y1="44" x2="40" y2="44" stroke="#fff" stroke-width="2.4" stroke-linecap="round" opacity="0.75"/></svg>
+      <h3>Review Queue</h3>
+      <p>Inspect every curation decision the engine wasn't confident enough to apply on its own. You approve, it writes.</p>
+    </div>
+    <div class="app-card">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"><rect width="64" height="64" rx="14" fill="#6d28d9"/><path d="M32 16 L54 26 L32 36 L10 26 Z" fill="none" stroke="#fff" stroke-width="2.8" stroke-linejoin="round"/><path d="M20 30 v10 c0 3.5 5.5 6.3 12 6.3 s12 -2.8 12 -6.3 v-10" fill="none" stroke="#fff" stroke-width="2.6" stroke-linejoin="round"/><line x1="54" y1="26" x2="54" y2="40" stroke="#fff" stroke-width="2.6" stroke-linecap="round"/><circle cx="54" cy="43" r="1.8" fill="#fff"/></svg>
+      <h3>Rule Coach</h3>
+      <p>Describe a curation rule in plain language. Review the typed expression before it touches anything.</p>
+    </div>
+    <div class="app-card">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"><rect width="64" height="64" rx="14" fill="#1d4ed8"/><path d="M20 12 h16 l8 8 v32 h-24 z" fill="none" stroke="#fff" stroke-width="2.6" stroke-linejoin="round"/><path d="M36 12 v8 h8" fill="none" stroke="#fff" stroke-width="2.6" stroke-linejoin="round"/><line x1="24" y1="34" x2="38" y2="34" stroke="#fff" stroke-width="2.2" stroke-linecap="round" opacity="0.8"/><line x1="24" y1="40" x2="38" y2="40" stroke="#fff" stroke-width="2.2" stroke-linecap="round" opacity="0.8"/><path d="M14 46 a8 8 0 1 1 3 6.2" fill="none" stroke="#fff" stroke-width="2.6" stroke-linecap="round"/><path d="M14 40 v6 h6" fill="none" stroke="#fff" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      <h3>Synced documents</h3>
+      <p>Browse folders synced between your Mac and home server — one view, both sides.</p>
+    </div>
+    <div class="app-card">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"><rect width="64" height="64" rx="14" fill="#4f46e5"/><path d="M12 20 c0 -3.5 6.3 -6.3 14 -6.3 s14 2.8 14 6.3 v18 c0 3.5 -6.3 6.3 -14 6.3 s-14 -2.8 -14 -6.3 z" fill="none" stroke="#fff" stroke-width="2.6" stroke-linejoin="round"/><ellipse cx="26" cy="20" rx="14" ry="6.3" fill="none" stroke="#fff" stroke-width="2.6"/><path d="M12 26.7 a14 6.3 0 0 0 28 0" fill="none" stroke="#fff" stroke-width="2" opacity="0.75"/><path d="M12 33.3 a14 6.3 0 0 0 28 0" fill="none" stroke="#fff" stroke-width="2" opacity="0.75"/><circle cx="43" cy="41" r="9.5" fill="#4f46e5" stroke="#fff" stroke-width="3.2"/><line x1="49.7" y1="47.7" x2="57.5" y2="55.5" stroke="#fff" stroke-width="4.2" stroke-linecap="round"/></svg>
+      <h3>DB Explorer</h3>
+      <p>A live map of every table in your unified database — row counts, ownership, nothing hidden.</p>
+    </div>
+  </div>
 </section>
 
 <div class="rule"></div>
 <footer>
-  Self-hosted, local-first, reversible.<span class="dot">·</span>nocloud.life
+  Your archives live at your address.<span class="dot">·</span>nocloud.life
 </footer>
 
 </div>
