@@ -190,11 +190,20 @@ RESOLUTION min_date
 
 <section>
   <h2>Status</h2>
-  <p>NoCloud is being built in the open-ish: it runs, every day, on the author's own Mac and
-  Raspberry Pi. The install command exists (see <a href="/start.html">Getting started</a>), but the
-  source repo it pulls from is <strong>still private</strong>, so it doesn't work for anyone else
-  yet. No tagged release exists either — installing today means pulling the repo's current state
-  directly.</p>
+  <p>NoCloud runs in production on the author's own Mac and Raspberry Pi every day. The server-side
+  source is still private while stabilising, but the
+  <a href="/download.html">desktop app</a> is now available for all three platforms —
+  unsigned builds, not for the faint-hearted, but real installers built from CI.</p>
+
+  <p style="margin-top:16px;color:var(--mut);font-size:15px">Recent additions:</p>
+  <ul style="margin-top:8px;padding-left:18px;color:var(--mut);font-size:15px;line-height:1.9">
+    <li><strong style="color:var(--ink)">Desktop app</strong> — native Tauri wrapper for macOS / Windows / Linux, <a href="/download.html">download here</a></li>
+    <li><strong style="color:var(--ink)">System → Sessions &amp; Resources</strong> — live user last-seen and per-component CPU/memory cards in the admin console</li>
+    <li><strong style="color:var(--ink)">Provenance endpoint</strong> — <code>/derivation?path=…</code> shows the full "why did this file end up here?" biography for any asset</li>
+    <li><strong style="color:var(--ink)">NL→DSL coach</strong> — describe a curation rule in plain language, get a reviewed, typed DSL expression back before anything runs</li>
+    <li><strong style="color:var(--ink)">Resource monitoring</strong> — <code>scripts/resource_monitor.py</code> tracks CPU/memory for every nocloud component on both machines</li>
+    <li><strong style="color:var(--ink)">Real app icons</strong> — all store apps now have proper SVG icons instead of emoji placeholders</li>
+  </ul>
 </section>
 
 <div class="rule"></div>
