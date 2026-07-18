@@ -1,0 +1,414 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>NoCloud — leave the clouds without losing a single byte</title>
+<meta name="description" content="Self-hosted layer that digests your past — 20 years of email, a Takeout export, a phone full of unsorted photos — into one normalized database you own. Reversibly.">
+<meta name="theme-color" content="#0a0e1a">
+<link rel="canonical" href="https://nocloud.life/">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='8 10 48 44'%3E%3Cpath fill='%23fff' stroke='%23000' stroke-width='2' stroke-linejoin='round' d='M19 43 h25 a8 8 0 0 0 .7 -16 a11 11 0 0 0 -21 -3.2 a8 8 0 0 0 -4.7 19.2 z'/%3E%3Cline x1='12.5' y1='50' x2='51.5' y2='14' stroke='%23ef4444' stroke-width='5' stroke-linecap='round'/%3E%3C/svg%3E">
+<meta property="og:title" content="NoCloud">
+<meta property="og:description" content="Leave the clouds without losing a single byte, with undo.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://nocloud.life/">
+<style>
+/* Same design tokens as the product's own shell, so landing and app look like one thing. */
+:root{
+  --bg:#0a0e1a;--card:#121829;--ink:#eaeefb;--mut:#8b94ad;--line:rgba(184,200,255,.10);
+  --glass:rgba(150,166,214,.06);--brd-hi:rgba(196,214,255,.20);
+  --sheen:inset 0 1px 0 rgba(255,255,255,.06);
+  --c1:#22d3ee;--c2:#8b5cf6;--c3:#f472d0;--grad:linear-gradient(115deg,var(--c1),var(--c2) 50%,var(--c3));
+  --font:-apple-system,"Segoe UI",Roboto,system-ui,sans-serif;
+  --mono:ui-monospace,SFMono-Regular,Menlo,monospace;
+  --shadow:0 14px 32px -22px rgba(0,0,0,.65);
+  --sky-glow:radial-gradient(ellipse at 42% 46%,rgba(34,211,238,.16),transparent 68%);
+}
+@media(prefers-color-scheme:light){
+  /* Sky-blue page, not near-white -- the earlier "barely blue" #edf0f7 was why the hero clouds
+     had nothing to read against, and Cesc specifically wants the whole page this tone (it used
+     to be, before a redesign narrowed it to a small patch behind the clouds). */
+  :root{--bg:#d9ecfb;--card:#fff;--ink:#0f1629;--mut:#4f6079;--line:rgba(20,30,70,.12);
+    --glass:rgba(255,255,255,.62);--brd-hi:rgba(20,30,70,.18);
+    --sheen:inset 0 1px 0 rgba(255,255,255,.9);--shadow:0 14px 28px -20px rgba(15,23,42,.18);
+    --sky-glow:none}   /* the whole page is sky blue now (see --bg) -- a local glow here just ate the clouds' contrast */
+}
+*{box-sizing:border-box;margin:0}
+body{font-family:var(--font);color:var(--ink);-webkit-font-smoothing:antialiased;line-height:1.62;
+  background:radial-gradient(900px 560px at 90% -10%,rgba(139,92,246,.14),transparent 60%),
+             radial-gradient(700px 460px at 0% 0%,rgba(34,211,238,.08),transparent 55%),var(--bg);
+  background-attachment:fixed}
+.wrap{max-width:820px;margin:0 auto;padding:0 22px}
+header{padding:64px 0 8px}
+.logo{width:58px;height:58px;display:block}
+/* Hero sky-mark: soft clouds that drift and dissolve to reveal clear sky (the tagline, made
+   ambient). Radial mask melts its edges into the page so there's no box — it reads as part of
+   the background, not a widget. Falls back to a still clear sky when motion is reduced. */
+.skymark{width:340px;max-width:82vw;height:168px;display:block;margin:-16px 0 -10px -12px;
+  background:var(--sky-glow);                             /* a patch of pale sky behind the clouds
+    -- clipped by the same mask below, so it fades at the same edges instead of reading as a box */
+  -webkit-mask:radial-gradient(130% 130% at 46% 50%,#000 68%,transparent 100%);
+          mask:radial-gradient(130% 130% at 46% 50%,#000 68%,transparent 100%)}
+h1{font-size:clamp(38px,7vw,60px);letter-spacing:-1.5px;font-weight:800;margin:20px 0 0;line-height:1.05}
+h1 em{font-style:normal;background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+.tag{font-size:clamp(17px,2.5vw,21px);color:var(--mut);margin-top:16px;max-width:38ch}
+.rule{height:1px;background:var(--grad);opacity:.45;margin:44px 0}
+h2{font-size:13px;text-transform:uppercase;letter-spacing:.6px;color:var(--mut);font-weight:650;margin:0 0 12px}
+p{margin:0 0 14px}
+p a{color:var(--c1)}
+section{margin:0 0 40px}
+strong{font-weight:680}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;margin-top:6px}
+.card{background:var(--glass);border:1px solid var(--line);border-radius:14px;padding:16px 18px;
+  box-shadow:var(--shadow),var(--sheen);-webkit-backdrop-filter:blur(16px);backdrop-filter:blur(16px)}
+.card h3{font-size:15px;margin:0 0 6px;font-weight:680}
+.card p{font-size:14px;color:var(--mut);margin:0}
+code,.cmd,.code{font-family:var(--mono)}
+.cmd{display:block;background:var(--card);border:1px solid var(--line);border-radius:10px;
+  padding:13px 15px;font-size:13.5px;overflow-x:auto;white-space:nowrap;color:var(--ink)}
+.cmd .p{color:var(--mut)}
+.code{display:block;background:var(--card);border:1px solid var(--line);border-radius:10px;
+  padding:16px 18px;font-size:13px;line-height:1.65;overflow-x:auto;white-space:pre;color:var(--ink)}
+.code .cm{color:var(--mut)}
+.code .p{color:var(--c1)}
+.code .ok{color:#34d399}
+.tabs{display:flex;flex-wrap:wrap;gap:6px;margin-top:22px 0 0}
+.tab{font:inherit;font-family:var(--mono);font-size:12.5px;font-weight:650;letter-spacing:.3px;
+  padding:7px 13px;border-radius:8px;border:1px solid var(--line);background:var(--glass);
+  color:var(--mut);cursor:pointer}
+.tab:hover{border-color:var(--brd-hi);color:var(--ink)}
+.tab.active{background:var(--grad);color:#0a0e1a;border-color:transparent}
+.tab-panel{display:none;margin-top:14px}
+.tab-panel.active{display:block}
+.app-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(178px,1fr));gap:10px;margin-top:14px}
+.app-card{background:var(--glass);border:1px solid var(--line);border-radius:14px;padding:14px 16px;
+  box-shadow:var(--shadow),var(--sheen);-webkit-backdrop-filter:blur(16px);backdrop-filter:blur(16px)}
+.app-card svg{width:38px;height:38px;margin-bottom:9px;display:block;border-radius:9px}
+.app-card h3{font-size:13.5px;font-weight:700;margin:0 0 4px}
+.app-card p{font-size:12.5px;color:var(--mut);margin:0;line-height:1.45}
+footer{color:var(--mut);font-size:13px;padding:14px 0 60px}
+footer .dot{opacity:.5;margin:0 7px}
+.btns{display:flex;flex-wrap:wrap;gap:10px;margin-top:26px}
+.btn{display:inline-block;font-size:14px;font-weight:650;padding:10px 16px;border-radius:11px;
+  text-decoration:none;border:1px solid var(--brd-hi);color:var(--ink);background:var(--glass)}
+.btn.primary{background:var(--grad);color:#0a0e1a;border-color:transparent}
+.btn:hover{border-color:var(--c2)}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <canvas class="skymark" width="680" height="336" role="img" aria-label="Clouds clearing to reveal open sky"></canvas>
+  <h1>Leave the clouds<br><em>without losing a byte</em>.</h1>
+  <p class="tag">Bring your Takeout, your 20 years of email and your unsorted photos. With undo.</p>
+  <div class="btns">
+    <a class="btn primary" href="/start/">Getting started →</a>
+    <a class="btn" href="/download/">Download desktop app</a>
+    <a class="btn" href="https://github.com/NoCloudLife">Source on GitHub</a>
+    <a class="btn" href="/help/">Docs</a>
+  </div>
+</header>
+
+<div class="rule"></div>
+
+<section>
+  <h2>What this actually is</h2>
+  <p>NoCloud is the local-first layer between your archive and the services you already use. It brings
+  folders and supported exports into <strong>your files, your SQLite database and your private
+  portal</strong>, then connects dashboards, automations and optional Store apps without turning
+  your life into another hosted account.</p>
+</section>
+
+<section>
+  <h2>Why not just run Immich + Firefly + Paperless?</h2>
+  <p>Run them — NoCloud does, where they're best-of-breed (Immich for photos, Home Assistant for the
+  home). The gap sits underneath: those apps <em>host the present</em>, starting from zero, while
+  your past — Takeouts, mailboxes, chat archives, bank statements — stays scattered across
+  single-purpose importers that don't talk to each other. NoCloud is the layer that <strong>digests
+  twenty years of exports into one normalized, searchable database, reversibly</strong>: every
+  curation decision is journaled with its inverse, uncertain ones wait for your review, and
+  supported operations can be undone. That migration-and-memory layer — with undo — is the
+  product.</p>
+</section>
+
+<section>
+  <h2>Reversibility is the point</h2>
+  <p>Leaving a cloud is a one-way door for most people: you export, you import, and whatever got
+  mangled on the way is gone. Here the pipeline that got your data in can always be run backward.</p>
+  <div class="cards">
+    <div class="card">
+      <h3>Snapshot first</h3>
+      <p>Every database write goes through an append-only ledger that snapshots before it touches
+      anything. Any change can be restored.</p>
+    </div>
+    <div class="card">
+      <h3>Nothing vanishes</h3>
+      <p>Nothing is permanently deleted without confirmation. Uninstalling an app quarantines its
+      tables — it doesn't drop them.</p>
+    </div>
+    <div class="card">
+      <h3>Glass box</h3>
+      <p>Curation runs on an explicit vocabulary of reversible operations, not an opaque classifier.
+      You can see why a file ended up where it did.</p>
+    </div>
+  </div>
+  <p style="margin-top:22px">Everything in the engine reduces to a small, closed vocabulary: six
+  algebra primitives for what an op <em style="font-style:normal;color:var(--ink)">does</em>
+  (<code>COPY</code> <code>MOVE</code> <code>ANNOTATE</code> <code>RECORD</code> <code>LINK</code>
+  <code>DELETE</code>, each with an exact inverse), and five Python constructs for what
+  <em style="font-style:normal;color:var(--ink)">decides</em> it — wired end to end. One tab each:</p>
+
+  <div class="tab-group">
+    <div class="tabs" role="tablist">
+      <button class="tab active" data-tab="rule">@rule</button>
+      <button class="tab" data-tab="constraint">@constraint</button>
+      <button class="tab" data-tab="classifier">@classifier</button>
+      <button class="tab" data-tab="resolution">@resolution</button>
+      <button class="tab" data-tab="undo">undo</button>
+    </div>
+
+    <div class="code tab-panel active" data-panel="rule"><span class="cm"># a rule proposes a fact from a pattern, and always says why</span>
+@rule(<span class="ok">"exif_date"</span>)
+def exif_date(asset, ctx):
+    date = read_exif(asset.path).get(<span class="ok">"DateTimeOriginal"</span>)
+    if date:
+        yield Evidence(<span class="ok">"date"</span>, date[:10], source=<span class="ok">"EXIF"</span>, confidence=<span class="ok">"high"</span>)
+
+<span class="cm"># the proposal is resolved and checked before it can be lowered</span>
+facts = curation.evaluate(asset, ctx)
+<span class="p">#</span> then compile_facts() writes only accepted facts through a journaled run</div>
+
+    <div class="code tab-panel" data-panel="constraint"><span class="cm"># a constraint vetoes any candidate that can't be right</span>
+@constraint(<span class="ok">"lifespan"</span>)
+def lifespan(asset, field, value, ctx):
+    if field != <span class="ok">"date"</span>:
+        return True
+    for person in ctx.depicts(asset):
+        _, died = ctx.person_bounds(person)
+        if died and value &gt; str(died):
+            return False, <span class="ok">f"{person} died in {died}"</span>
+    return True
+<span class="cm"># runs on every candidate before any fact is written</span></div>
+
+    <div class="code tab-panel" data-panel="classifier"><span class="cm"># a classifier proposes group membership — here, an album</span>
+@classifier(<span class="ok">"coastal_trip"</span>)
+def coastal_trip(asset, ctx):
+    date = inferred_date(asset, ctx)
+    place = inferred_place(asset, ctx)
+    if place == <span class="ok">"coast"</span> and date_in(<span class="ok">"2023-08"</span>, date):
+        yield Evidence(<span class="ok">"album"</span>, <span class="ok">"Summer 2023 · Coast"</span>,
+                       source=<span class="ok">"place + date cluster"</span>, confidence=<span class="ok">"medium"</span>)</div>
+
+    <div class="code tab-panel" data-panel="resolution"><span class="cm"># when two sources disagree on a date, a policy resolves it</span>
+@resolution(<span class="ok">"date"</span>, name=<span class="ok">"min-date"</span>)
+def min_date(evidences):
+    <span class="cm"># the earliest plausible date wins — upload timestamps are almost</span>
+    <span class="cm"># always later than the actual capture date</span>
+    return sorted(evidences, key=lambda e: (e.value, -CONF[e.confidence]))
+<span class="cm"># the chosen fact records which candidates it beat and why</span></div>
+
+    <div class="code tab-panel" data-panel="undo"><span class="cm"># every write goes through the algebra — any op can be reversed</span>
+<span class="p">$</span> python3 scripts/journal.py runs
+a1e3f9  ANNOTATE  beach.jpg.xmp  date=1994-08-14  [exif_date · lifespan ✓]
+b4c12a  LINK      beach.jpg → belongs_to <span class="ok">"Summer 2023 · Coast"</span>  [coastal_trip]
+c7f820  MOVE      Sink/IMG_0453.jpg → Photos/1994/beach.jpg  [category]
+
+<span class="p">$</span> python3 scripts/journal.py revert a1e3f9
+✓ reverted: ANNOTATE  beach.jpg.xmp  (date annotation removed)</div>
+  </div>
+</section>
+
+<section>
+  <h2>Local-first, literally</h2>
+  <p>Not a slogan — the mechanism. Your data lives on hardware you own (a Mac and a Raspberry Pi)
+  and is reachable only over your own VPN. There is no account, no tenant, and nothing of yours
+  leaves the house.</p>
+</section>
+
+<section>
+  <h2>Native apps</h2>
+  <p>Two native companions let you skip the browser entirely.</p>
+  <div class="cards">
+    <div class="card">
+      <h3>NoCloud Desktop</h3>
+      <p>Your self-hosted dashboard as a standalone window — no browser, no extra tabs, no hunting
+      through history. It discovers local instances, guides first-time setup, and keeps the Sink
+      import queue visible. <a href="/download/">Download →</a></p>
+    </div>
+    <div class="card">
+      <h3>NoCloud Agent</h3>
+      <p>A persistent icon in your menu bar, not the Dock. One glance to see whether your server
+      is reachable and your services are healthy. One click to connect, disconnect, deploy new
+      code, or open your dashboard — no terminal needed. Starts automatically at
+      login. <a href="/help/desktop/">Docs →</a></p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2>Status</h2>
+  <p>NoCloud is actively developed as a complete local-first platform: core runtime, Store contracts,
+  desktop wrapper, menu-bar companion and product manual. The current
+  <a href="/download/">desktop release</a> lists the installers available for each platform; builds
+  remain unsigned while release-signing credentials are being added.</p>
+
+  <p style="margin-top:16px;color:var(--mut);font-size:15px">In the store:</p>
+  <div class="app-grid">
+    <div class="app-card">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"><rect width="64" height="64" rx="14" fill="#047857"/><path d="M14 28 L32 18 L50 28 V46 L32 56 L14 46 Z" fill="none" stroke="#fff" stroke-width="2.6" stroke-linejoin="round"/><path d="M14 28 L32 38 L50 28" fill="none" stroke="#fff" stroke-width="2.6" stroke-linejoin="round"/><line x1="32" y1="38" x2="32" y2="56" stroke="#fff" stroke-width="2.6"/><path d="M32 10 v14 M26 18 l6 -8 l6 8" fill="none" stroke="#fff" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      <h3>Google Takeout</h3>
+      <p>Import your photo archive from Google. Dates, descriptions, and metadata — everything intact, nothing lost.</p>
+    </div>
+    <div class="app-card">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"><rect width="64" height="64" rx="14" fill="#334155"/><path d="M32 14 c-11 0 -20 7.8 -20 17.5 c0 5 2.6 9.5 6.8 12.7 l-2 8.3 l9 -4.3 c2 0.5 4 0.8 6.2 0.8 c11 0 20 -7.8 20 -17.5 s-9 -17.5 -20 -17.5z" fill="none" stroke="#fff" stroke-width="2.6" stroke-linejoin="round" stroke-linecap="round"/><line x1="24" y1="28" x2="40" y2="28" stroke="#fff" stroke-width="2.2" stroke-linecap="round" opacity="0.8"/><line x1="24" y1="35" x2="34" y2="35" stroke="#fff" stroke-width="2.2" stroke-linecap="round" opacity="0.8"/></svg>
+      <h3>WhatsApp archive</h3>
+      <p>Years of conversations and attachments in one local, searchable archive — organized by chat room.</p>
+    </div>
+    <div class="app-card">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"><rect width="64" height="64" rx="14" fill="#0369a1"/><rect x="10" y="16" width="44" height="32" rx="4" fill="none" stroke="#fff" stroke-width="2.8"/><path d="M10 19 l22 17 l22 -17" fill="none" stroke="#fff" stroke-width="2.8" stroke-linejoin="round" stroke-linecap="round"/></svg>
+      <h3>Webmail</h3>
+      <p>Read and write email from your own mailbox — no third-party app, no subscription, no scanning.</p>
+    </div>
+    <div class="app-card">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"><rect width="64" height="64" rx="14" fill="#0e7490"/><rect x="12" y="18" width="34" height="26" rx="3" fill="none" stroke="#fff" stroke-width="2.8"/><path d="M12 20 l17 13 l17 -13" fill="none" stroke="#fff" stroke-width="2.8" stroke-linejoin="round" stroke-linecap="round"/><circle cx="48" cy="42" r="10" fill="#0e7490" stroke="#fff" stroke-width="3"/><path d="M43.5 42 l3 3.5 l6 -7.5" fill="none" stroke="#fff" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      <h3>Mailbox rules</h3>
+      <p>Route incoming email by sender or subject. Applied locally, before you open anything.</p>
+    </div>
+    <div class="app-card">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"><rect width="64" height="64" rx="14" fill="#b45309"/><rect x="17" y="14" width="30" height="38" rx="4" fill="none" stroke="#fff" stroke-width="2.8"/><rect x="25" y="10" width="14" height="8" rx="2" fill="#b45309" stroke="#fff" stroke-width="2.4"/><path d="M24 32 l6 6 l12 -14" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/><line x1="24" y1="44" x2="40" y2="44" stroke="#fff" stroke-width="2.4" stroke-linecap="round" opacity="0.75"/></svg>
+      <h3>Review Queue</h3>
+      <p>Inspect every curation decision the engine wasn't confident enough to apply on its own. You approve, it writes.</p>
+    </div>
+    <div class="app-card">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"><rect width="64" height="64" rx="14" fill="#6d28d9"/><path d="M32 16 L54 26 L32 36 L10 26 Z" fill="none" stroke="#fff" stroke-width="2.8" stroke-linejoin="round"/><path d="M20 30 v10 c0 3.5 5.5 6.3 12 6.3 s12 -2.8 12 -6.3 v-10" fill="none" stroke="#fff" stroke-width="2.6" stroke-linejoin="round"/><line x1="54" y1="26" x2="54" y2="40" stroke="#fff" stroke-width="2.6" stroke-linecap="round"/><circle cx="54" cy="43" r="1.8" fill="#fff"/></svg>
+      <h3>Rule Coach</h3>
+      <p>Describe a curation rule in plain language. Review the typed expression before it touches anything.</p>
+    </div>
+    <div class="app-card">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"><rect width="64" height="64" rx="14" fill="#1d4ed8"/><path d="M20 12 h16 l8 8 v32 h-24 z" fill="none" stroke="#fff" stroke-width="2.6" stroke-linejoin="round"/><path d="M36 12 v8 h8" fill="none" stroke="#fff" stroke-width="2.6" stroke-linejoin="round"/><line x1="24" y1="34" x2="38" y2="34" stroke="#fff" stroke-width="2.2" stroke-linecap="round" opacity="0.8"/><line x1="24" y1="40" x2="38" y2="40" stroke="#fff" stroke-width="2.2" stroke-linecap="round" opacity="0.8"/><path d="M14 46 a8 8 0 1 1 3 6.2" fill="none" stroke="#fff" stroke-width="2.6" stroke-linecap="round"/><path d="M14 40 v6 h6" fill="none" stroke="#fff" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      <h3>Synced documents</h3>
+      <p>Browse folders synced between your Mac and home server — one view, both sides.</p>
+    </div>
+    <div class="app-card">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"><rect width="64" height="64" rx="14" fill="#4f46e5"/><path d="M12 20 c0 -3.5 6.3 -6.3 14 -6.3 s14 2.8 14 6.3 v18 c0 3.5 -6.3 6.3 -14 6.3 s-14 -2.8 -14 -6.3 z" fill="none" stroke="#fff" stroke-width="2.6" stroke-linejoin="round"/><ellipse cx="26" cy="20" rx="14" ry="6.3" fill="none" stroke="#fff" stroke-width="2.6"/><path d="M12 26.7 a14 6.3 0 0 0 28 0" fill="none" stroke="#fff" stroke-width="2" opacity="0.75"/><path d="M12 33.3 a14 6.3 0 0 0 28 0" fill="none" stroke="#fff" stroke-width="2" opacity="0.75"/><circle cx="43" cy="41" r="9.5" fill="#4f46e5" stroke="#fff" stroke-width="3.2"/><line x1="49.7" y1="47.7" x2="57.5" y2="55.5" stroke="#fff" stroke-width="4.2" stroke-linecap="round"/></svg>
+      <h3>DB Explorer</h3>
+      <p>A live map of every table in your unified database — row counts, ownership, nothing hidden.</p>
+    </div>
+  </div>
+</section>
+
+<div class="rule"></div>
+<footer>
+  Your digital life, on hardware you own<span class="dot">·</span>nocloud.life<span class="dot">·</span><a href="https://www.youtube.com/channel/UCL9SQ6TVSRJyOMKXBhJY9MA" style="color:inherit">YouTube</a><span class="dot">·</span><a href="https://github.com/NoCloudLife" style="color:inherit">GitHub</a>
+</footer>
+
+</div>
+<script>
+document.querySelectorAll('.tab-group').forEach(function(group){
+  group.addEventListener('click', function(e){
+    var btn = e.target.closest('.tab');
+    if (!btn) return;
+    group.querySelectorAll('.tab').forEach(function(b){ b.classList.toggle('active', b === btn); });
+    group.querySelectorAll('.tab-panel').forEach(function(p){
+      p.classList.toggle('active', p.dataset.panel === btn.dataset.tab);
+    });
+  });
+});
+
+/* Hero sky-mark. Soft clouds drift and dissolve to reveal clear sky — the tagline as ambient
+   motion. Palette-matched (the brand cyan is the clear-sky glow), theme-aware, and it holds a
+   still cleared sky when the visitor prefers reduced motion. Kept deliberately slow and low-
+   contrast: a background you feel, not a widget that shouts. */
+(function () {
+  var cv = document.querySelector('.skymark');
+  if (!cv || !cv.getContext) return;
+  var ctx = cv.getContext('2d');
+  var W = cv.width, H = cv.height;                       // backing pixels (2× the CSS box → crisp)
+  var SCALE = H / 192;                                   // puff geometry below is tuned for a 192px-
+                                                          // tall canvas; scale it to whatever size the
+                                                          // box actually is instead of staying pixel-
+                                                          // fixed and shrinking into a bigger box.
+  var dark = !matchMedia('(prefers-color-scheme: light)').matches;
+  var reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  // Only the clouds are painted; the "clear sky" they reveal is the page's own gradient background
+  // showing through — so there is no box, just soft clouds over the real backdrop. Normal
+  // compositing (not additive) so it works in BOTH themes: bright clouds on the dark sky, soft
+  // slate-blue clouds on the light one — visible either way.
+  // Dark theme: near-white reads fine against the near-black page (--bg:#0a0e1a).
+  // Light theme: the page background itself is already near-white (--bg:#edf0f7, 237/240/247) --
+  // painting an even-lighter "cloud" on top is invisible by construction, not just subtle (found
+  // live 2026-07-21: worked in dark mode, never visible in light mode). A cloud has to be a
+  // shade darker than the sky behind it to read at all; pick a soft slate tone with real
+  // contrast against that background, short of the dark "smoke" grey from the first attempt.
+  var cloud = dark ? [240, 245, 255] : [255, 255, 255];
+
+  function puff(x, y, r, a) {                            // one soft blob via a radial gradient
+    if (a <= 0.003) return;
+    var g = ctx.createRadialGradient(x, y, 0, x, y, r);
+    g.addColorStop(0, 'rgba(' + cloud[0] + ',' + cloud[1] + ',' + cloud[2] + ',' + a + ')');
+    g.addColorStop(0.5, 'rgba(' + cloud[0] + ',' + cloud[1] + ',' + cloud[2] + ',' + (a * 0.5) + ')');
+    g.addColorStop(1, 'rgba(' + cloud[0] + ',' + cloud[1] + ',' + cloud[2] + ',0)');
+    ctx.fillStyle = g; ctx.beginPath(); ctx.arc(x, y, r, 0, 6.2832); ctx.fill();
+  }
+  // Each puff fades by its OWN x position (edgeAlpha), not the cluster's center — otherwise the
+  // whole cloud shares one alpha and pops in/out as a block the instant the center crosses the
+  // fade zone. Per-puff fading makes the edge of the cloud dissolve gradually, puff by puff.
+  function cloudCluster(cx, cy, s, edgeAlpha, breathe) {
+    var OFF = [                                           // [dx, dy, r, relative strength]
+      [0,        0,        32, 1],                        // flattish base, rounded top —
+      [-30 * s,  4 * s,    22, 0.92],                      // reads as a CLOUD, not a wisp
+      [30 * s,   5 * s,    23, 0.92],
+      [-8 * s,  -14 * s,   22, 0.85],
+      [16 * s,  -10 * s,   19, 0.80],
+      [-54 * s,  7 * s,    15, 0.55],                      // thin trailing edges, lowest strength —
+      [56 * s,   8 * s,    15, 0.55]                       // they're the first to dissolve to nothing
+    ];
+    for (var i = 0; i < OFF.length; i++) {
+      var o = OFF[i], px = cx + o[0];
+      puff(px, cy + o[1], o[2] * s, edgeAlpha(px) * o[3] * breathe);
+    }
+  }
+
+  // ONE animation for everyone: a slow, continuous rightward drift. The clouds are always fully
+  // present (no opacity pulsing — that read as pulsing smoke and looked jerky); they only dissolve
+  // as they slide off the right edge, leaving clear sky behind. "Reduce motion" doesn't freeze it
+  // (a frozen/blinking hero was worse) — it just drifts slower. Continuous slow motion is smooth.
+  var N = 3, clouds = [];
+  for (var i = 0; i < N; i++) {
+    clouds.push({
+      x: (i / N) * W * 1.6 - W * 0.3,                    // spread across, some off-screen → steady stream
+      y: H * (0.42 + 0.16 * ((i * 0.37) % 1)),
+      s: 0.92 + 0.3 * ((i * 0.53) % 1), ph: i * 2.1
+    });
+  }
+  var peak = dark ? 0.92 : 0.80;         // bumped up (2026-07-21): every earlier tuning still
+                                          // read as "too faint to notice" at a normal glance
+  var speed = (reduce ? 5 : 12);                         // backing px/s — gentle either way
+  // Wide fade zones (45%/50% of the canvas) so the dissolve is a long, gradual melt into the sky,
+  // never an edge — smoothstep (not linear) so the fade itself has no visible "corner" either.
+  function smoothstep(t) { t = Math.min(1, Math.max(0, t)); return t * t * (3 - 2 * t); }
+  function edgeAlphaAt(x) {
+    return smoothstep(x / (W * 0.45)) * smoothstep((W - x) / (W * 0.50));
+  }
+
+  var last = 0;
+  function frame(ts) {
+    var t = ts / 1000, dt = last ? Math.min(0.05, (ts - last) / 1000) : 0; last = ts;
+    ctx.clearRect(0, 0, W, H);                           // fully transparent — page bg is the sky
+    for (var i = 0; i < clouds.length; i++) {
+      var c = clouds[i];
+      c.x += speed * c.s * SCALE * dt;                    // scale drift speed too, or a bigger canvas
+      if (c.x > W * 1.3) { c.x = -W * 0.3; c.y = H * (0.34 + 0.32 * ((c.ph * 0.41 + t * 0.11) % 1)); }
+      var breathe = peak * (0.94 + 0.06 * Math.sin(t * 0.3 + c.ph));  // near-constant; barely a breath
+      cloudCluster(c.x, c.y, c.s * SCALE, edgeAlphaAt, breathe);
+    }
+    requestAnimationFrame(frame);
+  }
+  frame(0);                     // paint one frame synchronously so the canvas is NEVER blank —
+  requestAnimationFrame(frame); // rAF is throttled to nothing in a hidden/background tab, and the
+                                // clouds must still be there the instant the hero is visible.
+})();
+</script>
+</body>
+</html>
