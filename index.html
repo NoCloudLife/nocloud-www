@@ -189,6 +189,30 @@ RESOLUTION min_date
 </section>
 
 <section>
+  <h2>Native apps</h2>
+  <p>Two native companions let you skip the browser entirely.</p>
+  <div class="cards">
+    <div class="card">
+      <h3>Desktop wrapper</h3>
+      <p>A <a href="https://tauri.app/">Tauri</a> window that opens your self-hosted instance without
+      a browser tab. Uses the OS's built-in WebView (no bundled Chromium), so the download is under
+      5&thinsp;MB and RAM use is negligible. Reads the server URL from <code>config/site.env</code>
+      and redirects the native window there on launch. Available for <strong>macOS, Windows, and
+      Linux</strong>. <a href="/download.html">Download →</a></p>
+    </div>
+    <div class="card">
+      <h3>Menu bar app</h3>
+      <p>A persistent <strong>macOS/Linux tray icon</strong> that lives in the menu bar, not the
+      Dock. Shows Pi reachability, Syncthing sync status, and the health of all 14 background
+      services with a single click. Lets you connect or disconnect every service at once, trigger
+      an immediate net-worth recalculation, deploy the latest code to the Pi, or open the web
+      portal — without touching a terminal. Starts automatically at login via a
+      <code>LaunchAgent</code>. <a href="/help/desktop/">Docs →</a></p>
+    </div>
+  </div>
+</section>
+
+<section>
   <h2>Status</h2>
   <p>NoCloud runs in production on the author's own Mac and Raspberry Pi every day. The server-side
   source is still private while stabilising, but the

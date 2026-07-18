@@ -23,7 +23,7 @@
     
     
       
-        <title>Writing a connector - NoCloudMe Docs</title>
+        <title>Writing a connector - NoCloud Docs</title>
       
     
     
@@ -92,7 +92,7 @@
 
 <header class="md-header md-header--shadow" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Header">
-    <a href="/" title="NoCloudMe Docs" class="md-header__button md-logo" aria-label="NoCloudMe Docs" data-md-component="logo">
+    <a href="/" title="NoCloud Docs" class="md-header__button md-logo" aria-label="NoCloud Docs" data-md-component="logo">
       
   <img src="../img/logo.svg" alt="logo">
 
@@ -105,7 +105,7 @@
       <div class="md-header__ellipsis">
         <div class="md-header__topic">
           <span class="md-ellipsis">
-            NoCloudMe Docs
+            NoCloud Docs
           </span>
         </div>
         <div class="md-header__topic" data-md-component="header-topic">
@@ -219,12 +219,12 @@
 
 <nav class="md-nav md-nav--primary md-nav--integrated" aria-label="Navigation" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href="/" title="NoCloudMe Docs" class="md-nav__button md-logo" aria-label="NoCloudMe Docs" data-md-component="logo">
+    <a href="/" title="NoCloud Docs" class="md-nav__button md-logo" aria-label="NoCloud Docs" data-md-component="logo">
       
   <img src="../img/logo.svg" alt="logo">
 
     </a>
-    NoCloudMe Docs
+    NoCloud Docs
   </label>
   
   <ul class="md-nav__list" data-md-scrollfix>
@@ -523,6 +523,34 @@
     
   
     App Store
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../desktop/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Desktop & menu bar
   
 
     
@@ -1288,7 +1316,6 @@ a boundary designed to not need to trust it.</p>
 <div class="highlight"><pre><span></span><code><span class="p">{</span>
 <span class="w">  </span><span class="nt">&quot;slug&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;your-bank&quot;</span><span class="p">,</span>
 <span class="w">  </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Your Bank Connector&quot;</span><span class="p">,</span>
-<span class="w">  </span><span class="nt">&quot;emoji&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;🏦&quot;</span><span class="p">,</span>
 <span class="w">  </span><span class="nt">&quot;version&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;1.0&quot;</span><span class="p">,</span>
 <span class="w">  </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Drop your Your Bank CSV and its transactions land in finances.&quot;</span><span class="p">,</span>
 <span class="w">  </span><span class="nt">&quot;url&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;/your-bank/index.html&quot;</span><span class="p">,</span>
@@ -1344,7 +1371,7 @@ locale-aware amount parsing (<code>1.234,56</code> vs <code>1,234.56</code>).</p
 <p>Renders the drop-zone page — this is templating, not logic:</p>
 <div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">os</span><span class="o">,</span><span class="w"> </span><span class="nn">sys</span>
 <span class="n">APP</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="vm">__file__</span><span class="p">))</span>
-<span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;NOCLOUDME_SCRIPTS&quot;</span><span class="p">,</span> <span class="s2">&quot;/opt/nocloudme/scripts&quot;</span><span class="p">))</span>
+<span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;NOCLOUD_SCRIPTS&quot;</span><span class="p">,</span> <span class="s2">&quot;/opt/nocloud/scripts&quot;</span><span class="p">))</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">connector_page</span><span class="w"> </span><span class="kn">import</span> <span class="n">render</span>
 
 <span class="n">OUT</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;YOUR_BANK_OUT&quot;</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">APP</span><span class="p">,</span> <span class="s2">&quot;site&quot;</span><span class="p">,</span> <span class="s2">&quot;index.html&quot;</span><span class="p">))</span>

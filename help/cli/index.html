@@ -23,7 +23,7 @@
     
     
       
-        <title>CLI - NoCloudMe Docs</title>
+        <title>CLI - NoCloud Docs</title>
       
     
     
@@ -92,7 +92,7 @@
 
 <header class="md-header md-header--shadow" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Header">
-    <a href="/" title="NoCloudMe Docs" class="md-header__button md-logo" aria-label="NoCloudMe Docs" data-md-component="logo">
+    <a href="/" title="NoCloud Docs" class="md-header__button md-logo" aria-label="NoCloud Docs" data-md-component="logo">
       
   <img src="../img/logo.svg" alt="logo">
 
@@ -105,7 +105,7 @@
       <div class="md-header__ellipsis">
         <div class="md-header__topic">
           <span class="md-ellipsis">
-            NoCloudMe Docs
+            NoCloud Docs
           </span>
         </div>
         <div class="md-header__topic" data-md-component="header-topic">
@@ -219,12 +219,12 @@
 
 <nav class="md-nav md-nav--primary md-nav--integrated" aria-label="Navigation" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href="/" title="NoCloudMe Docs" class="md-nav__button md-logo" aria-label="NoCloudMe Docs" data-md-component="logo">
+    <a href="/" title="NoCloud Docs" class="md-nav__button md-logo" aria-label="NoCloud Docs" data-md-component="logo">
       
   <img src="../img/logo.svg" alt="logo">
 
     </a>
-    NoCloudMe Docs
+    NoCloud Docs
   </label>
   
   <ul class="md-nav__list" data-md-scrollfix>
@@ -523,6 +523,34 @@
     
   
     App Store
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../desktop/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Desktop & menu bar
   
 
     
@@ -1204,8 +1232,8 @@
 
 <h1 id="cli-reference">⌨️ CLI reference</h1>
 <p>The complete surface of the <code>nocloud</code> command. Every subcommand that produces structured output
-accepts <code>--json</code> for automation. The installation lives at <code>NOCLOUDME_HOME</code> (default <code>~/nocloudme</code>,
-remembered in <code>~/.config/nocloudme/home</code>).</p>
+accepts <code>--json</code> for automation. The installation lives at <code>NOCLOUD_HOME</code> (default <code>~/nocloud</code>,
+remembered in <code>~/.config/nocloud/home</code>).</p>
 <h2 id="install-configure">Install &amp; configure</h2>
 <table>
 <thead>
@@ -1329,7 +1357,7 @@ remembered in <code>~/.config/nocloudme/home</code>).</p>
 </table>
 <h2 id="nocloud-daemon"><code>nocloud daemon</code></h2>
 <p>Serves the platform's state on <code>127.0.0.1:8765</code> by default (configure with <code>--host</code>/<code>--port</code>, the
-<code>NOCLOUDME_DAEMON_HOST</code>/<code>NOCLOUDME_DAEMON_PORT</code> variables, or <code>daemon_port</code> in
+<code>NOCLOUD_DAEMON_HOST</code>/<code>NOCLOUD_DAEMON_PORT</code> variables, or <code>daemon_port</code> in
 <code>config/runtime.yaml</code>).</p>
 <table>
 <thead>
@@ -1365,8 +1393,8 @@ remembered in <code>~/.config/nocloudme/home</code>).</p>
 </tr>
 </tbody>
 </table>
-<p>Set <code>NOCLOUDME_DAEMON_TOKEN</code> to require <code>Authorization: Bearer &lt;token&gt;</code> on every request;
-<code>NOCLOUDME_DAEMON_CORS_ORIGIN</code> restricts browser callers.</p>
+<p>Set <code>NOCLOUD_DAEMON_TOKEN</code> to require <code>Authorization: Bearer &lt;token&gt;</code> on every request;
+<code>NOCLOUD_DAEMON_CORS_ORIGIN</code> restricts browser callers.</p>
 <h2 id="environment-knobs">Environment knobs</h2>
 <p>These override defaults when set in the shell that runs <code>nocloud</code>:</p>
 <table>
@@ -1378,27 +1406,27 @@ remembered in <code>~/.config/nocloudme/home</code>).</p>
 </thead>
 <tbody>
 <tr>
-<td><code>NOCLOUDME_HOME</code></td>
-<td>where the installation lives (else <code>~/.config/nocloudme/home</code>, else <code>~/nocloudme</code>)</td>
+<td><code>NOCLOUD_HOME</code></td>
+<td>where the installation lives (else <code>~/.config/nocloud/home</code>, else <code>~/nocloud</code>)</td>
 </tr>
 <tr>
-<td><code>NOCLOUDME_REPO_URL</code></td>
+<td><code>NOCLOUD_REPO_URL</code></td>
 <td>repo cloned by <code>nocloud init</code></td>
 </tr>
 <tr>
-<td><code>NOCLOUDME_STORE_DIR</code></td>
+<td><code>NOCLOUD_STORE_DIR</code></td>
 <td>where the companion <code>nocloud-store</code> checkout lives (default: next to the core checkout)</td>
 </tr>
 <tr>
-<td><code>NOCLOUDME_DB</code></td>
-<td>path of the SQLite catalog (default <code>catalog/nocloudme.sqlite</code>)</td>
+<td><code>NOCLOUD_DB</code></td>
+<td>path of the SQLite catalog (default <code>local/db/nocloud.sqlite</code>)</td>
 </tr>
 <tr>
-<td><code>NOCLOUDME_STATE_DIR</code></td>
-<td>where job locks/history live (default <code>~/.local/state/nocloudme</code>)</td>
+<td><code>NOCLOUD_STATE_DIR</code></td>
+<td>where job locks/history live (default <code>~/.local/state/nocloud</code>)</td>
 </tr>
 <tr>
-<td><code>NOCLOUDME_DAEMON_HOST</code> / <code>NOCLOUDME_DAEMON_PORT</code> / <code>NOCLOUDME_DAEMON_TOKEN</code> / <code>NOCLOUDME_DAEMON_CORS_ORIGIN</code></td>
+<td><code>NOCLOUD_DAEMON_HOST</code> / <code>NOCLOUD_DAEMON_PORT</code> / <code>NOCLOUD_DAEMON_TOKEN</code> / <code>NOCLOUD_DAEMON_CORS_ORIGIN</code></td>
 <td>daemon binding, auth and CORS</td>
 </tr>
 </tbody>

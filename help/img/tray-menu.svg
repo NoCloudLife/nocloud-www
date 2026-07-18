@@ -1,0 +1,114 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 680 510" font-family="-apple-system,BlinkMacSystemFont,'Helvetica Neue',sans-serif">
+  <!-- background -->
+  <rect width="680" height="510" fill="#1a1a1a" rx="10"/>
+
+  <!-- simulated menu bar -->
+  <rect x="0" y="0" width="680" height="28" fill="#2a2a2a" rx="10"/>
+  <rect x="0" y="16" width="680" height="12" fill="#2a2a2a"/>
+  <!-- macOS menu bar items (left) -->
+  <text x="16" y="18" font-size="13" fill="#e0e0e0" font-weight="600"> NoCloud</text>
+  <text x="100" y="18" font-size="13" fill="#c0c0c0"> File  Edit  View  Window  Help</text>
+  <!-- clock + icons (right) -->
+  <text x="562" y="18" font-size="12" fill="#c0c0c0">14:37</text>
+  <!-- NoCloud tray icon (highlighted = active menu) -->
+  <rect x="604" y="1" width="32" height="26" fill="#3a6fd8" rx="3"/>
+  <!-- crossed-out cloud icon (white, simplified) -->
+  <g transform="translate(612, 7)">
+    <path d="M4 12 h12 a4 4 0 0 0 0.4 -8 a6 6 0 0 0 -11.5 -1.5 a4 4 0 0 0 -0.9 9.5z" fill="none" stroke="#fff" stroke-width="1.5" stroke-linejoin="round"/>
+    <line x1="1" y1="14" x2="14" y2="1" stroke="#ef4444" stroke-width="2" stroke-linecap="round"/>
+  </g>
+
+  <!-- main menu panel -->
+  <rect x="376" y="28" width="286" height="358" fill="#252525" rx="6" filter="url(#sh)"/>
+  <defs>
+    <filter id="sh" x="-10%" y="-5%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="4" stdDeviation="8" flood-color="#000" flood-opacity="0.55"/>
+    </filter>
+  </defs>
+
+  <!-- menu items -->
+  <!-- version (no-click, dimmed) -->
+  <text x="392" y="52" font-size="12" fill="#888">v0.1.0 · 2026-07-18 12:05</text>
+  <!-- last deploy -->
+  <text x="392" y="70" font-size="12" fill="#888">Last deploy: 2026-07-18 12:35</text>
+
+  <!-- separator -->
+  <line x1="384" y1="80" x2="654" y2="80" stroke="#3a3a3a" stroke-width="1"/>
+
+  <!-- Pi status -->
+  <circle cx="396" cy="96" r="4" fill="#34d399"/>
+  <text x="406" y="100" font-size="13" fill="#e0e0e0">Pi 192.168.1.5: connected</text>
+  <!-- Syncthing -->
+  <text x="392" y="118" font-size="13" fill="#e0e0e0">Sync: 2 dev. · up to date ✓</text>
+
+  <!-- separator -->
+  <line x1="384" y1="128" x2="654" y2="128" stroke="#3a3a3a" stroke-width="1"/>
+
+  <!-- Services (with submenu arrow) — highlighted -->
+  <rect x="378" y="130" width="282" height="22" fill="#3a6fd8" rx="3"/>
+  <text x="392" y="145" font-size="13" fill="#ffffff">Services</text>
+  <text x="645" y="145" font-size="13" fill="#ffffff">▶</text>
+
+  <!-- separator -->
+  <line x1="384" y1="155" x2="654" y2="155" stroke="#3a3a3a" stroke-width="1"/>
+
+  <!-- action items -->
+  <text x="392" y="173" font-size="13" fill="#e0e0e0">Disconnect services</text>
+  <text x="392" y="195" font-size="13" fill="#e0e0e0">Refresh net worth + spending</text>
+  <text x="392" y="217" font-size="13" fill="#e0e0e0">Deploy everything to the Pi</text>
+  <text x="392" y="239" font-size="13" fill="#e0e0e0">Open NoCloud</text>
+  <text x="392" y="261" font-size="13" fill="#e0e0e0">Inspect log</text>
+
+  <!-- separator -->
+  <line x1="384" y1="272" x2="654" y2="272" stroke="#3a3a3a" stroke-width="1"/>
+
+  <!-- startup toggle -->
+  <text x="392" y="289" font-size="13" fill="#e0e0e0">Open on startup</text>
+  <text x="635" y="289" font-size="13" fill="#34d399">✓</text>
+
+  <!-- quit -->
+  <text x="392" y="310" font-size="13" fill="#e0e0e0">Quit NoCloud</text>
+
+  <!-- bottom edge cap -->
+  <rect x="376" y="318" width="286" height="68" fill="#252525" rx="0"/>
+  <rect x="376" y="366" width="286" height="20" fill="#252525" rx="0 0 6 6"/>
+
+  <!-- ═══ Services submenu panel ═══ -->
+  <rect x="76" y="130" width="304" height="232" fill="#252525" rx="6" filter="url(#sh)"/>
+
+  <!-- submenu items -->
+  <text x="92" y="152" font-size="13" fill="#34d399">✓</text>
+  <text x="112" y="152" font-size="13" fill="#e0e0e0">Net Worth + spending</text>
+
+  <text x="92" y="172" font-size="13" fill="#34d399">✓</text>
+  <text x="112" y="172" font-size="13" fill="#e0e0e0">Immich memories</text>
+
+  <text x="92" y="192" font-size="13" fill="#34d399">✓</text>
+  <text x="112" y="192" font-size="13" fill="#e0e0e0">External disk backup</text>
+
+  <text x="92" y="212" font-size="13" fill="#34d399">✓</text>
+  <text x="112" y="212" font-size="13" fill="#e0e0e0">Mail · backup</text>
+
+  <text x="92" y="232" font-size="13" fill="#34d399">✓</text>
+  <text x="112" y="232" font-size="13" fill="#e0e0e0">Mail · refresh</text>
+
+  <text x="92" y="252" font-size="13" fill="#888">•</text>
+  <text x="112" y="252" font-size="13" fill="#888">Sink mailbox (not installed)</text>
+
+  <text x="92" y="272" font-size="13" fill="#34d399">✓</text>
+  <text x="112" y="272" font-size="13" fill="#e0e0e0">Repo replica</text>
+
+  <text x="92" y="292" font-size="13" fill="#34d399">✓</text>
+  <text x="112" y="292" font-size="13" fill="#e0e0e0">Typing pause</text>
+
+  <text x="92" y="312" font-size="13" fill="#34d399">✓</text>
+  <text x="112" y="312" font-size="13" fill="#e0e0e0">Daemon (on-demand jobs)</text>
+
+  <text x="92" y="332" font-size="13" fill="#34d399">✓</text>
+  <text x="112" y="332" font-size="13" fill="#e0e0e0">Queue drain (Pi → Mac)</text>
+
+  <!-- callout labels -->
+  <text x="16" y="470" font-size="12" fill="#888">← Services submenu</text>
+  <text x="490" y="470" font-size="12" fill="#888">Main menu →</text>
+  <text x="200" y="490" font-size="11" fill="#555">Click the NoCloud icon in the menu bar to open</text>
+</svg>

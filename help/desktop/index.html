@@ -9,10 +9,10 @@
       
       
       
-        <link rel="prev" href="../security/">
+        <link rel="prev" href="../store/">
       
       
-        <link rel="next" href="../connectors/">
+        <link rel="next" href="../recipes/">
       
       
         
@@ -23,7 +23,7 @@
     
     
       
-        <title>Network & outbound traffic - NoCloud Docs</title>
+        <title>Desktop & menu bar - NoCloud Docs</title>
       
     
     
@@ -76,7 +76,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#network-outbound-traffic" class="md-skip">
+        <a href="#desktop-menu-bar-apps" class="md-skip">
           Skip to content
         </a>
       
@@ -111,7 +111,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Network & outbound traffic
+              Desktop & menu bar
             
           </span>
         </div>
@@ -376,8 +376,10 @@
       
   
   
+    
   
   
+  
     
     
     
@@ -388,11 +390,11 @@
       
     
     
-    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
         
           
           <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
@@ -413,7 +415,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_2">
             <span class="md-nav__icon md-icon"></span>
             
@@ -540,10 +542,37 @@
                 
   
   
+    
   
   
-    <li class="md-nav__item">
-      <a href="../desktop/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Desktop & menu bar
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         
   
   
@@ -559,6 +588,176 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#desktop-wrapper-macos-windows-linux" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Desktop wrapper (macOS · Windows · Linux)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Desktop wrapper (macOS · Windows · Linux)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#what-it-does" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What it does
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#install" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Install
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#menu-bar-app-macos-linux" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Menu bar app (macOS · Linux)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Menu bar app (macOS · Linux)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#what-it-shows" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What it shows
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#installing-the-menu-bar-app" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Installing the menu bar app
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Installing the menu bar app">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-build-the-app-bundle" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Build the .app bundle
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-create-the-launchagent-plist" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Create the LaunchAgent plist
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-load-it" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Load it
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#updating" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Updating
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#linux" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Linux
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#tray-vs-desktop-which-to-use" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Tray vs desktop — which to use?
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -603,8 +802,6 @@
       
   
   
-    
-  
   
   
     
@@ -617,11 +814,11 @@
       
     
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
         
           
           <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
@@ -642,7 +839,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_3">
             <span class="md-nav__icon md-icon"></span>
             
@@ -825,37 +1022,10 @@
                 
   
   
-    
   
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Network & outbound traffic
-  
-
-    
-  </span>
-  
-  
-
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../network/" class="md-nav__link">
         
   
   
@@ -871,70 +1041,6 @@
   
 
       </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#default-deny-with-declared-exceptions" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Default deny, with declared exceptions
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#the-appliance-never-calls-the-outside-world" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        The appliance never calls the outside world
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#you-can-see-it" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        You can see it
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#what-this-is-not" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        What this is not
-      
-    </span>
-  </a>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
     </li>
   
 
@@ -1219,41 +1325,241 @@
 
 
 
-<h1 id="network-outbound-traffic">🌐 Network &amp; outbound traffic</h1>
-<p>A "no cloud" product that quietly phones home isn't one. This is what NoCloud is allowed to send
-out, and how that's enforced rather than promised.</p>
-<h2 id="default-deny-with-declared-exceptions">Default deny, with declared exceptions</h2>
-<p>The old state was all-or-nothing: outbound access was either fully blocked (App Store apps) or fully
-open (everything else). A script that needed exactly <strong>one</strong> legitimate destination had no way to say
-so, so it ran either sandboxed and broken, or unwrapped and able to reach anywhere.</p>
-<p>Now the default is <strong>deny</strong>, and the handful of things that genuinely need to leave your LAN declare
-it up front:</p>
-<ul>
-<li><strong>Apps declare their network needs</strong> in their manifest, the same way they declare which database
-  tables they may read or write — visible before you install, not discovered afterwards. See
-  <a href="../store/">The Store</a>.</li>
-<li>Anything not declared simply <strong>can't get out</strong>.</li>
-</ul>
-<h2 id="the-appliance-never-calls-the-outside-world">The appliance never calls the outside world</h2>
-<p>The home server used to pull code from GitHub itself — a real outbound connection from the very box
-being locked down.</p>
-<p>That's inverted now: <strong>your workstation pushes to the home server</strong> over your own LAN/SSH. The Mac
-already talks to GitHub for your development work; the appliance no longer needs to talk to GitHub at
-all. One less thing that reaches the internet, and one less thing that can be reached.</p>
-<h2 id="you-can-see-it">You can see it</h2>
-<p>Blocking without visibility is just hoping. The <strong>doctor</strong> diagnostic console shows outbound
-sessions, blocked attempts and how long they lasted — so an app quietly trying to reach somewhere it
-shouldn't is something you <em>notice</em>, not something you assume isn't happening.</p>
-<h2 id="what-this-is-not">What this is not</h2>
-<ul>
-<li>It isn't a firewall for <strong>your</strong> browsing — it governs what <em>NoCloud's own</em> pieces may send.</li>
-<li>Reaching your data from outside is a different perimeter: LAN or WireGuard VPN, plus SSO. See
-  <a href="../security/">Security &amp; privacy</a>.</li>
-<li>Some pieces are still being brought under it (containers, scheduled refreshes); the tracked backlog
-  is honest about which, rather than claiming a lockdown that isn't finished.</li>
-</ul>
+<h1 id="desktop-menu-bar-apps">Desktop &amp; menu bar apps</h1>
+<p>Two native companions ship alongside the web portal: a <strong>desktop wrapper</strong> that opens your
+instance in a native window, and a <strong>menu bar app</strong> that runs silently in the background and
+gives you one-click access to the most common actions.</p>
+<p>Neither app contains any of your data or credentials. They both talk to the same local server
+as your browser — the only difference is the container they use to open it.</p>
 <hr />
-<p>See also: <a href="../security/">Security &amp; privacy</a> · <a href="../store/">The Store</a> · <a href="../platform/">Platform</a></p>
+<h2 id="desktop-wrapper-macos-windows-linux">Desktop wrapper (macOS · Windows · Linux)</h2>
+<p><img alt="NoCloud desktop window" src="../img/desktop-window.svg" /></p>
+<p>The desktop app is a thin <a href="https://tauri.app/">Tauri</a> shell. Tauri wraps your operating
+system's built-in WebView (Safari/WebKit on Mac, WebView2 on Windows, WebKitGTK on Linux)
+around a URL — so there is no bundled Chromium, no 200 MB download, and no separate
+browser process eating RAM. The window IS your server's web UI; it just lives in its own
+frame rather than a browser tab.</p>
+<h3 id="what-it-does">What it does</h3>
+<p>On launch, the app reads <code>SITE_URL</code> from <code>config/site.env</code> (the same file the server itself
+uses) and redirects the native window to that address. If the variable is not set — for
+example on a fresh machine that hasn't been configured yet — it shows:</p>
+<div class="highlight"><pre><span></span><code>No instance configured yet.
+Run `nocloud setup` on the machine hosting your data, then reopen this app.
+</code></pre></div>
+<p>Once the URL is set, opening the app is identical to opening that URL in a browser, with one
+practical difference: the window stays out of your browser history, has its own entry in
+Alt+Tab / Cmd+Tab, and can be assigned its own desktop space. That's the full feature set —
+there is no extra logic.</p>
+<h3 id="install">Install</h3>
+<p>Download the installer for your platform from <a href="/download.html">nocloud.life/download</a> or
+build from source (see <a href="../installation/">Installation</a>).</p>
+<table>
+<thead>
+<tr>
+<th>Platform</th>
+<th>File</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>macOS</td>
+<td><code>.dmg</code></td>
+<td>Right-click → Open to bypass Gatekeeper on first launch (unsigned)</td>
+</tr>
+<tr>
+<td>Windows</td>
+<td><code>.msi</code></td>
+<td>Click "More info → Run anyway" at the SmartScreen prompt</td>
+</tr>
+<tr>
+<td>Linux (portable)</td>
+<td><code>.AppImage</code></td>
+<td><code>chmod +x NoCloud*.AppImage &amp;&amp; ./NoCloud*.AppImage</code></td>
+</tr>
+<tr>
+<td>Linux (Debian/Ubuntu)</td>
+<td><code>.deb</code></td>
+<td><code>sudo dpkg -i NoCloud*.deb</code></td>
+</tr>
+</tbody>
+</table>
+<div class="admonition warning">
+<p class="admonition-title">These builds are unsigned</p>
+<p>There is no Apple notarization or Microsoft Authenticode certificate yet.
+The app connects only to your own server and contains no data, tokens, or credentials.</p>
+</div>
+<hr />
+<h2 id="menu-bar-app-macos-linux">Menu bar app (macOS · Linux)</h2>
+<p><img alt="NoCloud menu bar — main menu and Services submenu open" src="../img/tray-menu.svg" /></p>
+<p>The menu bar app (<code>scripts/nocloud_tray.py</code>, built into <code>NoCloud.app</code> via
+<a href="https://py2app.readthedocs.io/">py2app</a>) lives in the system tray. On macOS it appears in
+the top-right menu bar; on Linux it uses a compatible system-tray icon. It has no Dock icon
+(<code>LSUIElement=True</code>) and does not appear in Cmd+Tab.</p>
+<h3 id="what-it-shows">What it shows</h3>
+<p><strong>Top section — identity and connectivity</strong></p>
+<ul>
+<li>App version and the timestamp of the last successful deploy.</li>
+<li>Pi reachability: a green dot when the server host responds, red when it does not.</li>
+<li>Syncthing sync status: number of connected devices and whether all folders are up to date.</li>
+</ul>
+<p><strong>Services submenu</strong></p>
+<p>All 14 background jobs, each with a status indicator:</p>
+<table>
+<thead>
+<tr>
+<th>Symbol</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>✓ (green)</td>
+<td>Service is loaded and running</td>
+</tr>
+<tr>
+<td>✗ (red)</td>
+<td>Service failed or did not start</td>
+</tr>
+<tr>
+<td>• (grey)</td>
+<td>Service not installed on this machine</td>
+</tr>
+</tbody>
+</table>
+<p>The 14 jobs: Net Worth + spending refresh, Immich memories, External disk backup,
+Mail backup, Mail refresh, Sink mailbox, Repo replica, Immich → XMP export,
+Pi config backup, Typing pause, Daemon (on-demand jobs), Synced docs refresh,
+Trigger engine, Queue drain.</p>
+<p><strong>Actions</strong></p>
+<table>
+<thead>
+<tr>
+<th>Menu item</th>
+<th>What it does</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Connect / Disconnect services</td>
+<td>Starts or stops all 14 background jobs at once. Disconnect writes a marker file (<code>~/.config/nocloud/stopped</code>); reopening the app with that marker present re-enables everything.</td>
+</tr>
+<tr>
+<td>Refresh net worth + spending</td>
+<td>Triggers an immediate recalculation without waiting for the next scheduled run.</td>
+</tr>
+<tr>
+<td>Deploy everything to the Pi</td>
+<td>Runs <code>deploy_pi.sh</code> in the background and shows a notification when done.</td>
+</tr>
+<tr>
+<td>Open NoCloud</td>
+<td>Opens the web portal in the default browser.</td>
+</tr>
+<tr>
+<td>Inspect log</td>
+<td>Tails the tray log file.</td>
+</tr>
+<tr>
+<td>Open on startup</td>
+<td>Toggles the LaunchAgent so the tray auto-starts at login.</td>
+</tr>
+<tr>
+<td>Quit NoCloud</td>
+<td>First click arms a 5-second confirm window; second click within that window actually quits. This prevents accidental shutdowns from a mis-click.</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="installing-the-menu-bar-app">Installing the menu bar app</h2>
+<p>The tray app is macOS/Linux-only and is not part of the standard <code>nocloud setup</code> flow.</p>
+<h3 id="1-build-the-app-bundle">1. Build the .app bundle</h3>
+<div class="highlight"><pre><span></span><code><span class="nb">cd</span><span class="w"> </span>/path/to/nocloud-core
+scripts/build_tray.sh
+<span class="c1"># → apps/tray/dist/NoCloud.app</span>
+</code></pre></div>
+<p><code>build_tray.sh</code> runs <code>py2app</code> in alias mode. The resulting <code>.app</code> is gitignored; rebuild it
+whenever you pull a tray update.</p>
+<h3 id="2-create-the-launchagent-plist">2. Create the LaunchAgent plist</h3>
+<p>Create <code>~/Library/LaunchAgents/com.$USER.tray.plist</code>:</p>
+<div class="highlight"><pre><span></span><code><span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span>
+<span class="cp">&lt;!DOCTYPE plist PUBLIC &quot;-//Apple//DTD PLIST 1.0//EN&quot;</span>
+<span class="cp">  &quot;http://www.apple.com/DTDs/PropertyList-1.0.dtd&quot;&gt;</span>
+<span class="nt">&lt;plist</span><span class="w"> </span><span class="na">version=</span><span class="s">&quot;1.0&quot;</span><span class="nt">&gt;</span>
+<span class="nt">&lt;dict&gt;</span>
+<span class="w">  </span><span class="nt">&lt;key&gt;</span>Label<span class="nt">&lt;/key&gt;</span><span class="w">       </span><span class="nt">&lt;string&gt;</span>com.nocloud.tray<span class="nt">&lt;/string&gt;</span>
+<span class="w">  </span><span class="nt">&lt;key&gt;</span>ProgramArguments<span class="nt">&lt;/key&gt;</span>
+<span class="w">  </span><span class="nt">&lt;array&gt;</span>
+<span class="w">    </span><span class="nt">&lt;string&gt;</span>/path/to/nocloud-core/apps/tray/dist/NoCloud.app/Contents/MacOS/NoCloud<span class="nt">&lt;/string&gt;</span>
+<span class="w">  </span><span class="nt">&lt;/array&gt;</span>
+<span class="w">  </span><span class="nt">&lt;key&gt;</span>RunAtLoad<span class="nt">&lt;/key&gt;</span><span class="w">   </span><span class="nt">&lt;true/&gt;</span>
+<span class="w">  </span><span class="nt">&lt;key&gt;</span>KeepAlive<span class="nt">&lt;/key&gt;</span><span class="w">   </span><span class="nt">&lt;true/&gt;</span>
+<span class="w">  </span><span class="nt">&lt;key&gt;</span>ProcessType<span class="nt">&lt;/key&gt;</span><span class="w"> </span><span class="nt">&lt;string&gt;</span>Interactive<span class="nt">&lt;/string&gt;</span>
+<span class="w">  </span><span class="nt">&lt;key&gt;</span>StandardOutPath<span class="nt">&lt;/key&gt;</span><span class="w"> </span><span class="nt">&lt;string&gt;</span>/tmp/nocloud_tray.log<span class="nt">&lt;/string&gt;</span>
+<span class="w">  </span><span class="nt">&lt;key&gt;</span>StandardErrorPath<span class="nt">&lt;/key&gt;&lt;string&gt;</span>/tmp/nocloud_tray.log<span class="nt">&lt;/string&gt;</span>
+<span class="nt">&lt;/dict&gt;</span>
+<span class="nt">&lt;/plist&gt;</span>
+</code></pre></div>
+<p>Replace <code>/path/to/nocloud-core</code> with the actual path.</p>
+<h3 id="3-load-it">3. Load it</h3>
+<div class="highlight"><pre><span></span><code>launchctl<span class="w"> </span>bootstrap<span class="w"> </span>gui/<span class="k">$(</span>id<span class="w"> </span>-u<span class="k">)</span><span class="w"> </span>~/Library/LaunchAgents/com.<span class="nv">$USER</span>.tray.plist
+</code></pre></div>
+<p>The tray icon appears in the menu bar immediately. macOS will also start it automatically
+at every subsequent login (<code>RunAtLoad=true</code>, <code>KeepAlive=true</code>).</p>
+<h3 id="updating">Updating</h3>
+<p>After a <code>git pull</code> that changes <code>scripts/nocloud_tray.py</code>:</p>
+<div class="highlight"><pre><span></span><code>launchctl<span class="w"> </span>bootout<span class="w"> </span>gui/<span class="k">$(</span>id<span class="w"> </span>-u<span class="k">)</span><span class="w"> </span>~/Library/LaunchAgents/com.<span class="nv">$USER</span>.tray.plist
+scripts/build_tray.sh
+launchctl<span class="w"> </span>bootstrap<span class="w"> </span>gui/<span class="k">$(</span>id<span class="w"> </span>-u<span class="k">)</span><span class="w"> </span>~/Library/LaunchAgents/com.<span class="nv">$USER</span>.tray.plist
+</code></pre></div>
+<h3 id="linux">Linux</h3>
+<p>On Linux, <code>pystray</code> uses the system tray via <code>AppIndicator</code> or <code>XEmbed</code> depending on the
+desktop environment. There is no <code>.app</code> bundle — run <code>scripts/nocloud_tray.py</code> directly
+with a Python virtualenv that has <code>pystray</code> and <code>Pillow</code> installed, and register it with
+your desktop's autostart mechanism.</p>
+<hr />
+<h2 id="tray-vs-desktop-which-to-use">Tray vs desktop — which to use?</h2>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>Desktop wrapper</th>
+<th>Menu bar app</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Opens the web UI</td>
+<td>Yes — in its own window</td>
+<td>Via "Open NoCloud" menu item</td>
+</tr>
+<tr>
+<td>Runs in background</td>
+<td>No</td>
+<td>Always</td>
+</tr>
+<tr>
+<td>Shows service health</td>
+<td>No</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>Triggers deploys</td>
+<td>No</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>Platforms</td>
+<td>Mac · Windows · Linux</td>
+<td>Mac · Linux</td>
+</tr>
+<tr>
+<td>Install</td>
+<td>Download + open</td>
+<td>Build + LaunchAgent</td>
+</tr>
+</tbody>
+</table>
 
 
 
@@ -1289,7 +1595,7 @@ shouldn't is something you <em>notice</em>, not something you assume isn't happe
       <nav class="md-footer__inner md-grid" aria-label="Footer" >
         
           
-          <a href="../security/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Security &amp; privacy">
+          <a href="../store/" class="md-footer__link md-footer__link--prev" aria-label="Previous: App Store">
             <div class="md-footer__button md-icon">
               
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
@@ -1299,20 +1605,20 @@ shouldn't is something you <em>notice</em>, not something you assume isn't happe
                 Previous
               </span>
               <div class="md-ellipsis">
-                Security & privacy
+                App Store
               </div>
             </div>
           </a>
         
         
           
-          <a href="../connectors/" class="md-footer__link md-footer__link--next" aria-label="Next: Writing a connector">
+          <a href="../recipes/" class="md-footer__link md-footer__link--next" aria-label="Next: Recipes">
             <div class="md-footer__title">
               <span class="md-footer__direction">
                 Next
               </span>
               <div class="md-ellipsis">
-                Writing a connector
+                Recipes
               </div>
             </div>
             <div class="md-footer__button md-icon">

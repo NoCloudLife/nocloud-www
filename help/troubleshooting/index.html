@@ -23,7 +23,7 @@
     
     
       
-        <title>Troubleshooting - NoCloudMe Docs</title>
+        <title>Troubleshooting - NoCloud Docs</title>
       
     
     
@@ -92,7 +92,7 @@
 
 <header class="md-header md-header--shadow" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Header">
-    <a href="/" title="NoCloudMe Docs" class="md-header__button md-logo" aria-label="NoCloudMe Docs" data-md-component="logo">
+    <a href="/" title="NoCloud Docs" class="md-header__button md-logo" aria-label="NoCloud Docs" data-md-component="logo">
       
   <img src="../img/logo.svg" alt="logo">
 
@@ -105,7 +105,7 @@
       <div class="md-header__ellipsis">
         <div class="md-header__topic">
           <span class="md-ellipsis">
-            NoCloudMe Docs
+            NoCloud Docs
           </span>
         </div>
         <div class="md-header__topic" data-md-component="header-topic">
@@ -219,12 +219,12 @@
 
 <nav class="md-nav md-nav--primary md-nav--integrated" aria-label="Navigation" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href="/" title="NoCloudMe Docs" class="md-nav__button md-logo" aria-label="NoCloudMe Docs" data-md-component="logo">
+    <a href="/" title="NoCloud Docs" class="md-nav__button md-logo" aria-label="NoCloud Docs" data-md-component="logo">
       
   <img src="../img/logo.svg" alt="logo">
 
     </a>
-    NoCloudMe Docs
+    NoCloud Docs
   </label>
   
   <ul class="md-nav__list" data-md-scrollfix>
@@ -523,6 +523,34 @@
     
   
     App Store
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../desktop/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Desktop & menu bar
   
 
     
@@ -1132,10 +1160,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#i-cant-reach-nocloudme-from-outside-the-house" class="md-nav__link">
+  <a href="#i-cant-reach-nocloud-from-outside-the-house" class="md-nav__link">
     <span class="md-ellipsis">
       
-        I can't reach NoCloudMe from outside the house
+        I can't reach NoCloud from outside the house
       
     </span>
   </a>
@@ -1453,7 +1481,7 @@ powered on — and the daemon running on it (<code>nocloud daemon</code>, see
 <li><strong>App</strong>: fully close it and reopen; if it persists, remove the shortcut and add it again.</li>
 <li><strong>Quotes</strong>: outside market hours the last close is shown — that's expected.</li>
 </ul>
-<h3 id="i-cant-reach-nocloudme-from-outside-the-house">I can't reach NoCloudMe from outside the house</h3>
+<h3 id="i-cant-reach-nocloud-from-outside-the-house">I can't reach NoCloud from outside the house</h3>
 <ol>
 <li>Is the VPN connected? That's the requirement.</li>
 <li>If the VPN won't connect, your home's public IP may have changed: dynamic DNS corrects it
@@ -1472,9 +1500,9 @@ too; the sender is <code>intranet@…</code>.</p>
 <h2 id="on-the-command-line-operator">On the command line (operator)</h2>
 <h3 id="cant-find-the-installation-at-run-nocloud-init"><code>can't find the installation at … — run: nocloud init</code></h3>
 <p>The launcher can't find the checkout. Either you haven't run <code>nocloud init</code> yet, or
-<code>~/.config/nocloudme/home</code> (or the <code>NOCLOUDME_HOME</code> variable) points at a directory that no longer
+<code>~/.config/nocloud/home</code> (or the <code>NOCLOUD_HOME</code> variable) points at a directory that no longer
 exists. Run <code>nocloud init</code>, or fix the pointer:</p>
-<div class="highlight"><pre><span></span><code>cat<span class="w"> </span>~/.config/nocloudme/home<span class="w">       </span><span class="c1"># where the launcher thinks the install lives</span>
+<div class="highlight"><pre><span></span><code>cat<span class="w"> </span>~/.config/nocloud/home<span class="w">       </span><span class="c1"># where the launcher thinks the install lives</span>
 nocloud<span class="w"> </span>home<span class="w">                       </span><span class="c1"># what it resolved to</span>
 </code></pre></div>
 <h3 id="missing-configsiteenv-copy-configsiteenvexample-and-fill-it-in"><code>missing config/site.env (copy config/site.env.example and fill it in)</code></h3>
@@ -1493,10 +1521,10 @@ must have. See the <a href="../configuration/">configuration reference</a>.</p>
 nocloud<span class="w"> </span>build
 </code></pre></div>
 <p><code>nocloud init</code> does this automatically on a fresh install; you only hit it if the database file
-(<code>catalog/nocloudme.sqlite</code>) was deleted or the checkout was copied without it.</p>
+(<code>local/db/nocloud.sqlite</code>) was deleted or the checkout was copied without it.</p>
 <h3 id="systemusershelp-skipped-nocloud-store-not-found-at"><code>· system/users/help skipped (nocloud-store not found at …)</code></h3>
 <p>Informational, not an error: those pages live in the companion <code>nocloud-store</code> repository. Clone it
-next to the core checkout (or point <code>NOCLOUDME_STORE_DIR</code> at it) and rebuild.</p>
+next to the core checkout (or point <code>NOCLOUD_STORE_DIR</code> at it) and rebuild.</p>
 <h3 id="server-not-reachable-during-nocloud-deploy"><code>server not reachable</code> during <code>nocloud deploy</code></h3>
 <p>The Mac can't SSH into the Pi. Check, in order:</p>
 <ol>
@@ -1515,8 +1543,8 @@ nocloud<span class="w"> </span>daemon<span class="w"> </span>--port<span class="
 </code></pre></div>
 <p>If you change the port, update <code>MAC_DAEMON_URL</code> in <code>config/site.env</code> to match.</p>
 <h3 id="the-daemon-answers-401-unauthorized">The daemon answers <code>401 unauthorized</code></h3>
-<p><code>NOCLOUDME_DAEMON_TOKEN</code> is set, so every request must carry it:</p>
-<div class="highlight"><pre><span></span><code>curl<span class="w"> </span>-H<span class="w"> </span><span class="s2">&quot;Authorization: Bearer </span><span class="nv">$NOCLOUDME_DAEMON_TOKEN</span><span class="s2">&quot;</span><span class="w"> </span>http://127.0.0.1:8765/api/health
+<p><code>NOCLOUD_DAEMON_TOKEN</code> is set, so every request must carry it:</p>
+<div class="highlight"><pre><span></span><code>curl<span class="w"> </span>-H<span class="w"> </span><span class="s2">&quot;Authorization: Bearer </span><span class="nv">$NOCLOUD_DAEMON_TOKEN</span><span class="s2">&quot;</span><span class="w"> </span>http://127.0.0.1:8765/api/health
 </code></pre></div>
 <h3 id="a-job-wont-run-already-running-or-timeout">A job won't run: "already running" or <code>timeout</code></h3>
 <ul>
@@ -1602,7 +1630,7 @@ git check when you're intentionally carrying local changes.</p>
 <ul>
 <li><code>python3 not found</code> / <code>docker not found</code> — install them first; <code>bootstrap_pi.sh</code> deliberately
   installs neither. Without docker, the Immich/Home Assistant/nginx steps are skipped, not failed.</li>
-<li>"Copy the repo here first" — the script needs the repo at <code>~/nocloudme-repo</code>; rsync it from the
+<li>"Copy the repo here first" — the script needs the repo at <code>~/nocloud-repo</code>; rsync it from the
   Mac as the message shows, then re-run.</li>
 <li>The security panel can't tell the egress firewall's mode — the read-only sudoers grant is
   missing; run <code>scripts/setup_pi.sh</code> on the Pi.</li>

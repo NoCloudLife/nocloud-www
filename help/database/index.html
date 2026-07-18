@@ -23,7 +23,7 @@
     
     
       
-        <title>Database - NoCloudMe Docs</title>
+        <title>Database - NoCloud Docs</title>
       
     
     
@@ -92,7 +92,7 @@
 
 <header class="md-header md-header--shadow" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Header">
-    <a href="/" title="NoCloudMe Docs" class="md-header__button md-logo" aria-label="NoCloudMe Docs" data-md-component="logo">
+    <a href="/" title="NoCloud Docs" class="md-header__button md-logo" aria-label="NoCloud Docs" data-md-component="logo">
       
   <img src="../img/logo.svg" alt="logo">
 
@@ -105,7 +105,7 @@
       <div class="md-header__ellipsis">
         <div class="md-header__topic">
           <span class="md-ellipsis">
-            NoCloudMe Docs
+            NoCloud Docs
           </span>
         </div>
         <div class="md-header__topic" data-md-component="header-topic">
@@ -219,12 +219,12 @@
 
 <nav class="md-nav md-nav--primary md-nav--integrated" aria-label="Navigation" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href="/" title="NoCloudMe Docs" class="md-nav__button md-logo" aria-label="NoCloudMe Docs" data-md-component="logo">
+    <a href="/" title="NoCloud Docs" class="md-nav__button md-logo" aria-label="NoCloud Docs" data-md-component="logo">
       
   <img src="../img/logo.svg" alt="logo">
 
     </a>
-    NoCloudMe Docs
+    NoCloud Docs
   </label>
   
   <ul class="md-nav__list" data-md-scrollfix>
@@ -523,6 +523,34 @@
     
   
     App Store
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../desktop/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Desktop & menu bar
   
 
     
@@ -1050,7 +1078,18 @@
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Safety net">
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#table-reference" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Table reference
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Table reference">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
@@ -1319,7 +1358,7 @@
 
 
 <h1 id="the-database">The database</h1>
-<p>Everything NoCloudMe knows lives in <strong>one unified SQLite database</strong> — your finances, your photos'
+<p>Everything NoCloud knows lives in <strong>one unified SQLite database</strong> — your finances, your photos'
 metadata, your family tree, your house, your health. One file, on hardware you own, queryable with
 any SQLite tool. See <a href="../architecture/">Architecture</a> for where it sits, and
 <a href="../standards/">Open standards</a> for the formats each domain normalises to.</p>
@@ -1341,6 +1380,9 @@ purpose. No row ever leaves your machine; see <a href="../security/">Security &a
 previous state is copied before the change and the operation is recorded, so any accident can be
 rolled back. Bulk operations on the archive are reversible too — see <a href="../concepts/">Concepts</a>.</p>
 <hr />
+<h2 id="table-reference">Table reference</h2>
+<p>Every table in the database, grouped by domain prefix (§"How to read it" above) — auto-generated
+from the live schema, so it never drifts from the real columns.</p>
 <!--DYN-->
 <h3 id="app-product-users-sections-languages">APP (product: users, sections, languages)</h3>
 <p><strong><code>app_languages</code></strong> — DIMENSION of the UI languages on offer (<code>code</code> is the BCP-47 tag). The UI is written in English and translated from it.</p>
@@ -1370,7 +1412,7 @@ rolled back. Bulk operations on the archive are reversible too — see <a href="
 </tr>
 </tbody>
 </table>
-<p><strong><code>app_sections</code></strong> — CATALOG of everything installable on the Home: the built-in sections plus every App Store app (<code>is_app</code>). One row per section, with the URL it opens and the emoji/description shown on its tile.</p>
+<p><strong><code>app_sections</code></strong> — CATALOG of everything installable on the Home: the built-in sections plus every App Store app (<code>is_app</code>). One row per section, with the URL it opens and the icon/description shown on its tile — <code>emoji</code> is a legacy fallback only (real icons are each app's own <code>icon.svg</code>; apps stopped declaring an emoji in their manifest).</p>
 <table>
 <thead>
 <tr>
@@ -2836,7 +2878,7 @@ rolled back. Bulk operations on the archive are reversible too — see <a href="
 </tbody>
 </table>
 <h3 id="taxes">TAXES</h3>
-<p><strong><code>tax_declarations</code></strong> — Spain IRPF returns (Modelo 100) reconciled against form 0424. (Skatteverket lives in fin_suecia_*.)</p>
+<p><strong><code>tax_es_irpf</code></strong> — Spain IRPF returns (Modelo 100) — one row per fiscal year, dynamic casilla columns (c0xxx). Skatteverket lives in fin_suecia_*.</p>
 <table>
 <thead>
 <tr>
@@ -2857,22 +2899,22 @@ rolled back. Bulk operations on the archive are reversible too — see <a href="
 <td>—</td>
 </tr>
 <tr>
-<td><code>reason</code></td>
-<td>TEXT</td>
-<td>—</td>
-</tr>
-<tr>
-<td><code>residency</code></td>
-<td>TEXT</td>
-<td>—</td>
-</tr>
-<tr>
 <td><code>filing_date</code></td>
 <td>TEXT</td>
 <td>—</td>
 </tr>
 <tr>
+<td><code>region</code></td>
+<td>TEXT</td>
+<td>—</td>
+</tr>
+<tr>
 <td><code>receipt_ref</code></td>
+<td>TEXT</td>
+<td>—</td>
+</tr>
+<tr>
+<td><code>note</code></td>
 <td>TEXT</td>
 <td>—</td>
 </tr>
@@ -2974,6 +3016,33 @@ rolled back. Bulk operations on the archive are reversible too — see <a href="
 <tr>
 <td><code>c0610</code></td>
 <td>REAL</td>
+<td>—</td>
+</tr>
+</tbody>
+</table>
+<p><strong><code>tax_non_filings</code></strong> — Fiscal years with no filing (e.g. Andorra residency): country_code + reason.</p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>fiscal_year</code></td>
+<td>INTEGER</td>
+<td>PK</td>
+</tr>
+<tr>
+<td><code>country_code</code></td>
+<td>TEXT</td>
+<td>NOT NULL</td>
+</tr>
+<tr>
+<td><code>reason</code></td>
+<td>TEXT</td>
 <td>—</td>
 </tr>
 <tr>
@@ -3279,6 +3348,43 @@ rolled back. Bulk operations on the archive are reversible too — see <a href="
 </tbody>
 </table>
 <h3 id="people-genealogy">PEOPLE &amp; GENEALOGY</h3>
+<p><strong><code>people_docs</code></strong> — The person wiki documents (fiches): one markdown doc per slug, kind = person | collection | template | chronology. Formerly loose .md files; see scripts/person_docs.py.</p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>slug</code></td>
+<td>TEXT</td>
+<td>PK</td>
+</tr>
+<tr>
+<td><code>kind</code></td>
+<td>TEXT</td>
+<td>NOT NULL</td>
+</tr>
+<tr>
+<td><code>title</code></td>
+<td>TEXT</td>
+<td>—</td>
+</tr>
+<tr>
+<td><code>body_md</code></td>
+<td>TEXT</td>
+<td>NOT NULL</td>
+</tr>
+<tr>
+<td><code>updated_at</code></td>
+<td>TEXT</td>
+<td>NOT NULL</td>
+</tr>
+</tbody>
+</table>
 <p><strong><code>people_email_stats</code></strong> — RAW pool: person↔addresses with mail counts (to curate → people_person_emails).</p>
 <table>
 <thead>
@@ -5551,6 +5657,100 @@ rolled back. Bulk operations on the archive are reversible too — see <a href="
 </tr>
 </tbody>
 </table>
+<p><strong><code>mail_matches</code></strong> — <em>(no description yet)</em></p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>id</code></td>
+<td>INTEGER</td>
+<td>PK</td>
+</tr>
+<tr>
+<td><code>rule_id</code></td>
+<td>INTEGER</td>
+<td>NOT NULL, → <code>mail_rules</code></td>
+</tr>
+<tr>
+<td><code>message_id</code></td>
+<td>TEXT</td>
+<td>NOT NULL</td>
+</tr>
+<tr>
+<td><code>from_addr</code></td>
+<td>TEXT</td>
+<td>—</td>
+</tr>
+<tr>
+<td><code>subject</code></td>
+<td>TEXT</td>
+<td>—</td>
+</tr>
+<tr>
+<td><code>date_iso</code></td>
+<td>TEXT</td>
+<td>—</td>
+</tr>
+<tr>
+<td><code>matched_at</code></td>
+<td>TEXT</td>
+<td>NOT NULL</td>
+</tr>
+</tbody>
+</table>
+<p><strong><code>mail_rules</code></strong> — <em>(no description yet)</em></p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>id</code></td>
+<td>INTEGER</td>
+<td>PK</td>
+</tr>
+<tr>
+<td><code>from_pattern</code></td>
+<td>TEXT</td>
+<td>—</td>
+</tr>
+<tr>
+<td><code>subject_pattern</code></td>
+<td>TEXT</td>
+<td>—</td>
+</tr>
+<tr>
+<td><code>label</code></td>
+<td>TEXT</td>
+<td>NOT NULL</td>
+</tr>
+<tr>
+<td><code>priority</code></td>
+<td>INTEGER</td>
+<td>NOT NULL</td>
+</tr>
+<tr>
+<td><code>created_at</code></td>
+<td>TEXT</td>
+<td>NOT NULL</td>
+</tr>
+<tr>
+<td><code>created_by</code></td>
+<td>TEXT</td>
+<td>—</td>
+</tr>
+</tbody>
+</table>
 <p><strong><code>sync_applied_ops</code></strong> — Queue requests from the Pi already applied here. The Pi cannot write this database (the replica overwrites it every 2h), so it queues its intent and the Mac applies it — this table is what stops one being applied twice.</p>
 <table>
 <thead>
@@ -5575,6 +5775,105 @@ rolled back. Bulk operations on the archive are reversible too — see <a href="
 <td><code>applied_at</code></td>
 <td>TEXT</td>
 <td>—</td>
+</tr>
+</tbody>
+</table>
+<p><strong><code>sys_journal_ops</code></strong> — <em>(no description yet)</em></p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>id</code></td>
+<td>INTEGER</td>
+<td>PK</td>
+</tr>
+<tr>
+<td><code>op_run</code></td>
+<td>TEXT</td>
+<td>NOT NULL</td>
+</tr>
+<tr>
+<td><code>seq</code></td>
+<td>INTEGER</td>
+<td>NOT NULL</td>
+</tr>
+<tr>
+<td><code>ts</code></td>
+<td>TEXT</td>
+<td>NOT NULL</td>
+</tr>
+<tr>
+<td><code>kind</code></td>
+<td>TEXT</td>
+<td>NOT NULL</td>
+</tr>
+<tr>
+<td><code>target</code></td>
+<td>TEXT</td>
+<td>—</td>
+</tr>
+<tr>
+<td><code>before</code></td>
+<td>TEXT</td>
+<td>—</td>
+</tr>
+<tr>
+<td><code>after</code></td>
+<td>TEXT</td>
+<td>—</td>
+</tr>
+<tr>
+<td><code>because</code></td>
+<td>TEXT</td>
+<td>—</td>
+</tr>
+<tr>
+<td><code>status</code></td>
+<td>TEXT</td>
+<td>NOT NULL</td>
+</tr>
+</tbody>
+</table>
+<p><strong><code>sys_journal_runs</code></strong> — <em>(no description yet)</em></p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>op_run</code></td>
+<td>TEXT</td>
+<td>PK</td>
+</tr>
+<tr>
+<td><code>ts</code></td>
+<td>TEXT</td>
+<td>NOT NULL</td>
+</tr>
+<tr>
+<td><code>tool</code></td>
+<td>TEXT</td>
+<td>—</td>
+</tr>
+<tr>
+<td><code>descr</code></td>
+<td>TEXT</td>
+<td>—</td>
+</tr>
+<tr>
+<td><code>status</code></td>
+<td>TEXT</td>
+<td>NOT NULL</td>
 </tr>
 </tbody>
 </table>

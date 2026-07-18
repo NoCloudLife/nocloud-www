@@ -23,7 +23,7 @@
     
     
       
-        <title>Curating your archive - NoCloudMe Docs</title>
+        <title>Curating your archive - NoCloud Docs</title>
       
     
     
@@ -92,7 +92,7 @@
 
 <header class="md-header md-header--shadow" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Header">
-    <a href="/" title="NoCloudMe Docs" class="md-header__button md-logo" aria-label="NoCloudMe Docs" data-md-component="logo">
+    <a href="/" title="NoCloud Docs" class="md-header__button md-logo" aria-label="NoCloud Docs" data-md-component="logo">
       
   <img src="../img/logo.svg" alt="logo">
 
@@ -105,7 +105,7 @@
       <div class="md-header__ellipsis">
         <div class="md-header__topic">
           <span class="md-ellipsis">
-            NoCloudMe Docs
+            NoCloud Docs
           </span>
         </div>
         <div class="md-header__topic" data-md-component="header-topic">
@@ -219,12 +219,12 @@
 
 <nav class="md-nav md-nav--primary md-nav--integrated" aria-label="Navigation" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href="/" title="NoCloudMe Docs" class="md-nav__button md-logo" aria-label="NoCloudMe Docs" data-md-component="logo">
+    <a href="/" title="NoCloud Docs" class="md-nav__button md-logo" aria-label="NoCloud Docs" data-md-component="logo">
       
   <img src="../img/logo.svg" alt="logo">
 
     </a>
-    NoCloudMe Docs
+    NoCloud Docs
   </label>
   
   <ul class="md-nav__list" data-md-scrollfix>
@@ -543,6 +543,34 @@
   
   
     <li class="md-nav__item">
+      <a href="../desktop/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Desktop & menu bar
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../recipes/" class="md-nav__link">
         
   
@@ -824,6 +852,17 @@
     <span class="md-ellipsis">
       
         "Why did this end up here?"
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#teach-it-in-plain-language" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Teach it in plain language
       
     </span>
   </a>
@@ -1214,11 +1253,11 @@
 
 
 <h1 id="curating-your-archive">🗂️ Curating your archive</h1>
-<p>Twenty years of photos, videos, mail and documents don't arrive tidy. NoCloudMe's job is to turn that
+<p>Twenty years of photos, videos, mail and documents don't arrive tidy. NoCloud's job is to turn that
 pile into an ordered archive — and to do it so that <strong>nothing is ever lost, everything can be undone,
 and why something ended up where it did stays on record</strong>.</p>
 <h2 id="your-originals-are-never-edited">Your originals are never edited</h2>
-<p>The vocabulary NoCloudMe uses to change your archive has <strong>no "edit file" operation at all</strong>. That's
+<p>The vocabulary NoCloud uses to change your archive has <strong>no "edit file" operation at all</strong>. That's
 not a promise, it's an absence — there is no way to express it:</p>
 <ul>
 <li><strong>Renaming</strong> a file <em>moves</em> it. The bytes are untouched (checked before and after).</li>
@@ -1293,10 +1332,32 @@ accepted (or overridden), it goes through the same journaled, reversible pipelin
 operation.</p>
 <h2 id="why-did-this-end-up-here">"Why did this end up here?"</h2>
 <p>Every accepted fact carries its <strong>derivation</strong>: the value chosen, the <strong>alternatives that were
-discarded and why</strong>, and which constraints it passed. Today that derivation is <strong>recorded and
-queryable</strong> — it travels with the fact in the journal; a page that displays it per photo is still
-to come. That's the difference between a glass box and a black box — an answer you can query is an
-answer you can correct. Correcting the system means editing a rule, not retraining a model.</p>
+discarded and why</strong>, and which constraints it passed. That derivation isn't just recorded, it's
+<strong>readable on demand</strong>: a "Why?" lookup takes any file's path and shows the full chain — the
+extractor that read the signal, the rule that fired, what else was considered and why it lost.
+That's the difference between a glass box and a black box — an answer you can query is an answer
+you can correct. Correcting the system means editing a rule, not retraining a model.</p>
+<p>Today that lookup is reachable from Synced Documents' own "Why?" button, and works for <strong>any</strong>
+path in your archive, not only synced documents. Bringing the same lookup onto a photo's own detail
+page inside your photo library is the one piece still missing — the derivation is already there and
+already correct, it just isn't one click away from every photo yet.</p>
+<h2 id="teach-it-in-plain-language">Teach it in plain language</h2>
+<p>A rule doesn't always exist yet for what you know. Coaching turns a sentence — the way you'd
+explain it to a person — into a new rule, without ever hand-writing code:</p>
+<ol>
+<li>In the <strong>Rule Coach</strong> app, you describe the pattern in your own words ("photos of [a person]
+   before they were born are scans of old prints, not new photos").</li>
+<li>The local model on your own machine translates that into a small, readable rule: what it
+   matches, what it proposes, how confident it is. Nothing is applied yet.</li>
+<li>You read the rule back — in the same plain block notation, not JSON — right there in the app,
+   before deciding anything.</li>
+<li>Only once you approve it does the rule join the catalog and start proposing facts, exactly like
+   every rule shipped with NoCloud. Uncertain proposals still land in your review queue first.
+   Changed your mind before approving? Discard it — nothing was ever applied.</li>
+</ol>
+<p>The model never runs your archive through a black box and never writes to it directly — it writes
+one small, versioned rule that you read before it does anything, and every fact it later proposes
+still carries its own derivation back to the sentence that taught it.</p>
 <h2 id="it-shows-up-where-you-actually-look">It shows up where you actually look</h2>
 <p>A decision is worthless if you open your photo library and see nothing changed, so each kind of fact
 goes to the sink that surfaces it:</p>

@@ -1,0 +1,70 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 420" font-family="-apple-system,BlinkMacSystemFont,'Helvetica Neue',sans-serif">
+  <!-- background -->
+  <rect width="640" height="420" fill="#111827" rx="10"/>
+
+  <!-- window chrome -->
+  <rect x="40" y="40" width="560" height="340" fill="#1e2433" rx="10" filter="url(#ws)"/>
+  <defs>
+    <filter id="ws" x="-5%" y="-5%" width="115%" height="120%">
+      <feDropShadow dx="0" dy="8" stdDeviation="16" flood-color="#000" flood-opacity="0.7"/>
+    </filter>
+  </defs>
+
+  <!-- title bar -->
+  <rect x="40" y="40" width="560" height="32" fill="#2a2f3e" rx="10"/>
+  <rect x="40" y="58" width="560" height="14" fill="#2a2f3e"/>
+  <!-- traffic lights -->
+  <circle cx="64" cy="56" r="6" fill="#ff5f57"/>
+  <circle cx="84" cy="56" r="6" fill="#ffbd2e"/>
+  <circle cx="104" cy="56" r="6" fill="#28c840"/>
+  <!-- window title -->
+  <text x="320" y="60" font-size="13" fill="#8892a4" text-anchor="middle">NoCloud — your-server.home</text>
+
+  <!-- web content area (simplified NoCloud UI) -->
+  <!-- nav header -->
+  <rect x="40" y="72" width="560" height="48" fill="#151c2c"/>
+  <!-- logo -->
+  <g transform="translate(60, 80)">
+    <path d="M4 20 h20 a7 7 0 0 0 0.5 -14 a9 9 0 0 0 -18 -2.5 a7 7 0 0 0 -2.5 16.5z" fill="none" stroke="#fff" stroke-width="2" stroke-linejoin="round"/>
+    <line x1="2.5" y1="24" x2="24" y2="2" stroke="#ef4444" stroke-width="3" stroke-linecap="round"/>
+  </g>
+  <text x="100" y="100" font-size="15" font-weight="700" fill="#eaeefb">NoCloud</text>
+  <!-- nav links -->
+  <text x="220" y="100" font-size="13" fill="#8b94ad">Home</text>
+  <text x="270" y="100" font-size="13" fill="#8b94ad">Photos</text>
+  <text x="330" y="100" font-size="13" fill="#8b94ad">Finance</text>
+  <text x="398" y="100" font-size="13" fill="#8b94ad">Health</text>
+  <text x="454" y="100" font-size="13" fill="#8b94ad">System</text>
+
+  <!-- home content cards grid -->
+  <rect x="56" y="140" width="155" height="90" fill="#0f1526" rx="8" stroke="#1e2a40" stroke-width="1"/>
+  <text x="72" y="163" font-size="11" fill="#8b94ad">Photos</text>
+  <text x="72" y="185" font-size="24" font-weight="700" fill="#eaeefb">47,291</text>
+  <text x="72" y="203" font-size="11" fill="#34d399">↑ 14 this week</text>
+
+  <rect x="228" y="140" width="155" height="90" fill="#0f1526" rx="8" stroke="#1e2a40" stroke-width="1"/>
+  <text x="244" y="163" font-size="11" fill="#8b94ad">Net Worth</text>
+  <text x="244" y="185" font-size="24" font-weight="700" fill="#eaeefb">€372k</text>
+  <text x="244" y="203" font-size="11" fill="#34d399">↑ 0.4% this month</text>
+
+  <rect x="400" y="140" width="155" height="90" fill="#0f1526" rx="8" stroke="#1e2a40" stroke-width="1"/>
+  <text x="416" y="163" font-size="11" fill="#8b94ad">Messages</text>
+  <text x="416" y="185" font-size="24" font-weight="700" fill="#eaeefb">3</text>
+  <text x="416" y="203" font-size="11" fill="#8b94ad">conversations today</text>
+
+  <!-- On this day -->
+  <rect x="56" y="250" width="500" height="80" fill="#0f1526" rx="8" stroke="#1e2a40" stroke-width="1"/>
+  <text x="72" y="273" font-size="11" fill="#8b94ad">ON THIS DAY</text>
+  <text x="72" y="293" font-size="14" fill="#eaeefb">4 years ago · Barcelona trip</text>
+  <text x="72" y="310" font-size="12" fill="#8b94ad">12 photos · 3 tagged</text>
+  <!-- mini photo thumbnails -->
+  <rect x="380" y="258" width="42" height="32" fill="#1e2a40" rx="3"/>
+  <rect x="428" y="258" width="42" height="32" fill="#2a3550" rx="3"/>
+  <rect x="476" y="258" width="42" height="32" fill="#1a2540" rx="3"/>
+  <text x="394" y="280" font-size="18" fill="#2d4070">🏖</text>
+  <text x="442" y="280" font-size="18" fill="#2d4070">🌅</text>
+  <text x="490" y="280" font-size="18" fill="#2d4070">🍷</text>
+
+  <!-- label below -->
+  <text x="320" y="400" font-size="12" fill="#555" text-anchor="middle">Your NoCloud web portal, in a native window — same UI, no browser tab</text>
+</svg>

@@ -23,7 +23,7 @@
     
     
       
-        <title>Installation - NoCloudMe Docs</title>
+        <title>Installation - NoCloud Docs</title>
       
     
     
@@ -92,7 +92,7 @@
 
 <header class="md-header md-header--shadow" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Header">
-    <a href="/" title="NoCloudMe Docs" class="md-header__button md-logo" aria-label="NoCloudMe Docs" data-md-component="logo">
+    <a href="/" title="NoCloud Docs" class="md-header__button md-logo" aria-label="NoCloud Docs" data-md-component="logo">
       
   <img src="../img/logo.svg" alt="logo">
 
@@ -105,7 +105,7 @@
       <div class="md-header__ellipsis">
         <div class="md-header__topic">
           <span class="md-ellipsis">
-            NoCloudMe Docs
+            NoCloud Docs
           </span>
         </div>
         <div class="md-header__topic" data-md-component="header-topic">
@@ -219,12 +219,12 @@
 
 <nav class="md-nav md-nav--primary md-nav--integrated" aria-label="Navigation" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href="/" title="NoCloudMe Docs" class="md-nav__button md-logo" aria-label="NoCloudMe Docs" data-md-component="logo">
+    <a href="/" title="NoCloud Docs" class="md-nav__button md-logo" aria-label="NoCloud Docs" data-md-component="logo">
       
   <img src="../img/logo.svg" alt="logo">
 
     </a>
-    NoCloudMe Docs
+    NoCloud Docs
   </label>
   
   <ul class="md-nav__list" data-md-scrollfix>
@@ -605,6 +605,34 @@
     
   
     App Store
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../desktop/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Desktop & menu bar
   
 
     
@@ -1183,7 +1211,7 @@
 <h1 id="installation">📦 Installation</h1>
 <div class="admonition note">
 <p class="admonition-title">Developing, not installing?</p>
-<p>This page installs NoCloudMe <em>as a user</em> (real config, real data paths). To hack on the
+<p>This page installs NoCloud <em>as a user</em> (real config, real data paths). To hack on the
 code you need none of it — see <code>CONTRIBUTING.md</code> in the repo: a plain clone plus the test
 suites, all on synthetic data.</p>
 </div>
@@ -1194,7 +1222,7 @@ or similar, reachable over SSH) serves the result over your own VPN. Set up both
 <div class="highlight"><pre><span></span><code>mkdir<span class="w"> </span>-p<span class="w"> </span>~/.local/bin<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>curl<span class="w"> </span>-fsSL<span class="w"> </span>https://raw.githubusercontent.com/NoCloudLife/nocloud-core/main/bin/nocloud<span class="w"> </span><span class="se">\</span>
 <span class="w">  </span>-o<span class="w"> </span>~/.local/bin/nocloud<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>chmod<span class="w"> </span>+x<span class="w"> </span>~/.local/bin/nocloud<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>~/.local/bin/nocloud<span class="w"> </span>init
 </code></pre></div>
-<p>(make sure <code>~/.local/bin</code> is on your <code>PATH</code>.) <code>nocloud init</code> clones the code into <code>~/nocloudme</code>,
+<p>(make sure <code>~/.local/bin</code> is on your <code>PATH</code>.) <code>nocloud init</code> clones the code into <code>~/nocloud</code>,
 creates the Python environment and initializes the local database. A Homebrew formula also ships
 in the repo (<code>Formula/nocloud.rb</code>); it installs from this git repo directly (no tagged release
 exists yet).</p>
@@ -1202,7 +1230,7 @@ exists yet).</p>
 <ol>
 <li><strong>Configure</strong>: <code>nocloud setup</code> — a guided, ASCII-art assistant that detects your network
    (your Mac's IP, router, and Raspberry Pi candidates on the LAN) and writes
-   <code>~/nocloudme/config/site.env</code> for you. You can also edit that file by hand (server SSH host/user,
+   <code>~/nocloud/config/site.env</code> for you. You can also edit that file by hand (server SSH host/user,
    service URLs, API keys) — it never travels to git either way.</li>
 <li><strong>Check</strong>: <code>nocloud doctor</code> — 16 checks covering git, Python, the job registry, the
    configuration schema, the database, seeded sections, module manifests, the backup contract, the
@@ -1215,11 +1243,11 @@ exists yet).</p>
 </ol>
 <h2 id="2-home-server-pi">2. Home server (Pi)</h2>
 <p>This side is a one-time, mostly-manual setup, run on the Pi itself. The one-time image/package
-pulls during setup are normal for any self-hosted box; what NoCloudMe itself avoids afterward is
+pulls during setup are normal for any self-hosted box; what NoCloud itself avoids afterward is
 the <em>appliance</em> pulling its own code from GitHub on an ongoing basis — the Mac pushes to the Pi
 over your LAN/SSH instead (see <a href="../network/">Network &amp; outbound traffic</a>).</p>
 <ol>
-<li>Copy the repo over once (from the Mac): <code>rsync -a ~/nocloudme/ pi@&lt;host&gt;:~/nocloudme-repo/</code>.</li>
+<li>Copy the repo over once (from the Mac): <code>rsync -a ~/nocloud/ pi@&lt;host&gt;:~/nocloud-repo/</code>.</li>
 <li>Run <code>scripts/bootstrap_pi.sh</code> on the Pi (needs <code>docker</code> already installed). It creates the
    <code>~/intranet/</code> directory layout, a Python environment, systemd units for the three native
    services (settings API, permissions API, ingest service), installs <strong>Immich</strong> and <strong>Home
@@ -1283,7 +1311,7 @@ over your LAN/SSH instead (see <a href="../network/">Network &amp; outbound traf
 <div class="admonition tip">
 <p class="admonition-title">Tip</p>
 <p><code>nocloud init</code> installs the <em>code and data</em>, separate from the launcher script itself.
-Removing <code>~/nocloudme</code> never touches anything already deployed on the Pi.</p>
+Removing <code>~/nocloud</code> never touches anything already deployed on the Pi.</p>
 </div>
 
 
