@@ -39,24 +39,24 @@
   <!-- home content cards grid -->
   <rect x="56" y="140" width="155" height="90" fill="#0f1526" rx="8" stroke="#1e2a40" stroke-width="1"/>
   <text x="72" y="163" font-size="11" fill="#8b94ad">Photos</text>
-  <text x="72" y="185" font-size="24" font-weight="700" fill="#eaeefb">47,291</text>
-  <text x="72" y="203" font-size="11" fill="#34d399">↑ 14 this week</text>
+  <text x="72" y="185" font-size="24" font-weight="700" fill="#eaeefb">· · ·</text>
+  <text x="72" y="203" font-size="11" fill="#34d399">synced this week</text>
 
   <rect x="228" y="140" width="155" height="90" fill="#0f1526" rx="8" stroke="#1e2a40" stroke-width="1"/>
   <text x="244" y="163" font-size="11" fill="#8b94ad">Net Worth</text>
-  <text x="244" y="185" font-size="24" font-weight="700" fill="#eaeefb">€372k</text>
-  <text x="244" y="203" font-size="11" fill="#34d399">↑ 0.4% this month</text>
+  <text x="244" y="185" font-size="24" font-weight="700" fill="#eaeefb">· · ·</text>
+  <text x="244" y="203" font-size="11" fill="#34d399">your numbers here</text>
 
   <rect x="400" y="140" width="155" height="90" fill="#0f1526" rx="8" stroke="#1e2a40" stroke-width="1"/>
   <text x="416" y="163" font-size="11" fill="#8b94ad">Messages</text>
-  <text x="416" y="185" font-size="24" font-weight="700" fill="#eaeefb">3</text>
+  <text x="416" y="185" font-size="24" font-weight="700" fill="#eaeefb">· · ·</text>
   <text x="416" y="203" font-size="11" fill="#8b94ad">conversations today</text>
 
   <!-- On this day -->
   <rect x="56" y="250" width="500" height="80" fill="#0f1526" rx="8" stroke="#1e2a40" stroke-width="1"/>
   <text x="72" y="273" font-size="11" fill="#8b94ad">ON THIS DAY</text>
-  <text x="72" y="293" font-size="14" fill="#eaeefb">4 years ago · Barcelona trip</text>
-  <text x="72" y="310" font-size="12" fill="#8b94ad">12 photos · 3 tagged</text>
+  <text x="72" y="293" font-size="14" fill="#eaeefb">Summer trip · a few years ago</text>
+  <text x="72" y="310" font-size="12" fill="#8b94ad">your photos · your memories</text>
   <!-- mini photo thumbnails -->
   <rect x="380" y="258" width="42" height="32" fill="#1e2a40" rx="3"/>
   <rect x="428" y="258" width="42" height="32" fill="#2a3550" rx="3"/>
