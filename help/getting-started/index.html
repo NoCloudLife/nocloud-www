@@ -355,6 +355,24 @@
         
       
       
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Getting started
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
       <a href="./" class="md-nav__link md-nav__link--active">
         
   
@@ -371,6 +389,47 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#your-first-import" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Your first import
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#daily-use" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Daily use
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
       
     </li>
   
@@ -1139,6 +1198,25 @@
 
 
 <h1 id="getting-started">🚀 Getting started</h1>
+<h2 id="your-first-import">Your first import</h2>
+<p>Start with one folder of photos or videos, a Google Takeout export, or a supported messaging
+export:</p>
+<div class="highlight"><pre><span></span><code>nocloud<span class="w"> </span>onboard<span class="w"> </span>/path/to/your-folder-or-export
+</code></pre></div>
+<p>NoCloud identifies the source before it changes anything. A media folder is <strong>copied</strong>, never
+moved, into your archive and every copy is journaled so it can be reversed. A Store export is
+routed to its matching app; if the app is not installed, NoCloud asks before installing it.</p>
+<p>At the end you will see how many files were copied, how many were already present, and where the
+new material lives. Repeating the same import is safe: unchanged source files are skipped without
+being read again, and changed files are hashed and handled normally. Run <code>nocloud build</code> afterward
+to generate your dashboard with this data.</p>
+<p>For photos to appear in Immich, add the archive root as an <strong>External Library</strong> in Immich's
+Administration settings and run its scan once. NoCloud does not silently alter Immich's library
+configuration for you.</p>
+<p>At any time, run <code>nocloud journey</code> or open <strong>Getting started</strong> in the portal. Both surfaces use
+the same instance state and show one next action, rather than making you infer the order from a
+list of services.</p>
+<h2 id="daily-use">Daily use</h2>
 <ol>
 <li><strong>Log in</strong> from the LAN or over VPN and pass single sign-on (SSO). One session covers every
    section — only mail keeps a second login of its own.</li>
@@ -1224,10 +1302,6 @@
   <div class="md-footer-meta md-typeset">
     <div class="md-footer-meta__inner md-grid">
       <div class="md-copyright">
-  
-    <div class="md-copyright__highlight">
-      v0.1.1 · manual generado desde docs/manual/*.md
-    </div>
   
   
 </div>

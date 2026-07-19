@@ -599,6 +599,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#widgets-and-settings-tabs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Widgets and Settings tabs
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#where-modules-live" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -1254,7 +1265,7 @@ needs and does:</p>
 </tr>
 <tr>
 <td><strong><code>jobs</code></strong></td>
-<td>scheduled tasks it brings along (e.g. an ingest job)</td>
+<td>scheduled tasks it brings along (e.g. an ingest job, or an hourly refresh — see below)</td>
 </tr>
 <tr>
 <td><strong><code>migrations</code></strong></td>
@@ -1267,6 +1278,18 @@ needs and does:</p>
 <tr>
 <td><strong><code>published</code> / <code>recommended</code></strong></td>
 <td>whether it appears in the Store's grid (opt-out), and whether onboarding suggests it</td>
+</tr>
+<tr>
+<td><strong><code>preinstall</code></strong></td>
+<td>present by default on a fresh instance (still normally uninstallable) — e.g. Photos</td>
+</tr>
+<tr>
+<td><strong><code>widget</code></strong></td>
+<td>a Home-grid widget this app contributes (slug, size, its own JSON feed)</td>
+</tr>
+<tr>
+<td><strong><code>settings_tab</code></strong></td>
+<td>a tab this app adds to the Settings app instead of (or in addition to) its own page</td>
 </tr>
 <tr>
 <td><strong><code>assets</code> / i18n</strong></td>
@@ -1298,6 +1321,20 @@ before you install it — and it's tightly boxed in even after installation:</p>
 <p>Connectors typically cover things like bank statements or tax declarations from a specific
 institution; each ships its own parser and file-format definitions, and you only install the ones
 that match banks or agencies you actually use.</p>
+<h2 id="widgets-and-settings-tabs">Widgets and Settings tabs</h2>
+<p>Some apps are widget-only: <strong>Coming Up</strong> has no page of its own — just a Home widget and a
+Settings tab where you paste your calendar link. <code>module.kind: "widget"</code> is for exactly that (no
+<code>entrypoint</code>/<code>output</code> page to build). An ordinary <code>"page"</code> app can <em>also</em> declare a <code>widget</code> — Photos
+does, for its "on this day" strip — a widget is independent of the app's own page kind.</p>
+<p>A <code>settings_tab</code> works the same way as the built-in Permissions tab: the app's own generator exposes
+a <code>PANEL</code>/<code>CSS</code>/<code>SCRIPT</code>, and the Settings app imports and injects them as one more tab, visible only
+while the app is installed. This is for apps with configuration but no natural place on their own
+page to put it (Photos' page <em>is</em> a redirect to Immich — there's nowhere on it to add a form).</p>
+<p>A <code>jobs[]</code> entry normally runs on your Mac (<code>host</code> defaults to <code>"mac"</code>). Setting <code>host: "server"</code>
+plus a 5-field cron <code>schedule</code> (e.g. <code>"17 * * * *"</code>) installs a real crontab line on the home
+server instead — for something that has to run there regardless of whether your Mac is even on, like
+Coming Up's hourly ICS refresh. Installing/uninstalling the app installs/removes that crontab line
+automatically (<code>scripts/server_cron.py</code>).</p>
 <h2 id="where-modules-live">Where modules live</h2>
 <p>Most sections ship with the core product. Optional apps and connectors live in a separate,
 lighter-weight companion repository dedicated to the module catalog, so the core stays focused on the
@@ -1403,10 +1440,6 @@ manifest.</p>
   <div class="md-footer-meta md-typeset">
     <div class="md-footer-meta__inner md-grid">
       <div class="md-copyright">
-  
-    <div class="md-copyright__highlight">
-      v0.1.1 · manual generado desde docs/manual/*.md
-    </div>
   
   
 </div>

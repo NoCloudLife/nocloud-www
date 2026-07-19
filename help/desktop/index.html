@@ -625,6 +625,23 @@
     </span>
   </a>
   
+    <nav class="md-nav" aria-label="What it does">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#set-up-nocloud-on-this-mac" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Set up NoCloud on this Mac
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
         
           <li class="md-nav__item">
@@ -1329,13 +1346,33 @@ around a URL — so there is no bundled Chromium, no 200 MB download, and no sep
 browser process eating RAM. The window IS your server's web UI; it just lives in its own
 frame rather than a browser tab.</p>
 <h3 id="what-it-does">What it does</h3>
-<p>On launch, the app opens the saved address of your instance. On a first launch it asks for that
-address and saves it for the current user, so the downloaded app works without a local checkout.
-It also recognises a configured <code>NOCLOUD_SITE_URL</code> or an existing local <code>config/site.env</code>.</p>
-<div class="highlight"><pre><span></span><code>Connect NoCloud
-Enter the address of your own NoCloud instance.
-</code></pre></div>
-<p>Once the URL is set, opening the app is identical to opening that URL in a browser, with one
+<p>On launch, the app opens the saved address of your instance. It also recognises a configured
+<code>NOCLOUD_SITE_URL</code> or an existing local <code>config/site.env</code> without asking.</p>
+<p>On a first launch (nothing saved yet), it looks for a NoCloud checkout already on this Mac
+(<code>NOCLOUD_HOME</code>, <code>~/.config/nocloud/home</code>, or one of a few common locations like <code>~/NoCloud</code> or
+<code>~/Documents/NoCloud</code>):</p>
+<ul>
+<li><strong>Found one or more</strong> → "Choose your NoCloud" lists them; pick one to open its portal.</li>
+<li><strong>Found none</strong> → "Welcome to NoCloud" offers two paths: <strong>Connect to my portal</strong> (just enter
+  a web address, the same as pointing the app at an instance that already runs elsewhere) or
+  <strong>Set up NoCloud</strong> (install a new instance on this Mac, below).</li>
+</ul>
+<h4 id="set-up-nocloud-on-this-mac">Set up NoCloud on this Mac</h4>
+<p>A 3-step wizard (also reachable from the instance picker via "Set up NoCloud on this Mac"):</p>
+<ol>
+<li><strong>NoCloud folder</strong> — where the checkout and local data live (e.g. <code>~/NoCloud</code>).</li>
+<li><strong>Home server address + user</strong> — the small always-on machine NoCloud publishes to (see
+   <a href="../installation/">Installation</a> for setting that up first if you haven't).</li>
+<li><strong>NoCloud web address</strong> <em>(optional)</em> — where this app should open the portal; leave it blank
+   to default to <code>http://&lt;home server address&gt;</code>.</li>
+</ol>
+<p>Submitting clones <code>nocloud-core</code>, creates a <code>.venv</code>, installs dependencies, sets up
+<code>~/nocloud-private</code> from the sample structure, and seeds the database — the same steps
+<a href="../installation/">Installation</a> walks through by hand, run for you. A failed step can be
+retried by submitting the wizard again with the same folder; already-completed steps aren't
+redone. Pointing the wizard at a folder that's already a configured instance is refused rather
+than silently overwritten — pick it from the instance list instead.</p>
+<p>Once the URL is set (by either path), opening the app is identical to opening that URL in a browser, with one
 practical difference: the window stays out of your browser history, has its own entry in
 Alt+Tab / Cmd+Tab, and can be assigned its own desktop space. That's the full feature set —
 there is no extra logic.</p>
@@ -1608,10 +1645,6 @@ your desktop's autostart mechanism.</p>
   <div class="md-footer-meta md-typeset">
     <div class="md-footer-meta__inner md-grid">
       <div class="md-copyright">
-  
-    <div class="md-copyright__highlight">
-      v0.1.1 · manual generado desde docs/manual/*.md
-    </div>
   
   
 </div>

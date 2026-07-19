@@ -1241,6 +1241,9 @@ available via <a href="https://github.com/NoCloudLife/homebrew-nocloud">NoCloudL
    originals are never moved or edited) and builds your first populated view automatically.
    Anything it doesn't recognize yet (bank/tax statements, other connectors) it says so plainly
    rather than guessing; install the matching connector from the Store for those instead.</li>
+<li><strong>Follow the handoff</strong>: <code>nocloud journey</code> shows the single next action across setup, import,
+   Immich connection and publication. The same journey also offers relevant Store apps and shows
+   recovery or archive-drift follow-up. It appears as <strong>Getting started</strong> on Home.</li>
 </ol>
 <h2 id="2-home-server-pi">2. Home server (Pi)</h2>
 <p>This side is a one-time, mostly-manual setup, run on the server itself. The one-time image/package
@@ -1323,6 +1326,10 @@ over your LAN/SSH instead (see <a href="../network/">Network &amp; outbound traf
 <tr>
 <td><code>nocloud doctor</code></td>
 <td>installation diagnostics (text or JSON)</td>
+</tr>
+<tr>
+<td><code>nocloud journey</code></td>
+<td>the next meaningful product step (text or JSON)</td>
 </tr>
 <tr>
 <td><code>nocloud jobs list</code></td>
@@ -1418,10 +1425,6 @@ Removing <code>~/nocloud</code> never touches anything already deployed on the s
   <div class="md-footer-meta md-typeset">
     <div class="md-footer-meta__inner md-grid">
       <div class="md-copyright">
-  
-    <div class="md-copyright__highlight">
-      v0.1.1 · manual generado desde docs/manual/*.md
-    </div>
   
   
 </div>

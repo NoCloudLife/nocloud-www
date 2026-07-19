@@ -1,5 +1,5 @@
 /* Sincroniza el día/noche de la ayuda (MkDocs Material) con el resto del sitio, que guarda la
-   preferencia en localStorage['cc-theme'] (mismo origen). portal→ayuda al cargar; el toggle de
+   preferencia en localStorage['cc-theme'] (mismo source). portal→ayuda al cargar; el toggle de
    Material (ayuda→portal) se refleja de vuelta. Experiencia uniforme. */
 (function () {
   var KEY = "cc-theme";
