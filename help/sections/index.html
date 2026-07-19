@@ -1139,90 +1139,97 @@
 
 
 <h1 id="the-sections-one-by-one">🧩 The sections, one by one</h1>
-<!--DYN-->
 <table>
 <thead>
 <tr>
 <th>Section</th>
 <th>What it is</th>
+<th>Note</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>🖼️ Photos</td>
-<td>Library with faces, albums and search</td>
+<td>📷 <a href="/photos/">Photos</a></td>
+<td>Immich · photos and videos with faces and albums</td>
+<td>faces, albums and search</td>
 </tr>
 <tr>
-<td>💶 Income &amp; expenses</td>
-<td>Spending by year/category with drill-down and reclassifier</td>
+<td>💸 <a href="/spending/">Income &amp; expenses</a></td>
+<td>Salaries, spending by category and monthly balance</td>
+<td>drill-down and drag-to-reclassify</td>
 </tr>
 <tr>
-<td>🏦 Net Worth</td>
-<td>Net Worth, portfolio with live quotes, real estate</td>
+<td>📊 <a href="/net_worth/">Net Worth</a></td>
+<td>Net Worth, investment portfolio and assets by month</td>
+<td></td>
 </tr>
 <tr>
-<td>🧾 Taxes</td>
-<td>Tax returns across jurisdictions</td>
+<td>🏠 <a href="/housing/">My home</a></td>
+<td>Floor plan, devices and home network</td>
+<td>the ✏️ opens the full editor</td>
 </tr>
 <tr>
-<td>🏠 My home</td>
-<td>Interactive floor plan + home network</td>
-</tr>
-<tr>
-<td>💡 Home automation</td>
+<td>🏡 <a href="#configurar">Home automation</a></td>
+<td>Home control · lights, climate and devices (Home Assistant)</td>
 <td>Home Assistant</td>
 </tr>
 <tr>
-<td>🩺 Health</td>
-<td>Health metrics and screen time</td>
+<td>❤️ <a href="/health/">Health</a></td>
+<td>Vitals, visits, prescriptions and medical documents</td>
+<td>time series</td>
 </tr>
 <tr>
-<td>✉️ Mail</td>
-<td>Full mail archive</td>
+<td>📧 <a href="#configurar">Email</a></td>
+<td>Roundcube webmail</td>
+<td>own web client</td>
 </tr>
 <tr>
-<td>💬 Message archive</td>
-<td>Archived conversations, read-only</td>
+<td>👨‍👩‍👧 <a href="/family/">Family</a></td>
+<td>Family tree and person wikis</td>
+<td>per-person wiki</td>
 </tr>
 <tr>
-<td>🌳 Family</td>
-<td>Family tree and per-person wikis</td>
+<td>⚙️ <a href="/settings/">Settings</a></td>
+<td>Profile, permissions, account and appearance</td>
+<td>user control center</td>
 </tr>
 <tr>
-<td>🔄 Sync</td>
-<td>Replicas across machines</td>
+<td>🛒 <a href="/store/">App Store</a></td>
+<td>Install and uninstall apps from the NoCloud repository</td>
+<td></td>
 </tr>
 <tr>
-<td>🛡️ Security</td>
-<td>Connections, traffic and deployment checks (admin)</td>
+<td>🧾 <a href="/tax/">Taxes</a></td>
+<td>Annual tax summaries and deductions</td>
+<td></td>
 </tr>
 <tr>
-<td>🖥️ System</td>
-<td>Runtime, jobs, backups and platform events (admin)</td>
+<td>📖 <a href="/help/">Help manual</a></td>
+<td>What each section is and how to use it — built from the core repo's docs/manual/*.md</td>
+<td>this documentation</td>
 </tr>
 <tr>
-<td>📦 App Store</td>
-<td>Install and manage optional modules and connectors</td>
+<td>🧬 <a href="/proced/index.html">Provenance</a></td>
+<td>Timeline of every reversible write: database changes (dbsafe) and archive operations (the curation algebra) — where each piece of data came from and how it was transformed.</td>
+<td></td>
 </tr>
 <tr>
-<td>⚙️ Settings</td>
-<td>User control center</td>
+<td>🔄 <a href="/sync/index.html">Sync</a></td>
+<td>Mac ↔ Pi replica status — which folders are up to date, which devices are connected</td>
+<td>Syncthing</td>
 </tr>
 <tr>
-<td>📖 Docs</td>
-<td>This documentation</td>
+<td>🖥️ <a href="/system/">System</a></td>
+<td>Runtime admin console: health, jobs, backups, modules, config, integrations, audit</td>
+<td></td>
 </tr>
 <tr>
-<td>👥 Users</td>
-<td>User management (admins only)</td>
-</tr>
-<tr>
-<td>🗂️ Synced documents</td>
-<td>Read-only browser for what syncs to the server</td>
+<td>👥 <a href="/users/index.html">Users</a></td>
+<td>Internal user profiles tied to the single sign-on Remote-User (admins only)</td>
+<td></td>
 </tr>
 </tbody>
 </table>
-<!--/DYN-->
 
 
 
@@ -1296,6 +1303,10 @@
   <div class="md-footer-meta md-typeset">
     <div class="md-footer-meta__inner md-grid">
       <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      v0.1.1 · manual generado desde docs/manual/*.md
+    </div>
   
   
 </div>

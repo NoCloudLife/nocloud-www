@@ -1216,20 +1216,21 @@ code you need none of it — see <code>CONTRIBUTING.md</code> in the repo: a pla
 suites, all on synthetic data.</p>
 </div>
 <p>The product runs across <strong>two machines</strong>: your workstation (macOS) does the heavy lifting —
-digesting exports, holding the one database — and a small always-on home server (a Raspberry Pi
+digesting exports, holding the one database — and a small always-on home server (a home server
 or similar, reachable over SSH) serves the result over your own VPN. Set up both.</p>
 <h2 id="1-workstation-mac">1. Workstation (Mac)</h2>
 <div class="highlight"><pre><span></span><code>mkdir<span class="w"> </span>-p<span class="w"> </span>~/.local/bin<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>curl<span class="w"> </span>-fsSL<span class="w"> </span>https://raw.githubusercontent.com/NoCloudLife/nocloud-core/main/bin/nocloud<span class="w"> </span><span class="se">\</span>
 <span class="w">  </span>-o<span class="w"> </span>~/.local/bin/nocloud<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>chmod<span class="w"> </span>+x<span class="w"> </span>~/.local/bin/nocloud<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>~/.local/bin/nocloud<span class="w"> </span>init
 </code></pre></div>
 <p>(make sure <code>~/.local/bin</code> is on your <code>PATH</code>.) <code>nocloud init</code> clones the code into <code>~/nocloud</code>,
-creates the Python environment and initializes the local database. A Homebrew formula also ships
-in the repo (<code>Formula/nocloud.rb</code>); it installs from this git repo directly (no tagged release
-exists yet).</p>
+creates the Python environment and initializes the local database. A Homebrew formula is also
+available via <a href="https://github.com/NoCloudLife/homebrew-nocloud">NoCloudLife/homebrew-nocloud</a>
+(<code>brew tap NoCloudLife/nocloud &amp;&amp; brew install nocloud</code>); it installs from this git repo directly
+(no tagged release exists yet).</p>
 <p>Then:</p>
 <ol>
 <li><strong>Configure</strong>: <code>nocloud setup</code> — a guided, ASCII-art assistant that detects your network
-   (your Mac's IP, router, and Raspberry Pi candidates on the LAN) and writes
+   (your Mac's IP, router, and home server candidates on the LAN) and writes
    <code>~/nocloud/config/site.env</code> for you. You can also edit that file by hand (server SSH host/user,
    service URLs, API keys) — it never travels to git either way.</li>
 <li><strong>Check</strong>: <code>nocloud doctor</code> — 16 checks covering git, Python, the job registry, the
@@ -1242,21 +1243,48 @@ exists yet).</p>
    rather than guessing; install the matching connector from the Store for those instead.</li>
 </ol>
 <h2 id="2-home-server-pi">2. Home server (Pi)</h2>
-<p>This side is a one-time, mostly-manual setup, run on the Pi itself. The one-time image/package
+<p>This side is a one-time, mostly-manual setup, run on the server itself. The one-time image/package
 pulls during setup are normal for any self-hosted box; what NoCloud itself avoids afterward is
-the <em>appliance</em> pulling its own code from GitHub on an ongoing basis — the Mac pushes to the Pi
+the <em>appliance</em> pulling its own code from GitHub on an ongoing basis — the Mac pushes to the server
 over your LAN/SSH instead (see <a href="../network/">Network &amp; outbound traffic</a>).</p>
 <ol>
 <li>Copy the repo over once (from the Mac): <code>rsync -a ~/nocloud/ pi@&lt;host&gt;:~/nocloud-repo/</code>.</li>
-<li>Run <code>scripts/bootstrap_pi.sh</code> on the Pi (needs <code>docker</code> already installed). It creates the
+<li>Run <code>scripts/bootstrap_server.sh</code> on the server (needs <code>docker</code> already installed). It creates the
    <code>~/intranet/</code> directory layout, a Python environment, systemd units for the three native
    services (settings API, permissions API, ingest service), installs <strong>Immich</strong> and <strong>Home
    Assistant</strong> if they aren't already there — both are real dependencies (the photo pipeline and
    the home dashboard, not optional extras) — and starts a starter nginx container for the portal.
    Authelia, Roundcube and Syncthing are opt-in; install them yourself when you want them.</li>
-<li>Wire up single sign-on once Authelia is running: the <code>OIDC_SSO</code> runbook (<code>docs/OIDC_SSO.md</code>
-   in the repo — an implementer runbook, outside this manual's own build).</li>
-<li>Run <code>scripts/setup_pi.sh</code> for the read-only security sudoers grant the doctor console needs, plus
+<li>Wire up single sign-on once Authelia is running, so Immich uses the same portal session — no
+   second login:<ul>
+<li>Generate the secrets on the server: a client secret
+   (<code>docker exec authelia authelia crypto rand --length 64 --charset alphanumeric</code>), its
+   PBKDF2 hash (<code>authelia crypto hash generate pbkdf2 --password '&lt;secret&gt;'</code>), and an RSA key
+   pair to sign the tokens (<code>authelia crypto certificate rsa generate --common-name
+   auth.&lt;your-domain&gt;</code>).</li>
+<li>Add an <code>identity_providers.oidc</code> block to Authelia's <code>configuration.yml</code>: an <code>hmac_secret</code>
+   (another 64-char random value), the RSA key under <code>jwks</code>, and a client (<code>client_id:
+   immich</code>, the PBKDF2 hash as <code>client_secret</code>, <code>authorization_policy: two_factor</code> — the same
+   level as the rest of the intranet — <code>redirect_uris</code> for the web app plus
+   <code>app.immich:///oauth-callback</code> for the mobile app, <code>scopes: [openid, profile, email]</code>).
+   Restart with <code>docker restart authelia</code> and check <code>docker logs authelia --tail 20</code> — a
+   config error means it didn't come back up, roll back immediately.</li>
+<li>In Immich → Administration → Settings → OAuth: issuer URL = your Authelia URL, paste the
+   client ID/secret, scope <code>openid email profile</code>, auto-register <strong>off</strong> (link your existing
+   account by hand once, under Account Settings → OAuth).</li>
+<li>Verify: a private window on Immich's URL should offer "Sign in with NoCloud"; with a
+   portal session already open, the Photos tile should go straight in, no credentials asked.</li>
+<li>This changes login for every service behind Authelia — apply it with the owner present.
+   Rollback is independent per side: re-enabling Immich's password login doesn't touch
+   Authelia; removing the <code>identity_providers</code> block and restarting Authelia removes the OIDC
+   provider entirely. Server config snapshots live in <code>backup_server_configs.sh</code>'s backup.</li>
+<li>Home Assistant doesn't ship OIDC out of the box — the practical equivalent is the
+   community <code>hass-oidc-auth</code> component, or the more pragmatic <code>trusted_networks</code> (auto-login
+   from the LAN/VPN). Decide this separately; lower priority since HA already lives behind
+   the VPN.</li>
+</ul>
+</li>
+<li>Run <code>scripts/setup_server.sh</code> for the read-only security sudoers grant the doctor console needs, plus
    the cron job that keeps the egress allowlist fresh.</li>
 <li>WireGuard and the egress lockdown: <a href="../network/">Network &amp; outbound traffic</a>,
    <a href="../security/">Security &amp; privacy</a>.</li>
@@ -1289,6 +1317,10 @@ over your LAN/SSH instead (see <a href="../network/">Network &amp; outbound traf
 <td>pull the latest version and its dependencies</td>
 </tr>
 <tr>
+<td><code>nocloud jobs run check_updates</code></td>
+<td>check whether a real new version has been released, without pulling (new commits alone don't count — only a <code>VERSION</code> bump does) — a banner appears at the top of every page once it has. Also checks a companion <code>nocloud-store</code> checkout the same way, if you have one</td>
+</tr>
+<tr>
 <td><code>nocloud doctor</code></td>
 <td>installation diagnostics (text or JSON)</td>
 </tr>
@@ -1311,7 +1343,7 @@ over your LAN/SSH instead (see <a href="../network/">Network &amp; outbound traf
 <div class="admonition tip">
 <p class="admonition-title">Tip</p>
 <p><code>nocloud init</code> installs the <em>code and data</em>, separate from the launcher script itself.
-Removing <code>~/nocloud</code> never touches anything already deployed on the Pi.</p>
+Removing <code>~/nocloud</code> never touches anything already deployed on the server.</p>
 </div>
 
 
@@ -1386,6 +1418,10 @@ Removing <code>~/nocloud</code> never touches anything already deployed on the P
   <div class="md-footer-meta md-typeset">
     <div class="md-footer-meta__inner md-grid">
       <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      v0.1.1 · manual generado desde docs/manual/*.md
+    </div>
   
   
 </div>

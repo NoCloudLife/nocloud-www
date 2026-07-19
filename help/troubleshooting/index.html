@@ -1353,10 +1353,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#something-on-the-pi-bootstrap" class="md-nav__link">
+  <a href="#something-on-the-server-bootstrap" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Something on the Pi (bootstrap)
+        Something on the server (bootstrap)
       
     </span>
   </a>
@@ -1526,12 +1526,12 @@ nocloud<span class="w"> </span>build
 <p>Informational, not an error: those pages live in the companion <code>nocloud-store</code> repository. Clone it
 next to the core checkout (or point <code>NOCLOUD_STORE_DIR</code> at it) and rebuild.</p>
 <h3 id="server-not-reachable-during-nocloud-deploy"><code>server not reachable</code> during <code>nocloud deploy</code></h3>
-<p>The Mac can't SSH into the Pi. Check, in order:</p>
+<p>The Mac can't SSH into the server. Check, in order:</p>
 <ol>
 <li>The Pi is powered on and on the same network (<code>nocloud doctor</code>).</li>
-<li><code>PI_HOST</code> / <code>PI_USER</code> in <code>config/site.env</code> are right.</li>
-<li>Key-based SSH works: <code>ssh &lt;PI_USER&gt;@&lt;PI_HOST&gt; true</code>. If it asks for a password, run
-   <code>ssh-copy-id &lt;PI_USER&gt;@&lt;PI_HOST&gt;</code> — deploy uses batch mode and never types passwords.</li>
+<li><code>SERVER_HOST</code> / <code>SERVER_USER</code> in <code>config/site.env</code> are right.</li>
+<li>Key-based SSH works: <code>ssh &lt;SERVER_USER&gt;@&lt;SERVER_HOST&gt; true</code>. If it asks for a password, run
+   <code>ssh-copy-id &lt;SERVER_USER&gt;@&lt;SERVER_HOST&gt;</code> — deploy uses batch mode and never types passwords.</li>
 </ol>
 <p>A deploy interrupted halfway leaves a partially published site; running <code>nocloud deploy</code> again is
 always safe.</p>
@@ -1626,14 +1626,14 @@ names it, and <code>scripts/dbsafe.py restore … --latest</code> brings the dat
 <p>Preflight refuses to proceed with a dirty git tree, a failing doctor, or a missing backup item.
 <code>nocloud upgrade preflight --json</code> shows exactly which gate failed. <code>--allow-dirty</code> overrides the
 git check when you're intentionally carrying local changes.</p>
-<h3 id="something-on-the-pi-bootstrap">Something on the Pi (bootstrap)</h3>
+<h3 id="something-on-the-server-bootstrap">Something on the server (bootstrap)</h3>
 <ul>
-<li><code>python3 not found</code> / <code>docker not found</code> — install them first; <code>bootstrap_pi.sh</code> deliberately
+<li><code>python3 not found</code> / <code>docker not found</code> — install them first; <code>bootstrap_server.sh</code> deliberately
   installs neither. Without docker, the Immich/Home Assistant/nginx steps are skipped, not failed.</li>
 <li>"Copy the repo here first" — the script needs the repo at <code>~/nocloud-repo</code>; rsync it from the
   Mac as the message shows, then re-run.</li>
 <li>The security panel can't tell the egress firewall's mode — the read-only sudoers grant is
-  missing; run <code>scripts/setup_pi.sh</code> on the Pi.</li>
+  missing; run <code>scripts/setup_server.sh</code> on the server.</li>
 </ul>
 <h3 id="i-edited-nginx-or-another-reverse-proxy-config-and-reloaded-but-the-change-isnt-live">I edited nginx (or another reverse proxy) config and reloaded, but the change isn't live</h3>
 <p>A config <em>reload</em> re-reads the config file <strong>as the running process currently sees it</strong> — if
@@ -1675,7 +1675,7 @@ authoritative side drains, an API call back to it) rather than writing to the lo
 — the fix is architectural, not a retry.</p>
 <div class="admonition tip">
 <p class="admonition-title">Port map</p>
-<p>Every default port (daemon 8765, Immich 2283, webmail 8888, the Pi's native APIs 9092–9095…)
+<p>Every default port (daemon 8765, Immich 2283, webmail 8888, the server's native APIs 9092–9095…)
 is listed in the <a href="../configuration/#default-ports">configuration reference</a>.</p>
 </div>
 
@@ -1751,6 +1751,10 @@ is listed in the <a href="../configuration/#default-ports">configuration referen
   <div class="md-footer-meta md-typeset">
     <div class="md-footer-meta__inner md-grid">
       <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      v0.1.1 · manual generado desde docs/manual/*.md
+    </div>
   
   
 </div>
