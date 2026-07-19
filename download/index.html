@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Download — NoCloud</title>
+<meta name="description" content="Download the NoCloud desktop app for macOS, Windows, and Linux.">
+<meta name="theme-color" content="#0a0e1a">
+<link rel="canonical" href="https://nocloud.life/download/">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='8 10 48 44'%3E%3Cpath fill='%23fff' stroke='%23000' stroke-width='2' stroke-linejoin='round' d='M19 43 h25 a8 8 0 0 0 .7 -16 a11 11 0 0 0 -21 -3.2 a8 8 0 0 0 -4.7 19.2 z'/%3E%3Cline x1='12.5' y1='50' x2='51.5' y2='14' stroke='%23ef4444' stroke-width='5' stroke-linecap='round'/%3E%3C/svg%3E">
+<style>
+:root{
+  --bg:#0a0e1a;--card:#121829;--ink:#eaeefb;--mut:#8b94ad;--line:rgba(184,200,255,.10);
+  --glass:rgba(150,166,214,.06);--brd-hi:rgba(196,214,255,.20);
+  --sheen:inset 0 1px 0 rgba(255,255,255,.06);
+  --c1:#22d3ee;--c2:#8b5cf6;--c3:#f472d0;--grad:linear-gradient(115deg,var(--c1),var(--c2) 50%,var(--c3));
+  --font:-apple-system,"Segoe UI",Roboto,system-ui,sans-serif;
+  --mono:ui-monospace,SFMono-Regular,Menlo,monospace;
+  --shadow:0 14px 32px -22px rgba(0,0,0,.65);
+}
+@media(prefers-color-scheme:light){
+  :root{--bg:#edf0f7;--card:#fff;--ink:#0f1629;--mut:#57607a;--line:rgba(20,30,70,.10);
+    --glass:rgba(255,255,255,.6);--brd-hi:rgba(20,30,70,.18);
+    --sheen:inset 0 1px 0 rgba(255,255,255,.9);--shadow:0 14px 28px -20px rgba(15,23,42,.18)}
+}
+*{box-sizing:border-box;margin:0}
+body{background:var(--bg);color:var(--ink);font:16px/1.6 var(--font);min-height:100vh;padding:0 20px 60px}
+.wrap{max-width:800px;margin:0 auto}
+nav{display:flex;align-items:center;gap:20px;padding:20px 0 40px;flex-wrap:wrap}
+nav a{color:var(--mut);text-decoration:none;font-size:14px}nav a:hover{color:var(--ink)}
+.logo{background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;font-weight:700;font-size:18px;margin-right:auto;text-decoration:none}
+h1{font-size:clamp(26px,5vw,42px);font-weight:800;letter-spacing:-.5px;margin-bottom:8px}
+.sub{color:var(--mut);margin-bottom:36px;font-size:17px}
+.warn{background:rgba(245,158,11,.10);border:1px solid rgba(245,158,11,.35);border-radius:10px;padding:12px 16px;font-size:13px;color:#fbbf24;margin-bottom:32px;line-height:1.6}
+.warn strong{font-weight:650}
+.warn ul{margin:6px 0 0;padding-left:18px}
+.warn li{margin:2px 0}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px;margin-bottom:36px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:22px 20px;box-shadow:var(--shadow)}
+.platform{font-size:13px;color:var(--mut);margin-bottom:6px;font-weight:600;text-transform:uppercase;letter-spacing:.08em}
+.card h2{font-size:20px;font-weight:700;margin-bottom:14px}
+.dl-btn{display:block;background:var(--grad);color:#fff;text-decoration:none;border-radius:8px;padding:10px 16px;font-size:14px;font-weight:600;text-align:center;margin-bottom:8px;transition:opacity .15s}
+.dl-btn:hover{opacity:.85}
+.dl-ext{color:var(--mut);font-size:12px;margin-top:2px}
+.release-status{color:var(--mut);font-size:13px;margin:-18px 0 28px}
+.note{font-size:13px;color:var(--mut);border-top:1px solid var(--line);padding-top:24px;line-height:1.6}
+.note a{color:var(--c1)}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <nav>
+    <a class="logo" href="/">NoCloud</a>
+    <a href="/start/">Getting started</a>
+    <a href="/help/">Docs</a>
+    <a href="https://github.com/NoCloudLife">GitHub</a>
+  </nav>
+
+  <h1>Download NoCloud</h1>
+  <p class="sub">Native desktop wrapper around your self-hosted instance.</p>
+  <p id="release-status" class="release-status" aria-live="polite">NoCloud Desktop</p>
+
+  <div class="warn">
+    <strong>Unsigned builds</strong> — no Apple/Microsoft certificate yet, so your OS will warn
+    on first open. Safe to proceed: NoCloud only talks to <em>your own</em> server.
+    <ul>
+      <li><strong>macOS:</strong> right-click the app → Open, or check System Settings for an "Open Anyway" prompt under Gatekeeper/security (exact wording varies by macOS version)</li>
+      <li><strong>Windows:</strong> "More info → Run anyway" on the SmartScreen prompt. The installer downloads the Microsoft Edge WebView2 runtime automatically if your PC doesn't have it. Note: on Windows the app currently offers the built-in demo and connecting to an existing portal; setting up a new local instance needs WSL (or a Mac/Linux machine)</li>
+      <li><strong>Linux:</strong> mark the AppImage executable, or install the .deb</li>
+    </ul>
+  </div>
+
+  <div class="cards">
+    <div class="card">
+      <div class="platform">macOS</div>
+      <h2>Mac App</h2>
+      <a class="dl-btn" href="/downloads/NoCloud_macos.dmg" download>Download for macOS</a>
+      <div class="dl-ext">macOS 11 Big Sur or later · the current release lists each available architecture</div>
+    </div>
+    <div class="card">
+      <div class="platform">Windows</div>
+      <h2>Windows App</h2>
+      <a class="dl-btn" href="/downloads/NoCloud_windows_setup.exe" download>Download for Windows</a>
+      <div class="dl-ext">Windows 10/11 · 64-bit</div>
+    </div>
+    <div class="card">
+      <div class="platform">Linux</div>
+      <h2>Linux App</h2>
+      <a class="dl-btn" href="/downloads/NoCloud_linux.deb" download>Download .deb (Debian/Ubuntu)</a>
+      <a class="dl-btn" style="background:var(--card);border:1px solid var(--line);color:var(--ink);margin-top:8px" href="https://github.com/NoCloudLife/nocloud-core/releases/latest">All builds & checksums →</a>
+      <div class="dl-ext">x86-64 · AppImage is portable (no install)</div>
+    </div>
+  </div>
+
+  <p class="note">
+    This is the desktop wrapper around your own self-hosted instance — it opens a native window on
+    the web UI served by your Raspberry Pi (or any Linux machine running NoCloud). Your data never
+    leaves your machine. See <a href="/start/">Getting started</a> to set up the server first.<br><br>
+    Verify your download against
+    <a href="/downloads/SHA256SUMS.txt">SHA256SUMS.txt</a> — with unsigned installers, the checksum
+    is your integrity guarantee. Installers are built locally from each tagged desktop release.
+  </p>
+</div>
+<script>
+// Downloads are static, hosted on this same public site (/downloads/*), so there's no release
+// API to query. Just surface the version these installers correspond to.
+(() => {
+  const status = document.getElementById("release-status");
+  if (status) status.textContent = "Latest desktop release: v0.1.8.";
+})();
+</script>
+</body>
+</html>
