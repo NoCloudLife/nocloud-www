@@ -1,0 +1,2184 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="../faq/">
+      
+      
+        <link rel="next" href="../glossary/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../img/favicon-64.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+    
+    
+      
+        <title>Troubleshooting - NoCloud Docs</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../css/extra.css">
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#troubleshooting" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="/" title="NoCloud Docs" class="md-header__button md-logo" aria-label="NoCloud Docs" data-md-component="logo">
+      
+  <img src="../img/logo.svg" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            NoCloud Docs
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Troubleshooting
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Light theme"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Light theme" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5s-1.65.15-2.39.42zM3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29zm.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14zM20.65 7l-1.77 3.79a7.02 7.02 0 0 0-2.38-4.15zm-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29zM12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Dark theme"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Dark theme" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3zm3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95zm-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="/" title="NoCloud Docs" class="md-nav__button md-logo" aria-label="NoCloud Docs" data-md-component="logo">
+      
+  <img src="../img/logo.svg" alt="logo">
+
+    </a>
+    NoCloud Docs
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_1" id="__nav_1_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Getting started
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Getting started
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    What it is
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../installation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Installation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../getting-started/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Getting started
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Daily use
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Daily use
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../sections/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    The sections
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../messaging/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Messaging
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../settings/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Settings
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../authentication/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Signing in
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../store/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    App Store
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../desktop/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Desktop & menu bar
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../recipes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Recipes
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Under the hood
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Under the hood
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../concepts/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Concepts
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../standards/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Open standards
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../architecture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Architecture
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../curation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Curating your archive
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../platform/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Platform
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../security/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Security & privacy
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../network/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Network & outbound traffic
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../recovery/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Recovery & resilience
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../connectors/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Writing a connector
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Reference
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Reference
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../cli/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    CLI
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../configuration/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Configuration
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../database/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Database
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../faq/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    FAQ
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Troubleshooting
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Troubleshooting
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#in-the-browser-or-the-app" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        In the browser or the app
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="In the browser or the app">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#the-phone-app-opens-blank" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The phone app opens blank
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#a-button-says-no-connection-to-the-mac-workstation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        A button says "no connection to the Mac / workstation"
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#im-seeing-stale-data" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        I'm seeing stale data
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#i-cant-reach-nocloud-from-outside-the-house" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        I can't reach NoCloud from outside the house
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#the-login-wont-let-me-in" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The login won't let me in
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#a-page-looks-unstyled-or-half-rendered" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        A page looks unstyled or half-rendered
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#the-validation-email-never-arrives" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The validation email never arrives
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#on-the-command-line-operator" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        On the command line (operator)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="On the command line (operator)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#cant-find-the-installation-at-run-nocloud-init" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        can't find the installation at … — run: nocloud init
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#missing-configsiteenv-copy-configsiteenvexample-and-fill-it-in" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        missing config/site.env (copy config/site.env.example and fill it in)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#db_seed-failed-or-gen_-failed-during-nocloud-build" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ✗ db_seed FAILED or ✗ gen_… FAILED during nocloud build
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#systemusershelp-skipped-nocloud-store-not-found-at" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        · system/users/help skipped (nocloud-store not found at …)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#server-not-reachable-during-nocloud-deploy" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        server not reachable during nocloud deploy
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#the-daemon-wont-start-address-already-in-use" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The daemon won't start: Address already in use
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#the-daemon-answers-401-unauthorized" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The daemon answers 401 unauthorized
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#a-job-wont-run-already-running-or-timeout" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        A job won't run: "already running" or timeout
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#a-doctor-check-fails" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        A doctor check fails
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#nocloud-doctor-passes-but-somethings-still-wrong" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        nocloud doctor passes but something's still wrong
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#nocloud-onboard-says-it-doesnt-recognize-the-folder" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        nocloud onboard says it doesn't recognize the folder
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#module-install-fails-invalid-manifest-or-dependency-order" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Module install fails: invalid manifest or dependency order
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#nocloud-upgrade-stops-at-preflight" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        nocloud upgrade stops at preflight
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#something-on-the-server-bootstrap" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Something on the server (bootstrap)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#i-edited-nginx-or-another-reverse-proxy-config-and-reloaded-but-the-change-isnt-live" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        I edited nginx (or another reverse proxy) config and reloaded, but the change isn't live
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#a-background-jobservice-didnt-follow-when-i-renamed-or-moved-my-installation-directory" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        A background job/service didn't follow when I renamed or moved my installation directory
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#a-change-i-made-against-the-servers-own-copy-of-the-database-didnt-stick" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        A change I made against the server's own copy of the database didn't stick
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../glossary/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Glossary
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#in-the-browser-or-the-app" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        In the browser or the app
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="In the browser or the app">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#the-phone-app-opens-blank" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The phone app opens blank
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#a-button-says-no-connection-to-the-mac-workstation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        A button says "no connection to the Mac / workstation"
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#im-seeing-stale-data" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        I'm seeing stale data
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#i-cant-reach-nocloud-from-outside-the-house" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        I can't reach NoCloud from outside the house
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#the-login-wont-let-me-in" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The login won't let me in
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#a-page-looks-unstyled-or-half-rendered" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        A page looks unstyled or half-rendered
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#the-validation-email-never-arrives" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The validation email never arrives
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#on-the-command-line-operator" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        On the command line (operator)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="On the command line (operator)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#cant-find-the-installation-at-run-nocloud-init" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        can't find the installation at … — run: nocloud init
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#missing-configsiteenv-copy-configsiteenvexample-and-fill-it-in" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        missing config/site.env (copy config/site.env.example and fill it in)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#db_seed-failed-or-gen_-failed-during-nocloud-build" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ✗ db_seed FAILED or ✗ gen_… FAILED during nocloud build
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#systemusershelp-skipped-nocloud-store-not-found-at" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        · system/users/help skipped (nocloud-store not found at …)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#server-not-reachable-during-nocloud-deploy" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        server not reachable during nocloud deploy
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#the-daemon-wont-start-address-already-in-use" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The daemon won't start: Address already in use
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#the-daemon-answers-401-unauthorized" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The daemon answers 401 unauthorized
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#a-job-wont-run-already-running-or-timeout" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        A job won't run: "already running" or timeout
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#a-doctor-check-fails" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        A doctor check fails
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#nocloud-doctor-passes-but-somethings-still-wrong" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        nocloud doctor passes but something's still wrong
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#nocloud-onboard-says-it-doesnt-recognize-the-folder" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        nocloud onboard says it doesn't recognize the folder
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#module-install-fails-invalid-manifest-or-dependency-order" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Module install fails: invalid manifest or dependency order
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#nocloud-upgrade-stops-at-preflight" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        nocloud upgrade stops at preflight
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#something-on-the-server-bootstrap" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Something on the server (bootstrap)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#i-edited-nginx-or-another-reverse-proxy-config-and-reloaded-but-the-change-isnt-live" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        I edited nginx (or another reverse proxy) config and reloaded, but the change isn't live
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#a-background-jobservice-didnt-follow-when-i-renamed-or-moved-my-installation-directory" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        A background job/service didn't follow when I renamed or moved my installation directory
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#a-change-i-made-against-the-servers-own-copy-of-the-database-didnt-stick" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        A change I made against the server's own copy of the database didn't stick
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="troubleshooting">🛟 Troubleshooting</h1>
+<p>The first half of this page covers what you see <strong>as a user</strong> (in the browser or the phone app);
+the second half covers what you see <strong>as the operator</strong>, on the command line. When in doubt, start
+with <code>nocloud doctor</code> — it checks the whole installation and tells you which piece is broken.</p>
+<h2 id="in-the-browser-or-the-app">In the browser or the app</h2>
+<h3 id="the-phone-app-opens-blank">The phone app opens blank</h3>
+<p>Almost always <strong>the VPN</strong>: turn it on and reopen the app. If it persists, delete the home-screen
+shortcut and add it again (Share → Add to Home Screen); the first open will ask you to sign in.</p>
+<h3 id="a-button-says-no-connection-to-the-mac-workstation">A button says "no connection to the Mac / workstation"</h3>
+<p>Functions that <strong>write</strong> (expense reclassification, refreshing quotes, the danger zone, a
+connector's drop area, any "↻ Refresh" button) need the machine the database lives on to be
+powered on — and the daemon running on it (<code>nocloud daemon</code>, see
+<a href="../platform/#the-daemon">The platform</a>). Turn it on and try again. Read-only pages don't need it.</p>
+<h3 id="im-seeing-stale-data">I'm seeing stale data</h3>
+<ul>
+<li><strong>Web</strong>: reload (the server forces revalidation; no need to clear cache).</li>
+<li><strong>App</strong>: fully close it and reopen; if it persists, remove the shortcut and add it again.</li>
+<li><strong>Quotes</strong>: outside market hours the last close is shown — that's expected.</li>
+</ul>
+<h3 id="i-cant-reach-nocloud-from-outside-the-house">I can't reach NoCloud from outside the house</h3>
+<ol>
+<li>Is the VPN connected? That's the requirement.</li>
+<li>If the VPN won't connect, your home's public IP may have changed: dynamic DNS corrects it
+   automatically every 5 minutes — wait and try again.</li>
+</ol>
+<h3 id="the-login-wont-let-me-in">The login won't let me in</h3>
+<ul>
+<li>Check your SSO username/password; after several failed attempts there's a brief courtesy lockout.</li>
+<li>The browser session and the installed app's session are independent: sign in to each separately.</li>
+</ul>
+<h3 id="a-page-looks-unstyled-or-half-rendered">A page looks unstyled or half-rendered</h3>
+<p>Usually a partial deployment. Rebuild and republish: <code>nocloud deploy</code> from the workstation.</p>
+<h3 id="the-validation-email-never-arrives">The validation email never arrives</h3>
+<p>It's only ever delivered to mailboxes hosted on your own server (your domain). Check the spam folder
+too; the sender is <code>nocloud@…</code>.</p>
+<h2 id="on-the-command-line-operator">On the command line (operator)</h2>
+<h3 id="cant-find-the-installation-at-run-nocloud-init"><code>can't find the installation at … — run: nocloud init</code></h3>
+<p>The launcher can't find the checkout. Either you haven't run <code>nocloud init</code> yet, or
+<code>~/.config/nocloud/home</code> (or the <code>NOCLOUD_HOME</code> variable) points at a directory that no longer
+exists. Run <code>nocloud init</code>, or fix the pointer:</p>
+<div class="highlight"><pre><span></span><code>cat<span class="w"> </span>~/.config/nocloud/home<span class="w">       </span><span class="c1"># where the launcher thinks the install lives</span>
+nocloud<span class="w"> </span>home<span class="w">                       </span><span class="c1"># what it resolved to</span>
+</code></pre></div>
+<h3 id="missing-configsiteenv-copy-configsiteenvexample-and-fill-it-in"><code>missing config/site.env (copy config/site.env.example and fill it in)</code></h3>
+<p><code>nocloud deploy</code> and <code>nocloud security</code> need the instance configuration. Run <code>nocloud setup</code> (it
+detects your network and writes the file, keeping any previous one as <code>site.env.bak</code>), or copy
+<code>config/site.env.example</code> and fill it in by hand. Validate the result:</p>
+<div class="highlight"><pre><span></span><code>nocloud<span class="w"> </span>config<span class="w"> </span>check
+</code></pre></div>
+<p><code>config check</code> flags each key as ok / warning / failure: an <em>unknown key</em> isn't in
+<code>config/schema.yaml</code>, and a type error (integer, URL, email, host) tells you which format the value
+must have. See the <a href="../configuration/">configuration reference</a>.</p>
+<h3 id="db_seed-failed-or-gen_-failed-during-nocloud-build"><code>✗ db_seed FAILED</code> or <code>✗ gen_… FAILED</code> during <code>nocloud build</code></h3>
+<p>Almost always the database: it's missing or unseeded, and the page generators fail with
+<code>sqlite3.OperationalError: no such table …</code>. Initialize it and rebuild:</p>
+<div class="highlight"><pre><span></span><code><span class="s2">&quot;</span><span class="k">$(</span>nocloud<span class="w"> </span>home<span class="k">)</span><span class="s2">/.venv/bin/python3&quot;</span><span class="w"> </span><span class="s2">&quot;</span><span class="k">$(</span>nocloud<span class="w"> </span>home<span class="k">)</span><span class="s2">/scripts/db_seed.py&quot;</span><span class="w"> </span>--init
+nocloud<span class="w"> </span>build
+</code></pre></div>
+<p><code>nocloud init</code> does this automatically on a fresh install; you only hit it if the database file
+(<code>local/db/nocloud.sqlite</code>) was deleted or the checkout was copied without it.</p>
+<h3 id="systemusershelp-skipped-nocloud-store-not-found-at"><code>· system/users/help skipped (nocloud-store not found at …)</code></h3>
+<p>Informational, not an error: those pages live in the companion <code>nocloud-store</code> repository. Clone it
+next to the core checkout (or point <code>NOCLOUD_STORE_DIR</code> at it) and rebuild.</p>
+<h3 id="server-not-reachable-during-nocloud-deploy"><code>server not reachable</code> during <code>nocloud deploy</code></h3>
+<p>The workstation can't SSH into the home server. Check, in order:</p>
+<ol>
+<li>The home server is powered on and reachable from the same network or VPN (<code>nocloud doctor</code>).</li>
+<li><code>SERVER_HOST</code> / <code>SERVER_USER</code> in <code>config/site.env</code> are right.</li>
+<li>Key-based SSH works: <code>ssh &lt;SERVER_USER&gt;@&lt;SERVER_HOST&gt; true</code>. If it asks for a password, run
+   <code>ssh-copy-id &lt;SERVER_USER&gt;@&lt;SERVER_HOST&gt;</code> — deploy uses batch mode and never types passwords.</li>
+</ol>
+<p>A deploy interrupted halfway leaves a partially published site; running <code>nocloud deploy</code> again is
+always safe.</p>
+<h3 id="the-daemon-wont-start-address-already-in-use">The daemon won't start: <code>Address already in use</code></h3>
+<p>Another process (usually a previous daemon) is already listening on the port (default <strong>8765</strong>).
+Find it and stop it, or start on another port:</p>
+<div class="highlight"><pre><span></span><code>lsof<span class="w"> </span>-i<span class="w"> </span>:8765
+nocloud<span class="w"> </span>daemon<span class="w"> </span>--port<span class="w"> </span><span class="m">8766</span>
+</code></pre></div>
+<p>If you change the port, update <code>MAC_DAEMON_URL</code> in <code>config/site.env</code> to match.</p>
+<h3 id="the-daemon-answers-401-unauthorized">The daemon answers <code>401 unauthorized</code></h3>
+<p><code>NOCLOUD_DAEMON_TOKEN</code> is set, so every request must carry it:</p>
+<div class="highlight"><pre><span></span><code>curl<span class="w"> </span>-H<span class="w"> </span><span class="s2">&quot;Authorization: Bearer </span><span class="nv">$NOCLOUD_DAEMON_TOKEN</span><span class="s2">&quot;</span><span class="w"> </span>http://127.0.0.1:8765/api/health
+</code></pre></div>
+<h3 id="a-job-wont-run-already-running-or-timeout">A job won't run: "already running" or <code>timeout</code></h3>
+<ul>
+<li>A job that is still running holds a lock; a second <code>jobs run</code> is refused until it finishes. If
+  the process died and the lock survived (rare), the platform clears stale locks automatically on
+  the next attempt.</li>
+<li>A run recorded as <code>timeout</code> (return code 124) exceeded the job's <code>timeout</code> in
+  <code>config/jobs.yaml</code> (default 900 s). Raise it if the job legitimately needs longer.</li>
+</ul>
+<p>Inspect what happened with <code>nocloud jobs history &lt;id&gt;</code>.</p>
+<h3 id="a-doctor-check-fails">A doctor check fails</h3>
+<p>Each <code>✗</code> line in <code>nocloud doctor</code> maps to one fix:</p>
+<table>
+<thead>
+<tr>
+<th>Check</th>
+<th>What to do</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>git</code> / <code>python</code></td>
+<td>install the missing tool so it's on <code>PATH</code></td>
+</tr>
+<tr>
+<td><code>runtime.yaml</code> / <code>jobs.yaml</code></td>
+<td>the repo files are missing — restore the checkout (<code>nocloud update</code>)</td>
+</tr>
+<tr>
+<td><code>config/site.env</code></td>
+<td>run <code>nocloud setup</code></td>
+</tr>
+<tr>
+<td><code>config schema</code></td>
+<td>run <code>nocloud config check</code> for the per-key detail</td>
+</tr>
+<tr>
+<td><code>sqlite catalog</code> / seeded sections</td>
+<td>run <code>db_seed.py --init</code> (see the build entry above)</td>
+</tr>
+<tr>
+<td>jobs with recorded failures</td>
+<td><code>nocloud jobs history &lt;id&gt;</code>, fix the cause, re-run</td>
+</tr>
+<tr>
+<td><code>module manifests</code></td>
+<td><code>nocloud module doctor</code> lists each manifest error</td>
+</tr>
+<tr>
+<td><code>backup manifest</code></td>
+<td>a required item in <code>config/backup_manifest.yaml</code> is missing on disk</td>
+</tr>
+<tr>
+<td><code>upgrade lifecycle</code></td>
+<td><code>config/upgrade.yaml</code> is missing from the checkout</td>
+</tr>
+<tr>
+<td><code>integration adapters</code></td>
+<td><code>nocloud integrations check</code> shows which adapter is failing</td>
+</tr>
+</tbody>
+</table>
+<h3 id="nocloud-doctor-passes-but-somethings-still-wrong"><code>nocloud doctor</code> passes but something's still wrong</h3>
+<p><code>doctor</code> checks the installation's <em>shape</em> (files, config, schema) — it won't catch a job that ran
+and failed, or a service that's up but misbehaving. Two more places to look:</p>
+<ul>
+<li><code>nocloud events [--limit N]</code> — the platform's own event stream (job runs, drift detections,
+  upgrade steps, HTTP errors); often shows exactly what happened and when.</li>
+<li><code>journalctl -u dovecot</code> / <code>journalctl -u wg-quick@wg0</code> — logs for the two services that run
+  natively on the home server (not in Docker). <code>docker logs nocloud_settings_api</code> (or
+  <code>nocloud_authelia</code>, <code>nocloud_permissions_api</code>, <code>nocloud_ingest_api</code>, …) for anything containerized.</li>
+</ul>
+<h3 id="nocloud-onboard-says-it-doesnt-recognize-the-folder"><code>nocloud onboard</code> says it doesn't recognize the folder</h3>
+<p><code>onboard</code> only ingests what it can identify: a folder of photos/videos, or an export that matches
+an installed (or installable) Store app — WhatsApp and Google Takeout exports today. Anything else
+is refused rather than guessed at; install the matching connector from the Store first. Everything
+<code>onboard</code> copies is journaled and reversible (<code>scripts/journal.py revert &lt;op_run&gt;</code>).</p>
+<h3 id="module-install-fails-invalid-manifest-or-dependency-order">Module install fails: invalid manifest or dependency order</h3>
+<ul>
+<li><em>Invalid manifest</em> — the app's <code>manifest.json</code> fails validation; <code>nocloud module doctor</code> prints
+  every problem it found.</li>
+<li><em>Install its dependencies first</em> — the app <code>depends_on</code> modules you haven't installed; install
+  those first (there is deliberately no cascade install).</li>
+<li><em>Uninstall its dependents first</em> — another installed module depends on the one you're removing.</li>
+</ul>
+<p>If an install fails during its database migration, a snapshot was taken first; the error message
+names it, and <code>scripts/dbsafe.py restore … --latest</code> brings the database back.</p>
+<h3 id="nocloud-upgrade-stops-at-preflight"><code>nocloud upgrade</code> stops at preflight</h3>
+<p>Preflight refuses to proceed with a dirty git tree, a failing doctor, or a missing backup item.
+<code>nocloud upgrade preflight --json</code> shows exactly which gate failed. <code>--allow-dirty</code> overrides the
+git check when you're intentionally carrying local changes.</p>
+<h3 id="something-on-the-server-bootstrap">Something on the server (bootstrap)</h3>
+<ul>
+<li><code>python3 not found</code> / <code>docker not found</code> — install them first; <code>bootstrap_server_docker.sh</code>
+  doesn't install Docker itself. Everything on the server runs in Docker (there is no
+  systemd-unit alternative anymore): the bootstrap creates the <code>~/nocloud-private</code> skeleton,
+  instantiates each service's compose project and brings them up; the first deploy from the
+  workstation converges the rest — see docs/manual/installation.md.</li>
+<li>"checkout incomplete" — the script needs the repo at <code>~/nocloud-core</code>; rsync it from the
+  workstation as the message shows, then re-run.</li>
+<li>The security panel can't tell the egress firewall's mode — the read-only sudoers grant is
+  missing; run <code>scripts/setup_server.sh</code> on the server.</li>
+</ul>
+<h3 id="i-edited-nginx-or-another-reverse-proxy-config-and-reloaded-but-the-change-isnt-live">I edited nginx (or another reverse proxy) config and reloaded, but the change isn't live</h3>
+<p>A config <em>reload</em> re-reads the config file <strong>as the running process currently sees it</strong> — if
+you're on a container/VM setup where the config file is bind-mounted, an in-place rewrite (most
+editors, and <code>sed -i</code>, replace the file via a temp-file-then-rename rather than writing in place)
+can leave the running container looking at a now-stale mount reference. The symptom is confusing
+because it looks like a <em>routing</em> bug (a URL that should proxy somewhere now serves the wrong
+content, e.g. falling through to a catch-all) rather than a stale-config bug.</p>
+<p>Don't trust <code>nginx -t</code> (syntax check on the file on disk) or a "successful" reload alone — verify
+what's actually <strong>loaded in memory</strong>:</p>
+<div class="highlight"><pre><span></span><code>docker<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>&lt;container&gt;<span class="w"> </span>nginx<span class="w"> </span>-T<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span><span class="s2">&quot;&lt;the thing you just changed&gt;&quot;</span>
+</code></pre></div>
+<p>If that doesn't show your edit, a <code>reload</code> won't fix it — the container needs to remount:</p>
+<div class="highlight"><pre><span></span><code>docker<span class="w"> </span>restart<span class="w"> </span>&lt;container&gt;
+docker<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>&lt;container&gt;<span class="w"> </span>nginx<span class="w"> </span>-T<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span><span class="s2">&quot;&lt;the thing you just changed&gt;&quot;</span><span class="w">   </span><span class="c1"># confirm before moving on</span>
+</code></pre></div>
+<h3 id="a-background-jobservice-didnt-follow-when-i-renamed-or-moved-my-installation-directory">A background job/service didn't follow when I renamed or moved my installation directory</h3>
+<p>Anything scheduled outside the app itself (a systemd user unit, a macOS LaunchAgent, a cron entry)
+has the <strong>old path baked into it at the time you created it</strong> — renaming or moving the checkout
+doesn't retroactively update jobs that already exist. The symptom looks unrelated to the move: a
+page silently shows stale data, or a scheduled refresh "does nothing," because the job is quietly
+still running against the <em>old</em> location, if it still exists at all.</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># macOS</span>
+grep<span class="w"> </span>-rl<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$OLD_PATH</span><span class="s2">&quot;</span><span class="w"> </span>~/Library/LaunchAgents/com.*.plist
+<span class="c1"># Linux</span>
+grep<span class="w"> </span>-rl<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$OLD_PATH</span><span class="s2">&quot;</span><span class="w"> </span>~/.config/systemd/user/*.service
+</code></pre></div>
+<p>Update the path in each match and reload that job (<code>launchctl bootout</code>+<code>bootstrap</code>, or
+<code>systemctl --user daemon-reload</code>), rather than assuming a rename anywhere in the stack is free.</p>
+<h3 id="a-change-i-made-against-the-servers-own-copy-of-the-database-didnt-stick">A change I made against the server's own copy of the database didn't stick</h3>
+<p>If your setup <strong>replicates</strong> a database from a primary machine to a server on a schedule (rather
+than the server being the one source of truth), any write made directly against the server's local
+copy is only as durable as the time until the next replication — it gets silently overwritten,
+with no error, the next time the sync runs. This is easy to hit by accident if a service running
+<em>on</em> the server has write access to its own local copy: it looks like it worked (no error, the
+change is there if you check immediately), then reverts on its own with no obvious trigger.</p>
+<p>If your architecture has one authoritative side, route writes through it explicitly (a queue the
+authoritative side drains, an API call back to it) rather than writing to the local copy directly
+— the fix is architectural, not a retry.</p>
+<div class="admonition tip">
+<p class="admonition-title">Port map</p>
+<p>Every default port (daemon 8765, Immich 2283, webmail 8888, the server's native APIs
+9092/9093/9095…) is listed in the <a href="../configuration/#default-ports">configuration reference</a>.</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="Footer" >
+        
+          
+          <a href="../faq/" class="md-footer__link md-footer__link--prev" aria-label="Previous: FAQ">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              <div class="md-ellipsis">
+                FAQ
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="../glossary/" class="md-footer__link md-footer__link--next" aria-label="Next: Glossary">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              <div class="md-ellipsis">
+                Glossary
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+      <div class="md-progress" data-md-component="progress" role="progressbar"></div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": ["navigation.sections", "navigation.top", "navigation.footer", "navigation.instant", "navigation.instant.progress", "search.highlight", "search.suggest", "content.code.copy"], "search": "../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+        <script src="../theme-sync.js"></script>
+      
+    
+  </body>
+</html>

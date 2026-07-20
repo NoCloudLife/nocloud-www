@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 500" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif">
+  <defs><filter id="shadow" x="-15%" y="-10%" width="130%" height="130%"><feDropShadow dx="0" dy="14" stdDeviation="18" flood-color="#000" flood-opacity=".42"/></filter></defs>
+  <rect width="760" height="500" rx="16" fill="#eef2f7"/>
+  <rect width="760" height="31" rx="16" fill="#f8fafc"/><rect y="18" width="760" height="13" fill="#f8fafc"/>
+  <text x="20" y="20" font-size="13" font-weight="700" fill="#18233a">NoCloud</text><text x="88" y="20" font-size="12" fill="#64748b">File   Edit   View   Window   Help</text>
+  <text x="673" y="20" font-size="12" fill="#475569">14:37</text>
+  <rect x="710" y="3" width="34" height="25" rx="7" fill="#dbeafe"/>
+  <path d="M720 19h12a4 4 0 0 0 .3-8 6 6 0 0 0-11.4-1.7 4 4 0 0 0-.9 9.7Z" fill="none" stroke="#152238" stroke-width="1.4"/>
+  <path d="m717 23 18-17" stroke="#ef4444" stroke-width="2" stroke-linecap="round"/>
+  <rect x="409" y="31" width="324" height="320" rx="10" fill="#fff" filter="url(#shadow)"/>
+  <text x="429" y="58" font-size="13" font-weight="650" fill="#263247">NoCloud · server connected · sync up to date</text>
+  <path d="M421 72h300" stroke="#d9e1ec"/>
+  <g font-size="14" fill="#1f2937"><text x="429" y="100">Open NoCloud Web</text><text x="429" y="129">Open NoCloud Desktop</text></g>
+  <path d="M421 143h300" stroke="#d9e1ec"/>
+  <rect x="417" y="153" width="308" height="29" rx="6" fill="#e8eef9"/>
+  <text x="429" y="173" font-size="14" font-weight="650" fill="#1f3d72">Deploy everything to the server</text>
+  <text x="429" y="211" font-size="14" fill="#1f2937">Services</text><text x="705" y="211" font-size="16" fill="#64748b">›</text>
+  <rect x="417" y="220" width="308" height="29" rx="6" fill="#2f5da8"/>
+  <text x="429" y="240" font-size="14" font-weight="650" fill="#fff">Status &amp; details</text><text x="705" y="240" font-size="16" fill="#fff">›</text>
+  <path d="M421 260h300" stroke="#d9e1ec"/>
+  <text x="429" y="289" font-size="14" fill="#1f2937">Pause background automations</text>
+  <text x="429" y="318" font-size="14" fill="#1f2937">Open on startup</text><text x="698" y="318" font-size="14" font-weight="700" fill="#15803d">✓</text>
+  <text x="429" y="341" font-size="14" fill="#1f2937">Quit NoCloud</text>
+  <rect x="80" y="220" width="336" height="207" rx="10" fill="#fff" filter="url(#shadow)"/>
+  <text x="101" y="250" font-size="13" font-weight="750" fill="#475569">STATUS &amp; DETAILS</text>
+  <circle cx="105" cy="280" r="5" fill="#22c55e"/><text x="120" y="285" font-size="14" fill="#263247">Server · connected</text>
+  <circle cx="105" cy="311" r="5" fill="#22c55e"/><text x="120" y="316" font-size="14" fill="#263247">Sync · 1 device · up to date</text>
+  <circle cx="105" cy="342" r="5" fill="#3b82f6"/><text x="120" y="347" font-size="14" fill="#263247">Deployment · ready</text>
+  <text x="101" y="379" font-size="12" fill="#64748b">Verified deployment · current version</text>
+  <path d="M101 393h294" stroke="#d9e1ec"/><text x="101" y="415" font-size="13" font-weight="650" fill="#2f5da8">Inspect Agent log</text>
+  <text x="380" y="470" text-anchor="middle" font-size="12" fill="#64748b">The Agent keeps services close; Web and Desktop stay one click away.</text>
+</svg>

@@ -1,0 +1,166 @@
+/* ============================================================
+   NoCloud manual styling (MkDocs Material) — same design tokens as nocloud.life's
+   landing page, so the manual reads as part of the same site instead of a bolted-on
+   docs tool. Cyan → violet → pink gradient accent, dark-first, crossed-out cloud mark.
+   ============================================================ */
+:root{
+  --nc-c1:#22d3ee; --nc-c2:#8b5cf6; --nc-c3:#f472d0;
+  --nc-grad:linear-gradient(115deg,var(--nc-c1),var(--nc-c2) 50%,var(--nc-c3));
+  --md-primary-fg-color:#8b5cf6; --md-accent-fg-color:#22d3ee;
+  --ncm-line:#8b5cf655; --ncm-line-hover:#8b5cf6;
+}
+[data-md-color-scheme="slate"]{
+  --md-default-bg-color:#0a0e1a; --md-code-bg-color:#121829;
+  --md-default-fg-color--light:#8b94ad;
+  --md-typeset-a-color:#22d3ee;
+  --ncm-card:linear-gradient(160deg,#8b5cf614,transparent);
+  --ncm-th:#121829; --ncm-th-fg:#eaeefb;
+}
+[data-md-color-scheme="default"]{
+  --md-default-bg-color:#edf0f7; --md-typeset-a-color:#7c3aed;
+  --ncm-card:linear-gradient(160deg,#8b5cf60d,#ffffff);
+  --ncm-th:#eef2f7; --ncm-th-fg:#0f1629;
+}
+
+/* Header and tabs: the same three-stop gradient as the landing page */
+.md-header{ background:linear-gradient(135deg,#0a0e1a,#1e1b4b,#0a0e1a); }
+.md-tabs{ background:linear-gradient(135deg,#1e1b4b,#0a0e1a); }
+[data-md-color-scheme="default"] .md-tabs{ background:var(--nc-grad); }
+.md-header__button.md-logo img{ height:26px; }
+.md-tabs__link{ opacity:.82; font-weight:600; }
+.md-tabs__link--active,.md-tabs__link:hover{ opacity:1; }
+
+/* Headings */
+.md-typeset h1{ font-weight:800; letter-spacing:-.01em; }
+.md-typeset h2{ font-weight:750; border-top:1px solid var(--md-default-fg-color--lightest);
+  padding-top:.7em; margin-top:1.6em; }
+
+/* Tables: rounded corners, branded header row */
+.md-typeset table:not([class]){ border-radius:12px; overflow:hidden; box-shadow:0 1px 8px #0003; }
+.md-typeset table:not([class]) th{ background:var(--ncm-th); color:var(--ncm-th-fg); font-weight:700; }
+
+/* Admonitions and details: rounded, same as the landing page's cards */
+.md-typeset .admonition, .md-typeset details{ border-radius:14px; }
+.md-typeset .admonition{ box-shadow:0 1px 8px #0002; }
+
+/* Front-page grid cards */
+.grid.cards > ul{ display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:14px;
+  list-style:none; margin:.6em 0 0; padding:0; }
+.grid.cards > ul > li{ border:1px solid var(--ncm-line); border-radius:14px; padding:18px 20px; margin:0;
+  background:var(--ncm-card); transition:transform .15s ease, border-color .15s ease, box-shadow .15s ease; }
+.grid.cards > ul > li:hover{ transform:translateY(-3px); border-color:var(--ncm-line-hover);
+  box-shadow:0 6px 20px #8b5cf630; }
+.grid.cards > ul > li > p:first-child{ font-weight:800; font-size:15.5px; margin:0 0 6px; }
+
+/* Inline code */
+.md-typeset code{ border-radius:6px; }
+
+/* Footer */
+.md-footer{ background:#0a0e1a; }
+
+/* Title text picks up the gradient, like the landing page's <h1 em> */
+.md-header__topic:first-child{ font-weight:800; }
+
+/* mkdocs-material's cutoff for a permanent, always-expanded sidebar is 76.25em (1220px) — a
+   fully maximized wide monitor, but wider than a normal, un-maximized desktop window, which then
+   falls back to a hamburger + drilldown drawer. That fallback belongs on an actual phone, not a
+   merely-modest desktop window. Re-declared verbatim from main.*.min.css's own 76.25em block
+   (both the sidebar-position rules AND the ones that turn top-level sections from an accordion
+   into permanently-expanded, non-clickable headers — without the latter this just pins the
+   *mobile* drilldown open, which is worse, not better), at 60em (960px) instead. Below that
+   there's genuinely no room for both a fixed sidebar and readable content.
+   Source rule, so this can be re-diffed after a mkdocs-material upgrade:
+   main.*.min.css → search for "(min-width:76.25em)" → the block containing
+   ".md-nav__item--section". */
+@media screen and (min-width:60em){
+  [dir=ltr] .md-sidebar--primary:not([hidden])~.md-content>.md-content__inner{ margin-left:1.2rem; }
+  [dir=ltr] .md-sidebar--secondary:not([hidden])~.md-content>.md-content__inner,
+  [dir=rtl] .md-sidebar--primary:not([hidden])~.md-content>.md-content__inner{ margin-right:1.2rem; }
+  [dir=rtl] .md-sidebar--secondary:not([hidden])~.md-content>.md-content__inner{ margin-left:1.2rem; }
+  .md-header__button.md-icon[for="__drawer"]{ display:none; }
+  [dir=ltr] .md-sidebar--primary{ left:0; }
+  [dir=rtl] .md-sidebar--primary{ right:0; }
+
+  .md-nav{ margin-bottom:-.4rem; transition:max-height .25s cubic-bezier(.86,0,.07,1); }
+  .md-nav--primary .md-nav__title{
+    background:var(--md-default-bg-color);
+    box-shadow:0 0 .4rem .4rem var(--md-default-bg-color); position:sticky; top:0; z-index:1;
+  }
+  .md-nav--primary .md-nav__title[for="__drawer"]{ scroll-snap-align:start; }
+  .md-nav--primary .md-nav__title .md-nav__icon{ display:none; }
+  [dir=ltr] .md-nav--primary .md-nav__list{ padding-left:.6rem; }
+  [dir=rtl] .md-nav--primary .md-nav__list{ padding-right:.6rem; }
+  .md-nav--primary .md-nav__list{ padding-bottom:.4rem; }
+  [dir=ltr] .md-nav--primary .md-nav__item>.md-nav__link{ margin-right:.4rem; }
+  [dir=rtl] .md-nav--primary .md-nav__item>.md-nav__link{ margin-left:.4rem; }
+
+  .md-nav__toggle~.md-nav{
+    display:grid; grid-template-rows:minmax(.4rem,0fr); opacity:0;
+    transition:grid-template-rows .25s cubic-bezier(.86,0,.07,1), opacity .25s, visibility 0ms .25s;
+    visibility:collapse;
+  }
+  .md-nav__toggle~.md-nav>.md-nav__list{ overflow:hidden; }
+  .md-nav__toggle.md-toggle--indeterminate~.md-nav,
+  .md-nav__toggle:checked~.md-nav{
+    grid-template-rows:minmax(.4rem,1fr); opacity:1;
+    transition:grid-template-rows .25s cubic-bezier(.86,0,.07,1), opacity .15s .1s, visibility 0ms;
+    visibility:visible;
+  }
+  .md-nav__toggle.md-toggle--indeterminate~.md-nav{ transition:none; }
+  .md-nav__item--nested>.md-nav>.md-nav__title{ display:none; }
+
+  /* Section labels remain clearly identifiable as expandable document-tree branches. */
+  .md-nav__item--section{ display:block; margin:1.25em 0; }
+  .md-nav__item--section:last-child{ margin-bottom:0; }
+  .md-nav__item--section>.md-nav__link{ font-weight:700; }
+  .md-nav__item--section>.md-nav__link[for]{ color:var(--md-default-fg-color--light); }
+  [dir=ltr] .md-nav__item--section>.md-nav{ margin-left:-.6rem; }
+  [dir=rtl] .md-nav__item--section>.md-nav{ margin-right:-.6rem; }
+  .md-nav__item--section>.md-nav>.md-nav__list>.md-nav__item{ padding:0; }
+  /* Let the desktop tree flow vertically instead of using Material's mobile drilldown stack. */
+  .md-nav--primary{ position:static; height:auto; display:block; }
+
+  .md-nav__icon{ border-radius:100%; height:.9rem; transition:background-color .25s; width:.9rem; }
+  .md-nav__icon:hover{ background-color:var(--md-accent-fg-color--transparent); }
+  .md-nav__icon:after{
+    background-color:currentcolor; border-radius:100%; content:""; display:inline-block;
+    height:100%; -webkit-mask-image:var(--md-nav-icon--next); mask-image:var(--md-nav-icon--next);
+    -webkit-mask-position:center; mask-position:center; -webkit-mask-repeat:no-repeat;
+    mask-repeat:no-repeat; -webkit-mask-size:contain; mask-size:contain;
+    transition:transform .25s; vertical-align:-.1rem; width:100%;
+  }
+  [dir=rtl] .md-nav__icon:after{ transform:rotate(180deg); }
+  .md-nav__item--nested .md-nav__toggle:checked~.md-nav__link .md-nav__icon:after,
+  .md-nav__item--nested .md-toggle--indeterminate~.md-nav__link .md-nav__icon:after{
+    transform:rotate(90deg);
+  }
+
+  /* The document tree may be taller than the viewport; it must remain scrollable. */
+  .md-sidebar--primary .md-sidebar__scrollwrap{ overflow-y:auto; }
+
+  /* Document sections are collapsed by default. Their title is a toggle, the chevron is always
+     visible, and the current section remains open after instant navigation. */
+  .md-nav__item--section>.md-nav__link:not(.md-nav__container){
+    align-items:center; cursor:pointer; display:flex; justify-content:space-between;
+    pointer-events:auto;
+  }
+  .md-nav__item--section>.md-nav__link .md-icon,
+  .md-nav__item--section>.md-nav__link>[for]{ display:inline-flex; }
+  .md-nav__item--section>.md-nav{
+    display:grid; grid-template-rows:minmax(.4rem,0fr); height:auto; opacity:0;
+    position:static; transition:grid-template-rows .25s cubic-bezier(.86,0,.07,1),opacity .15s,visibility 0ms .25s;
+    visibility:collapse;
+  }
+  .md-nav__item--section>.md-nav__toggle:checked~.md-nav{
+    grid-template-rows:minmax(.4rem,1fr); opacity:1; transition:grid-template-rows .25s cubic-bezier(.86,0,.07,1),opacity .15s .1s,visibility 0ms;
+    visibility:visible;
+  }
+  .md-nav__item--section>.md-nav>.md-nav__list{ overflow:hidden; }
+  .md-nav__item--section>.md-nav__toggle:checked~.md-nav>.md-nav__list{ overflow:visible; }
+  .ncm-nav-toggle .md-nav__icon{
+    align-items:center; border:1px solid var(--ncm-line); display:inline-flex; flex:0 0 1.2rem;
+    height:1.2rem; justify-content:center; margin-left:.35rem; width:1.2rem;
+  }
+  .ncm-nav-toggle:hover .md-nav__icon,
+  .ncm-nav-toggle:focus-visible .md-nav__icon{ border-color:var(--md-accent-fg-color); }
+}
