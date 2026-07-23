@@ -1497,6 +1497,10 @@ remembered in <code>~/.config/nocloud/home</code>).</p>
 <td>generates <code>build/legacy/envelope.html</code>: one printable, self-contained page for an heir — what this system is, where the three directories live, how to reach and restore it; contains no secrets, see <a href="../recovery/#if-im-gone">Recovery</a></td>
 </tr>
 <tr>
+<td><code>nocloud freeze --out PATH</code></td>
+<td>exports the whole archive (family tree, provenance, finances, every app page — not the photo/video library, see <a href="../recovery/#if-im-gone">Recovery</a>) to a self-contained, offline directory that opens in any browser with <code>python3 start_archive.py</code>, no server required</td>
+</tr>
+<tr>
 <td><code>nocloud integrations list\|status\|check\|actions &lt;id&gt; [--json]</code></td>
 <td>third-party adapters (Immich, Home Assistant, docker, systemd, launchd, syncthing, mail, CasaOS); <code>list</code>/<code>status</code>/<code>check</code> are aliases</td>
 </tr>

@@ -1466,6 +1466,21 @@ to fill in by hand — the master password's location, 2FA recovery codes, a saf
 nothing sensitive is ever typed into the file itself. Print it, keep the paper somewhere safe (a
 lawyer, a relative, a safe deposit box), and regenerate it yearly, since servers and backup disks
 change: <code>nocloud legacy</code>.</p>
+<p>The envelope is a map back to a <em>running</em> system. For the case where nothing is running any
+more — the server is long gone, nobody renewed the domain — <code>nocloud freeze --out PATH</code> exports
+the archive itself: the family tree and every person's page (memorial pages included), the
+financial history and its linked evidence, the provenance ledger, and every installed app's page,
+as a self-contained offline directory. It bundles the break-glass envelope alongside it
+(<code>for-my-heirs.html</code>) and opens in any browser decades from now with nothing more than
+<code>python3 start_archive.py</code> — no server, no install, no dependency beyond Python's own standard
+library. It deliberately does not copy the photo/video library itself (Immich's own store, with
+its own backup, above) — freezing that too would make the export enormous; what it preserves is
+the story and the record, not the raw media bytes. When Immich is configured, freeze offers
+(interactively, or <code>--include-immich yes/no</code>) to bundle the existing local copy of its database
+backup (<code>&lt;nocloud-private&gt;/immich_backup/</code>, already replicated to the workstation above) — small
+enough to travel with the rest of the freeze, so restoring Immich later needs no live server, only
+a fresh install and <code>psql</code>. Point <code>--out</code> at a mounted USB stick and keep it wherever the printed
+envelope lives.</p>
 <h2 id="uninstalling">Uninstalling</h2>
 <p><code>scripts/uninstall_server.sh</code> removes NoCloud's own pieces unconditionally, asks per-service
 about the third-party services <em>it</em> installed (recorded in <code>config/services.json</code> at install
