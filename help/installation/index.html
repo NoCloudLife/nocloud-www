@@ -1349,9 +1349,11 @@ over SSH (no tagged release exists yet).</p>
    (your workstation's IP, router, and home server candidates on the LAN) and writes
    <code>~/nocloud/config/site.env</code> for you. You can also edit that file by hand (server SSH host/user,
    service URLs, API keys) — it never travels to git either way.</li>
-<li><strong>Check</strong>: <code>nocloud doctor</code> — 16 checks covering git, Python, the job registry, the
-   configuration schema, the database, seeded sections, module manifests, the backup contract, the
-   audit event stream, the upgrade lifecycle and the integration adapters.</li>
+<li><strong>Check</strong>: <code>nocloud doctor</code> — 18 checks covering git, Python, the job registry, the
+   configuration schema, the database, seeded sections, module manifests, the backup contract
+   (both the live files it promises to copy and the freshness of the latest snapshot at the
+   backup destination), the audit event stream, the upgrade lifecycle, the integration adapters,
+   and (low-severity, since it's optional) whether Rule Coach's local LLM is reachable.</li>
 <li><strong>Bring in your data</strong>: <code>nocloud onboard &lt;folder-or-export&gt;</code> — point it at a folder of
    photos/videos, a WhatsApp export or a Google Takeout export and it copies them in (reversibly —
    originals are never moved or edited) and builds your first populated view automatically.
@@ -1415,7 +1417,7 @@ Message-ID) — most people care far more about that ongoing history than about 
 <li>Add an <code>identity_providers.oidc</code> block to Authelia's <code>configuration.yml</code>: an <code>hmac_secret</code>
    (another 64-char random value), the RSA key under <code>jwks</code>, and a client (<code>client_id:
    immich</code>, the PBKDF2 hash as <code>client_secret</code>, <code>authorization_policy: one_factor</code> — the same
-   level as the rest of the intranet — <code>redirect_uris</code> for the web app plus
+   level as the rest of the portal — <code>redirect_uris</code> for the web app plus
    <code>app.immich:///oauth-callback</code> for the mobile app, <code>scopes: [openid, profile, email]</code>).
    Restart with <code>docker restart nocloud_authelia</code> (or, if you started it via
    <code>docker compose --profile auth up -d</code>, <code>docker compose restart authelia</code>) and check

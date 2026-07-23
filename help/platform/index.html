@@ -1450,7 +1450,9 @@ nocloud<span class="w"> </span>config<span class="w"> </span><span class="nb">se
 <code>config/runtime.yaml</code> and <code>config/jobs.yaml</code>, a non-empty job registry, <code>config/site.env</code>, the
 configuration schema, the SQLite catalog (existence, integrity, schema version) and its seeded
 sections, a known build directory, jobs with no recorded failures, module manifests, the backup
-contract, orphaned journal operations, the audit event stream, the upgrade lifecycle, the
+contract (both the live files it promises to copy and whether a fresh, intact snapshot actually
+exists at the backup destination), orphaned journal operations, the audit event stream, the
+upgrade lifecycle, the
 integration adapters, and whether the local daemon (and, once a remote server is configured, its
 own APIs) are actually answering. It exits non-zero if any check fails — see
 <a href="../troubleshooting/#a-doctor-check-fails">Troubleshooting</a> for what each failing check means.</p>

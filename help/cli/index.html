@@ -1454,7 +1454,7 @@ remembered in <code>~/.config/nocloud/home</code>).</p>
 <tbody>
 <tr>
 <td><code>nocloud doctor [--json]</code></td>
-<td>16 installation checks; exits non-zero if any fails</td>
+<td>17 installation checks; exits non-zero if any fails</td>
 </tr>
 <tr>
 <td><code>nocloud auth [--json]</code></td>
@@ -1486,11 +1486,15 @@ remembered in <code>~/.config/nocloud/home</code>).</p>
 </tr>
 <tr>
 <td><code>nocloud backup [--json]</code></td>
-<td>validates the backup contract (<code>config/backup_manifest.yaml</code>)</td>
+<td>validates the backup contract (<code>config/backup_manifest.yaml</code>) AND the destination: fails unless a fresh snapshot with an intact DB copy exists at <code>BACKUP_DEST</code></td>
 </tr>
 <tr>
 <td><code>nocloud restore [source] [--execute] [--json]</code></td>
 <td>restores backup manifest items from <code>source</code> (default: <code>BACKUP_DEST/backups/latest</code>); plan-only unless <code>--execute</code></td>
+</tr>
+<tr>
+<td><code>nocloud legacy</code></td>
+<td>generates <code>build/legacy/envelope.html</code>: one printable, self-contained page for an heir — what this system is, where the three directories live, how to reach and restore it; contains no secrets, see <a href="../recovery/#if-im-gone">Recovery</a></td>
 </tr>
 <tr>
 <td><code>nocloud integrations list\|status\|check\|actions &lt;id&gt; [--json]</code></td>

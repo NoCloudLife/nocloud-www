@@ -1625,13 +1625,22 @@ remains the writable development walkthrough described in the <a href="../cli/">
 <ol>
 <li><strong>NoCloud folder</strong> — where the checkout and local data live.</li>
 <li><strong>Archive folder</strong> — where imported photos, videos and documents belong.</li>
-<li><strong>Home server address + user</strong> — the small always-on machine NoCloud publishes to.</li>
+<li><strong>Home server address + user</strong> — the small always-on machine NoCloud publishes to. No home
+   server yet? Choose <strong>"Just this computer for now"</strong> instead: the wizard becomes a four-step
+   flow (this list's steps 1–4), skipping the three server-bound steps below.</li>
 <li><strong>Recommended imports</strong> — optional WhatsApp and Google Takeout support.</li>
 <li><strong>NoCloud web address</strong> — where Desktop opens the portal; it can default to the home server.</li>
 <li><strong>Network</strong> — optional domain, certificate mode and WireGuard access; these remain editable in
    Settings later.</li>
 <li><strong>Portal login</strong> — optional Authelia administrator setup when the server is reachable over SSH.</li>
 </ol>
+<p>In the single-machine flow nothing leaves the computer: setup generates the instance's pages
+(<code>nocloud build</code>) and Desktop serves them read-only on a private loopback address whenever the
+portal is opened — imports, the Sink and the import monitor work exactly the same. The portal's
+Journey page keeps "Configure this instance" pending and shows how to connect a home server
+later (<code>nocloud setup</code>, then <code>nocloud deploy</code>). On stock Windows (no WSL) the wizard explains
+that local setup needs macOS or Linux instead of failing mid-install; connecting to an existing
+portal and the demo still work there.</p>
 <p>Submitting clones <code>nocloud-core</code>, creates a <code>.venv</code>, installs dependencies, sets up
 <code>~/nocloud-private</code> from the sample structure, and seeds the database — the same steps
 <a href="../installation/">Installation</a> walks through by hand, run for you. A failed step can be

@@ -957,6 +957,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#do-you-remember" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Do you remember?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#folder-drift-when-a-file-disappears-outside-the-app" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -1537,6 +1548,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#do-you-remember" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Do you remember?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#folder-drift-when-a-file-disappears-outside-the-app" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -1873,6 +1895,18 @@ and a preview of what would change, and gives you three verbs, one by one or in 
 <p>A pending item is a proposal, not yet a change: nothing is journaled until you resolve it. Once
 accepted (or overridden), it goes through the same journaled, reversible pipeline as every other
 operation.</p>
+<h2 id="do-you-remember">Do you remember?</h2>
+<p>The archive already knows, precisely, what it doesn't know: a photo dated only to a year, an
+Immich face never linked to anyone, a person field still holding a bulk-import default instead of
+a real answer. <strong>Do you remember?</strong> turns that backlog into a warm ritual instead of an admin
+chore — hand a tablet to a grandparent and let them answer one huge, simple question at a time: a
+photo and "about what year was this?", a face and "do you recognize this?", a small fact about
+someone in the family, each with a handful of big tap targets and an honest "I don't know / Skip".
+Anyone signed in can answer, not just admins — that's the whole point of the feature. An answer
+never changes the archive by itself: it becomes a <strong>pending item in the same review queue</strong>
+described above, with who answered and when recorded alongside it, so an admin still accepts,
+overrides or rejects it before anything is written — the same one-word-at-a-time, fully reversible
+path any other queued fact takes.</p>
 <h2 id="folder-drift-when-a-file-disappears-outside-the-app">Folder drift: when a file disappears outside the app</h2>
 <p>Deleting a file from your archive by hand (in Finder, not through NoCloud) isn't gated by
 anything in the app — there's no way to stop it from happening. What NoCloud <em>can</em> do is notice
@@ -1923,6 +1957,16 @@ explain it to a person — into a new rule, without ever hand-writing code:</p>
 <p>The model never runs your archive through a black box and never writes to it directly — it writes
 one small, versioned rule that you read before it does anything, and every fact it later proposes
 still carries its own derivation back to the sentence that taught it.</p>
+<p><strong>Is a coached rule the same language as the <code>@rule</code> decorators above?</strong> Not literally, and the
+difference is the whole point. A hand-written rule is arbitrary Python — full expressiveness, but
+you have to write and trust it. A coached rule can never be that: the model's only output is a
+fixed, closed vocabulary (which people appear or don't, a filename pattern, a path fragment; a
+date/album/category to propose) that a small, unchanging piece of NoCloud code turns into a rule
+function — no Python is generated, and nothing the model outputs is ever executed as code. The
+block notation you read on screen is a plain-English <em>rendering</em> of that closed vocabulary, not a
+language of its own. Once built, a coached rule is registered in the exact same catalog as every
+hand-written one and runs through the exact same call, so from that point on the engine can't tell
+them apart — the difference is entirely in how each one was made, not in how either one runs.</p>
 <h2 id="it-shows-up-where-you-actually-look">It shows up where you actually look</h2>
 <p>A decision is worthless if you open your photo library and see nothing changed, so each kind of fact
 goes to the sink that surfaces it:</p>

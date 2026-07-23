@@ -1983,8 +1983,12 @@ nocloud<span class="w"> </span>daemon<span class="w"> </span>--port<span class="
 <td><code>nocloud module doctor</code> lists each manifest error</td>
 </tr>
 <tr>
-<td><code>backup manifest</code></td>
-<td>a required item in <code>config/backup_manifest.yaml</code> is missing on disk</td>
+<td><code>backup live files</code></td>
+<td>a required item in <code>config/backup_manifest.yaml</code> is missing on the live system</td>
+</tr>
+<tr>
+<td><code>backup snapshot</code></td>
+<td>the backup destination has no fresh, intact snapshot — plug the backup disk in, set <code>BACKUP_DEST</code> in <code>config/site.env</code>, or check the <code>backup_local.sh</code> launchd job</td>
 </tr>
 <tr>
 <td><code>upgrade lifecycle</code></td>

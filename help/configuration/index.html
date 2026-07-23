@@ -1411,6 +1411,10 @@ list</code> masks them.</p>
 <td>where the ordered archive, the Immich backup and the local mail live</td>
 </tr>
 <tr>
+<td><code>BACKUP_DEST</code></td>
+<td>the external disk <code>backup_local.sh</code> snapshots to and <code>nocloud restore</code> reads from; while unset, <code>nocloud doctor</code>'s <code>backup snapshot</code> check fails with "no backup destination configured"</td>
+</tr>
+<tr>
 <td><code>SERVER_HOME</code> / <code>SERVER_PORTAL</code></td>
 <td>the server's home and the portal's web root</td>
 </tr>
@@ -1424,6 +1428,18 @@ it leaves <code>MAC_DAEMON_TOKEN</code> empty, only needed when the daemon liste
 hand (or with <code>nocloud config set</code>) when you need them. The certificate and WireGuard keys
 (<code>ACME_MODE</code> through <code>WG_LAN</code>) are asked by the install wizard and stay editable afterwards
 from <strong>Settings → Network</strong> — see <a href="../network/">Network</a> — rather than hand-edited.</p>
+</div>
+<div class="admonition tip">
+<p class="admonition-title">Rule Coach's local model needs a one-time pull</p>
+<p><code>OLLAMA_URL</code>/<code>COACH_MODEL</code> only point at where Ollama should be — nothing installs Ollama or
+downloads the model for you. On the machine <code>OLLAMA_URL</code> resolves to (the workstation, by
+default), one time:
+<div class="highlight"><pre><span></span><code>brew<span class="w"> </span>install<span class="w"> </span>ollama<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>ollama<span class="w"> </span>serve<span class="w"> </span><span class="p">&amp;</span><span class="w">   </span><span class="c1"># or: your platform&#39;s Ollama install</span>
+ollama<span class="w"> </span>pull<span class="w"> </span>qwen2.5:7b
+</code></pre></div>
+<code>nocloud doctor</code> includes a low-severity "ollama model pulled (Rule Coach)" check so a missing
+or unpulled model shows up there instead of only failing the first time you actually try to
+coach a rule.</p>
 </div>
 <h2 id="configyaml-the-products-declarations"><code>config/*.yaml</code> — the product's declarations</h2>
 <p>These files ship with the product and are versioned; you rarely edit them, but they're where the

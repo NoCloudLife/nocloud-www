@@ -681,6 +681,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#see-the-receipt-behind-an-expense" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        See the receipt behind an expense
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#verify-your-email" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -1316,6 +1327,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#see-the-receipt-behind-an-expense" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        See the receipt behind an expense
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#verify-your-email" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -1383,6 +1405,24 @@
    the API and the app alike.</li>
 <li>Made a mistake? Every rule is reversible: it's recorded in the overrides table (with top
    priority over the automatic rules), and the editor ships an undo.</li>
+</ol>
+<h2 id="see-the-receipt-behind-an-expense">See the receipt behind an expense</h2>
+<ol>
+<li><code>python3 scripts/money_provenance.py</code> scans your bank movements and looks for evidence that
+   explains them: a receipt photo whose OCR text contains the same amount within a few days of the
+   movement, or an email whose sender/subject overlaps the movement's description within a date
+   window. Add <code>--dry-run</code> to see what it would link without writing anything, <code>--days N</code> to widen
+   or narrow the date window (default 5), and <code>--no-llm</code> to skip the confirmation step below
+   entirely.</li>
+<li>Strong matches (exact amount, close date) are linked automatically — no model involved.
+   Ambiguous matches are handed to your local model for a closed-vocabulary confirm/reject; this
+   step is entirely optional, and the scanner is fully functional without Ollama installed if you
+   pass <code>--no-llm</code> or it simply isn't running.</li>
+<li>Confirmed links show up as a small evidence marker on the matching movement in Income &amp;
+   expenses → "Otros expenses"; expand it to see the receipt thumbnail or the mail subject it was
+   matched to.</li>
+<li>Nothing here is scheduled automatically yet — run it by hand, or wire the <code>money_provenance_scan</code>
+   entry in <code>config/jobs.yaml</code> into your own schedule after a fresh <code>refresh_patrimonio</code>.</li>
 </ol>
 <h2 id="verify-your-email">Verify your email</h2>
 <ol>

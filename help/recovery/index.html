@@ -964,10 +964,32 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#local-snapshots" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Local snapshots
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#when-something-is-really-lost" class="md-nav__link">
     <span class="md-ellipsis">
       
         When something is really lost
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#if-im-gone" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        If I'm gone
       
     </span>
   </a>
@@ -1305,10 +1327,32 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#local-snapshots" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Local snapshots
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#when-something-is-really-lost" class="md-nav__link">
     <span class="md-ellipsis">
       
         When something is really lost
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#if-im-gone" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        If I'm gone
       
     </span>
   </a>
@@ -1379,6 +1423,15 @@ directories are Docker's own storage and OS registration points (<code>/etc/syst
 </ul>
 <p>The mirror excludes the server-truth paths precisely so it can never revert live state to a
 stale snapshot.</p>
+<h2 id="local-snapshots">Local snapshots</h2>
+<p><code>scripts/backup_local.sh</code> (daily, via launchd) writes hardlinked, date-stamped snapshots of the
+archive, the catalog, the local state and the local mail dir to <code>BACKUP_DEST</code> (an external disk,
+set in <code>config/site.env</code>); <code>nocloud restore</code> brings any of them back, archive included. The
+doctor's <code>backup snapshot</code> check reads the <strong>destination</strong>, not the live files: it fails when no
+destination is configured, when no snapshot exists or the latest one is older than the expected
+cadence, and when the snapshot's database copy no longer passes an integrity check — so an
+unplugged backup disk shows up as a red check the same day, not a year later. An unmounted disk
+also makes the backup job itself exit non-zero and leave a <code>backup_failed</code> event in the journal.</p>
 <p><img alt="The System centre makes system health, recovery coverage and next actions visible without requiring a terminal." src="../img/screenshots/system.png" /></p>
 <p><em>Recovery begins with a clear status: checks, background work and the available recovery route are
 all presented together. Screenshot: synthetic demo data.</em></p>
@@ -1401,6 +1454,18 @@ all presented together. Screenshot: synthetic demo data.</em></p>
   Dovecot, backed up to the workstation's <code>nocloud-private/mail</code> by a scheduled rsync, and only
   ever <em>appended to</em> by the refresh job — deletions upstream never delete here.</li>
 </ul>
+<h2 id="if-im-gone">If I'm gone</h2>
+<p><code>nocloud legacy</code> generates <code>build/legacy/envelope.html</code>: one printable, self-contained page meant
+for whoever has to pick this system up without the owner around to explain it — the three
+directories and their real paths, where the portal and the server are, where backups live, and
+the same plain-language version of the recovery steps above (<code>nocloud restore</code>,
+<code>scripts/heal_server.sh</code>). It contains no passwords, keys or secrets by construction: it reads
+only the non-secret settings from <code>config/site.env</code> (never <code>IMMICH_KEY</code>, <code>SMTP_PASS_FILE</code>, or any
+other key <code>config/schema.yaml</code> marks <code>secret: true</code>), and leaves blank, dashed lines for the owner
+to fill in by hand — the master password's location, 2FA recovery codes, a safe deposit box — so
+nothing sensitive is ever typed into the file itself. Print it, keep the paper somewhere safe (a
+lawyer, a relative, a safe deposit box), and regenerate it yearly, since servers and backup disks
+change: <code>nocloud legacy</code>.</p>
 <h2 id="uninstalling">Uninstalling</h2>
 <p><code>scripts/uninstall_server.sh</code> removes NoCloud's own pieces unconditionally, asks per-service
 about the third-party services <em>it</em> installed (recorded in <code>config/services.json</code> at install
