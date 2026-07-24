@@ -2,124 +2,515 @@
 <html lang="ca">
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="robots" content="noindex,nofollow">
-<title>Proves — NoCloud</title>
+<title>Proves · Radio Castiza — NoCloud</title>
 <style>
-  * { box-sizing: border-box; margin: 0; padding: 0; }
-  body {
-    background: #0d1117;
-    color: #e6edf3;
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-    padding: 2rem 1rem 4rem;
-    min-height: 100vh;
+/* ── tokens ───────────────────────────────────────── */
+:root {
+  --bg:        #080a10;
+  --sur:       #0d0f19;
+  --card:      #131520;
+  --bdr:       #1e2035;
+  --text:      #c8cae0;
+  --muted:     #484a68;
+  --subtle:    #1c1e30;
+  --gold:      #c49a2c;
+  --gold-faint:rgba(196,154,44,.10);
+  --gold-dim:  #5a430a;
+  --crimson:   rgba(74,14,26,.55);
+  --up:        #22c55e;
+  --up-bg:     #031409;
+  --up-bdr:    #165228;
+  --down:      #f87171;
+  --down-bg:   #140505;
+  --down-bdr:  #7f1d1d;
+  --descbg:    #0b0c14;
+  --font-mono: 'SF Mono','Fira Code','Cascadia Code',ui-monospace,monospace;
+  --font-ui:   system-ui,-apple-system,'Segoe UI',sans-serif;
+}
+@media (prefers-color-scheme: light) {
+  :root {
+    --bg:        #f0f0f8;
+    --sur:       #e6e6f2;
+    --card:      #ffffff;
+    --bdr:       #d2d2e8;
+    --text:      #1a1a30;
+    --muted:     #7070a0;
+    --subtle:    #eeeef8;
+    --gold:      #7a5c10;
+    --gold-faint:rgba(122,92,16,.08);
+    --gold-dim:  #c49a2c;
+    --crimson:   rgba(140,20,40,.06);
+    --up:        #16a34a;
+    --up-bg:     #f0fdf4;
+    --up-bdr:    #86efac;
+    --down:      #dc2626;
+    --down-bg:   #fef2f2;
+    --down-bdr:  #fca5a5;
+    --descbg:    #f5f5ff;
   }
-  h1 { font-size: 1.1rem; font-weight: 500; color: #8b949e; margin-bottom: 2.5rem; letter-spacing: 0.04em; }
-  .section { margin-bottom: 3rem; }
-  .section-title {
-    font-size: 0.75rem;
-    font-weight: 600;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: #58a6ff;
-    border-bottom: 1px solid #21262d;
-    padding-bottom: 0.5rem;
-    margin-bottom: 1.5rem;
-  }
-  .grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 2rem;
-    max-width: 1100px;
-  }
-  .grid.wide { grid-template-columns: repeat(auto-fit, minmax(360px, 1fr)); }
-  .card { display: flex; flex-direction: column; gap: 0.6rem; }
-  .card h2 { font-size: 0.85rem; font-weight: 500; color: #cdd9e5; }
-  .card .meta { font-size: 0.72rem; color: #8b949e; }
-  video {
-    width: 100%;
-    border-radius: 10px;
-    background: #161b22;
-    display: block;
-  }
-  .dl {
-    font-size: 0.72rem;
-    color: #58a6ff;
-    text-decoration: none;
-    align-self: flex-start;
-  }
-  .dl:hover { text-decoration: underline; }
+}
+:root[data-theme="dark"] {
+  --bg:#080a10; --sur:#0d0f19; --card:#131520; --bdr:#1e2035;
+  --text:#c8cae0; --muted:#484a68; --subtle:#1c1e30;
+  --gold:#c49a2c; --gold-faint:rgba(196,154,44,.10); --gold-dim:#5a430a;
+  --crimson:rgba(74,14,26,.55);
+  --up:#22c55e; --up-bg:#031409; --up-bdr:#165228;
+  --down:#f87171; --down-bg:#140505; --down-bdr:#7f1d1d; --descbg:#0b0c14;
+}
+:root[data-theme="light"] {
+  --bg:#f0f0f8; --sur:#e6e6f2; --card:#ffffff; --bdr:#d2d2e8;
+  --text:#1a1a30; --muted:#7070a0; --subtle:#eeeef8;
+  --gold:#7a5c10; --gold-faint:rgba(122,92,16,.08); --gold-dim:#c49a2c;
+  --crimson:rgba(140,20,40,.06);
+  --up:#16a34a; --up-bg:#f0fdf4; --up-bdr:#86efac;
+  --down:#dc2626; --down-bg:#fef2f2; --down-bdr:#fca5a5; --descbg:#f5f5ff;
+}
+
+/* ── reset ────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { color-scheme: dark light; }
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-ui);
+  font-size: 14px;
+  line-height: 1.5;
+  min-height: 100vh;
+  padding: 0 0 5rem;
+  position: relative;
+}
+/* scanline texture — subtle CRT feel */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  background: repeating-linear-gradient(to bottom,
+    transparent 0, transparent 1px,
+    rgba(0,0,0,.06) 1px, rgba(0,0,0,.06) 2px);
+}
+#root { position: relative; z-index: 1; }
+
+/* ── page header ──────────────────────────────────── */
+.page-header {
+  padding: 1.75rem 2rem 1.25rem;
+  border-bottom: 1px solid var(--bdr);
+  background: var(--sur);
+  display: flex;
+  align-items: baseline;
+  gap: 1.2rem;
+  flex-wrap: wrap;
+}
+.page-header h1 {
+  font-size: .72rem;
+  font-weight: 600;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.page-header .scope-badge {
+  font-family: var(--font-mono);
+  font-size: .65rem;
+  color: var(--muted);
+  background: var(--subtle);
+  border: 1px solid var(--bdr);
+  padding: 2px 8px;
+  border-radius: 3px;
+}
+
+/* ── section wrapper ──────────────────────────────── */
+.section {
+  max-width: 1060px;
+  margin: 0 auto;
+  padding: 2rem 1.5rem 0;
+}
+.section-title {
+  display: flex;
+  align-items: center;
+  gap: .75rem;
+  margin-bottom: 1.25rem;
+}
+.section-title .label {
+  font-size: .68rem;
+  font-weight: 700;
+  letter-spacing: .13em;
+  text-transform: uppercase;
+  color: var(--gold);
+}
+.section-title .rule {
+  flex: 1;
+  height: 1px;
+  background: var(--bdr);
+}
+.section-title .count {
+  font-family: var(--font-mono);
+  font-size: .65rem;
+  color: var(--muted);
+}
+
+/* ── episode card ─────────────────────────────────── */
+.card {
+  display: flex;
+  gap: 0;
+  background: var(--card);
+  border: 1px solid var(--bdr);
+  border-radius: 8px;
+  margin-bottom: 1rem;
+  overflow: hidden;
+  transition: border-color .2s, background .2s;
+}
+.card--up {
+  background: color-mix(in srgb, var(--up-bg) 60%, var(--card));
+  border-color: var(--up-bdr);
+}
+.card--down {
+  background: color-mix(in srgb, var(--down-bg) 60%, var(--card));
+  border-color: var(--down-bdr);
+}
+
+/* left: video */
+.card-video {
+  flex: 0 0 58%;
+  background: #000;
+  position: relative;
+}
+.card-video video {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+  max-height: 280px;
+}
+
+/* right: panel */
+.card-panel {
+  flex: 1;
+  padding: 1.25rem 1.4rem;
+  display: flex;
+  flex-direction: column;
+  gap: .55rem;
+  border-left: 1px solid var(--bdr);
+  min-width: 0;
+  background: linear-gradient(135deg, var(--crimson) 0%, transparent 60%);
+}
+
+.ep-id {
+  font-family: var(--font-mono);
+  font-size: .68rem;
+  font-weight: 600;
+  letter-spacing: .14em;
+  color: var(--gold);
+  background: var(--gold-faint);
+  border: 1px solid var(--gold-dim);
+  border-radius: 3px;
+  padding: 2px 8px;
+  display: inline-block;
+  width: fit-content;
+}
+
+.badge-yt {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-family: var(--font-mono);
+  font-size: .62rem;
+  font-weight: 700;
+  letter-spacing: .1em;
+  color: var(--up);
+  width: fit-content;
+}
+.badge-yt .dot {
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: var(--up);
+  animation: pulse 1.8s ease-in-out infinite;
+  flex-shrink: 0;
+}
+@keyframes pulse { 0%,100%{opacity:1} 50%{opacity:.3} }
+
+.ep-title {
+  font-size: .9rem;
+  font-weight: 600;
+  color: var(--text);
+  line-height: 1.3;
+  text-wrap: balance;
+}
+.ep-cast {
+  font-size: .72rem;
+  color: var(--muted);
+  line-height: 1.4;
+}
+.ep-dur {
+  font-family: var(--font-mono);
+  font-size: .65rem;
+  color: var(--muted);
+}
+
+.vote-row {
+  display: flex;
+  gap: .5rem;
+  margin-top: auto;
+  padding-top: .75rem;
+}
+.btn-vote {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: .35rem;
+  padding: .55rem .5rem;
+  border-radius: 5px;
+  border: 1px solid var(--bdr);
+  background: transparent;
+  color: var(--muted);
+  font: 600 .7rem/1 var(--font-ui);
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: background .15s, border-color .15s, color .15s;
+}
+.btn-vote .v-icon {
+  font-size: .8rem;
+  line-height: 1;
+}
+.btn-up:hover { background: var(--up-bg); border-color: var(--up-bdr); color: var(--up); }
+.btn-down:hover { background: var(--down-bg); border-color: var(--down-bdr); color: var(--down); }
+.btn-up.active { background: var(--up-bg); border-color: var(--up-bdr); color: var(--up); }
+.btn-down.active { background: var(--down-bg); border-color: var(--down-bdr); color: var(--down); }
+
+.dl-link {
+  font-size: .65rem;
+  color: var(--muted);
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: .25rem;
+  margin-top: .25rem;
+}
+.dl-link:hover { color: var(--text); }
+
+/* ── descartats drawer ────────────────────────────── */
+.descartats-section {
+  max-width: 1060px;
+  margin: 0 auto 1rem;
+  padding: 0 1.5rem;
+}
+.descartats-toggle {
+  display: flex;
+  align-items: center;
+  gap: .5rem;
+  background: none;
+  border: 1px dashed var(--bdr);
+  border-radius: 5px;
+  color: var(--muted);
+  font: .7rem/1 var(--font-mono);
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  padding: .55rem 1rem;
+  cursor: pointer;
+  width: 100%;
+  margin-top: .5rem;
+  transition: border-color .15s, color .15s;
+}
+.descartats-toggle:hover { border-color: var(--down-bdr); color: var(--down); }
+.descartats-toggle .arrow { font-size: .8rem; }
+.descartats-list { padding-top: .75rem; }
+.descartats-list .card { opacity: .75; }
+
+/* ── empty state ─────────────────────────────────── */
+.empty-queue {
+  text-align: center;
+  padding: 3rem 1rem;
+  color: var(--muted);
+  font-size: .8rem;
+  border: 1px dashed var(--bdr);
+  border-radius: 8px;
+}
+
+/* ── nocloud shorts ──────────────────────────────── */
+.nocloud-section {
+  max-width: 1060px;
+  margin: 2rem auto 0;
+  padding: 0 1.5rem;
+}
+.nocloud-section .grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1rem;
+}
+.nc-card { background: var(--card); border: 1px solid var(--bdr); border-radius: 8px; overflow: hidden; }
+.nc-card-label { padding: .7rem 1rem .4rem; font-size: .8rem; font-weight: 500; color: var(--text); }
+.nc-card video { width: 100%; display: block; background: #000; }
+.nc-card-footer { padding: .4rem 1rem .7rem; }
+.nc-card-footer a { font-size: .65rem; color: var(--muted); text-decoration: none; }
+.nc-card-footer a:hover { color: var(--text); }
+
+/* ── backend-pending notice ─────────────────────────*/
+.notice {
+  max-width: 1060px;
+  margin: 2rem auto .25rem;
+  padding: 0 1.5rem;
+}
+.notice p {
+  font-family: var(--font-mono);
+  font-size: .65rem;
+  color: var(--muted);
+  background: var(--subtle);
+  border: 1px solid var(--bdr);
+  border-radius: 4px;
+  padding: .55rem 1rem;
+  line-height: 1.6;
+}
+.notice span { color: var(--gold); }
+
+/* ── responsive ─────────────────────────────────── */
+@media (max-width: 680px) {
+  .card { flex-direction: column; }
+  .card-video { flex: none; }
+  .card-video video { max-height: 220px; }
+  .card-panel { border-left: none; border-top: 1px solid var(--bdr); }
+  .vote-row { gap: .4rem; }
+  .page-header { padding: 1.25rem 1rem; }
+  .section, .descartats-section, .nocloud-section, .notice { padding-left: 1rem; padding-right: 1rem; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .badge-yt .dot { animation: none; }
+  .btn-vote, .card { transition: none; }
+}
 </style>
 </head>
 <body>
-<h1>PROVES / en revisió</h1>
+<div id="root"></div>
 
-<div class="section">
-  <div class="section-title">Es la manera de hacerme rico — Radio Castiza</div>
-  <div class="grid wide">
+<script>
+/* ── episode data ────────────────────────────────── */
+const ESLM = [
+  { id:'ep006', n:6, title:'Los medios de Sánchez y la propaganda del gobierno', cast:'Manolo · Lola · Paco · Arturo', dur:'~4 min', src:'eslamanera-ep006.mp4' },
+  { id:'ep005', n:5, title:'La ideología de género en los colegios',             cast:'Manolo · Lola · Paco · Carmen', dur:'~4 min', src:'eslamanera-ep005.mp4' },
+  { id:'ep004', n:4, title:'El sueldo de los españoles va para impuestos',       cast:'Manolo · Lola · Paco · Carmen · Arturo', dur:'~4 min', src:'eslamanera-ep004.mp4' },
+  { id:'ep003', n:3, title:'La familia de toda la vida',                         cast:'Manolo · Lola · Paco · Carmen', dur:'~5 min', src:'eslamanera-ep003.mp4' },
+  { id:'ep002', n:2, title:'Sánchez y la ruina de España',                      cast:'Manolo · Lola · Paco · Carmen · Ramón', dur:'~4 min', src:'eslamanera-ep002.mp4' },
+  { id:'ep001', n:1, title:'La inmigración nos está matando',                    cast:'Manolo · Lola · Paco · Carmen · Ramón', dur:'~5 min', src:'eslamanera-ep001.mp4' },
+];
 
-    <div class="card">
-      <h2>Ep. 1 — La inmigración nos está matando</h2>
-      <div class="meta">Manolo · Lola · Paco · Carmen · Ramón · ~5 min</div>
-      <video src="eslamanera-ep001.mp4" controls playsinline></video>
-      <a class="dl" href="eslamanera-ep001.mp4" download>Baixar MP4</a>
+const NOCLOUD = [
+  { id:'nc-exp',  title:'Expense reclassification', src:'nocloud-short-expense-reclass.mp4' },
+  { id:'nc-app',  title:'App store',                 src:'nocloud-short-app-store.mp4' },
+];
+
+/* ── vote storage (localStorage — swap for /api/vote when backend exists) ── */
+const KEY = id => 'eslm:v:' + id;
+function getVote(id) { return localStorage.getItem(KEY(id)); }
+function setVote(id, v) {
+  const cur = getVote(id);
+  if (cur === v) localStorage.removeItem(KEY(id)); /* toggle off */
+  else           localStorage.setItem(KEY(id), v);
+  render();
+}
+window.setVote = setVote;
+
+function toggleDescartats(btn) {
+  const list = btn.nextElementSibling;
+  const hidden = list.hasAttribute('hidden');
+  list.toggleAttribute('hidden', !hidden);
+  btn.querySelector('.arrow').textContent = hidden ? '▾' : '▸';
+}
+window.toggleDescartats = toggleDescartats;
+
+/* ── card template ───────────────────────────────── */
+function cardHTML(ep) {
+  const vote = getVote(ep.id);
+  const isUp   = vote === 'up';
+  const isDown = vote === 'down';
+  const cls    = isUp ? 'card--up' : isDown ? 'card--down' : '';
+  const n      = String(ep.n).padStart(3, '0');
+  return `
+  <div class="card ${cls}">
+    <div class="card-video">
+      <video src="${ep.src}" controls playsinline preload="none"></video>
+    </div>
+    <div class="card-panel">
+      <div class="ep-id">EP·${n}</div>
+      ${isUp ? `<div class="badge-yt"><span class="dot"></span>PENDENT YT</div>` : ''}
+      <h2 class="ep-title">${ep.title}</h2>
+      <div class="ep-cast">${ep.cast}</div>
+      <div class="ep-dur">${ep.dur}</div>
+      <div class="vote-row">
+        <button class="btn-vote btn-up${isUp?' active':''}" onclick="setVote('${ep.id}','up')" aria-label="Aprovar">
+          <span class="v-icon">▲</span> Aprovar
+        </button>
+        <button class="btn-vote btn-down${isDown?' active':''}" onclick="setVote('${ep.id}','down')" aria-label="Descartar">
+          <span class="v-icon">▼</span> Descartar
+        </button>
+      </div>
+      <a class="dl-link" href="${ep.src}" download>↓ MP4</a>
+    </div>
+  </div>`;
+}
+
+/* ── nc shorts template ──────────────────────────── */
+function ncCardHTML(ep) {
+  return `
+  <div class="nc-card">
+    <div class="nc-card-label">${ep.title}</div>
+    <video src="${ep.src}" controls playsinline preload="none"></video>
+    <div class="nc-card-footer"><a href="${ep.src}" download>↓ Baixar MP4</a></div>
+  </div>`;
+}
+
+/* ── render ──────────────────────────────────────── */
+function render() {
+  const queue      = ESLM.filter(e => getVote(e.id) !== 'down');
+  const descartats = ESLM.filter(e => getVote(e.id) === 'down');
+  const upCount    = queue.filter(e => getVote(e.id) === 'up').length;
+
+  document.getElementById('root').innerHTML = `
+    <header class="page-header">
+      <h1>PROVES / en revisió</h1>
+      <span class="scope-badge">localStorage — pendent de backend real</span>
+    </header>
+
+    <div class="section">
+      <div class="section-title">
+        <span class="label">Es la manera de hacerme rico</span>
+        <span class="rule"></span>
+        <span class="count">${queue.length} en cua · ${upCount} aprovats</span>
+      </div>
+      ${queue.length > 0
+        ? queue.map(cardHTML).join('')
+        : '<div class="empty-queue">La cua és buida — tots els episodis han estat descartats o aprovats.</div>'}
     </div>
 
-    <div class="card">
-      <h2>Ep. 2 — Sánchez y la ruina de España</h2>
-      <div class="meta">Manolo · Lola · Paco · Carmen · Ramón · ~4 min</div>
-      <video src="eslamanera-ep002.mp4" controls playsinline></video>
-      <a class="dl" href="eslamanera-ep002.mp4" download>Baixar MP4</a>
+    ${descartats.length > 0 ? `
+    <div class="descartats-section">
+      <button class="descartats-toggle" onclick="toggleDescartats(this)">
+        <span class="arrow">▸</span>&nbsp; Descartats (${descartats.length})
+      </button>
+      <div class="descartats-list" hidden>
+        ${descartats.map(cardHTML).join('')}
+      </div>
+    </div>` : ''}
+
+    <div class="notice">
+      <p><span>// BACKEND PENDENT:</span> Quan tinguem hosting real, substituir getVote/setVote
+       per fetch('/api/votes') i POST /api/vote {ep, vote}. Els "aprovats" pujaran a YouTube
+       via publish_youtube.py. Els "descartats" s'arxivaran a una carpeta separada al servidor.</p>
     </div>
 
-    <div class="card">
-      <h2>Ep. 3 — La familia de toda la vida</h2>
-      <div class="meta">Manolo · Lola · Paco · Carmen · ~5 min</div>
-      <video src="eslamanera-ep003.mp4" controls playsinline></video>
-      <a class="dl" href="eslamanera-ep003.mp4" download>Baixar MP4</a>
+    <div class="nocloud-section">
+      <div class="section-title">
+        <span class="label">NoCloud — Shorts de producte</span>
+        <span class="rule"></span>
+      </div>
+      <div class="grid">${NOCLOUD.map(ncCardHTML).join('')}</div>
     </div>
+  `;
+}
 
-    <div class="card">
-      <h2>Ep. 4 — El sueldo de los españoles va para impuestos</h2>
-      <div class="meta">Manolo · Lola · Paco · Carmen · Arturo · ~4 min</div>
-      <video src="eslamanera-ep004.mp4" controls playsinline></video>
-      <a class="dl" href="eslamanera-ep004.mp4" download>Baixar MP4</a>
-    </div>
-
-    <div class="card">
-      <h2>Ep. 5 — La ideología de género en los colegios</h2>
-      <div class="meta">Manolo · Lola · Paco · Carmen · ~4 min</div>
-      <video src="eslamanera-ep005.mp4" controls playsinline></video>
-      <a class="dl" href="eslamanera-ep005.mp4" download>Baixar MP4</a>
-    </div>
-
-    <div class="card">
-      <h2>Ep. 6 — Los medios de Sánchez y la propaganda del gobierno</h2>
-      <div class="meta">Manolo · Lola · Paco · Arturo · ~4 min</div>
-      <video src="eslamanera-ep006.mp4" controls playsinline></video>
-      <a class="dl" href="eslamanera-ep006.mp4" download>Baixar MP4</a>
-    </div>
-
-  </div>
-</div>
-
-<div class="section">
-  <div class="section-title">NoCloud — Shorts de producto</div>
-  <div class="grid">
-
-    <div class="card">
-      <h2>Expense reclassification</h2>
-      <video src="nocloud-short-expense-reclass.mp4" controls playsinline></video>
-      <a class="dl" href="nocloud-short-expense-reclass.mp4" download>Baixar MP4</a>
-    </div>
-
-    <div class="card">
-      <h2>App store</h2>
-      <video src="nocloud-short-app-store.mp4" controls playsinline></video>
-      <a class="dl" href="nocloud-short-app-store.mp4" download>Baixar MP4</a>
-    </div>
-
-  </div>
-</div>
-
+render();
+</script>
 </body>
 </html>
