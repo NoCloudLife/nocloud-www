@@ -412,18 +412,19 @@ body::before {
 <script>
 /* ── episode data ────────────────────────────────── */
 const ESLM = [
-  { id:'ep012', n:12, title:'Las nueve: toros, divorcio famoso y el verano de Sánchez', cast:'Manolo · Lola · Paco · Carmen · 09:00 h', dur:'~10 min', src:'eslamanera-ep012.mp4', date:'2026-07-24', risk:{score:12,label:'SEGURO',tier:0} },
-  { id:'ep011', n:11, title:'Las siete: Milei y el espejo español',                     cast:'Manolo · Paco · Arturo · 07:00 h',         dur:'~8 min',  src:'eslamanera-ep011.mp4', date:'2026-07-24', risk:{score:20,label:'SEGURO',tier:0} },
-  { id:'ep010', n:10, title:'Las cinco: la España que madruga',                         cast:'Manolo (solo) · 05:00 h',                  dur:'~7 min',  src:'eslamanera-ep010.mp4', date:'2026-07-24', risk:{score:22,label:'SEGURO',tier:0} },
-  { id:'ep009', n:9,  title:'Las nueve: amores, escándalos y la jet set patria',        cast:'Manolo · Lola · Paco · Carmen · 09:00 h',  dur:'~8 min',  src:'eslamanera-ep009.mp4', date:'2026-07-24', risk:{score:11,label:'SEGURO',tier:0} },
-  { id:'ep008', n:8,  title:'Las siete: el empleo que se va y el gasto que queda',      cast:'Manolo · Paco · Arturo · 07:00 h',         dur:'~8 min',  src:'eslamanera-ep008.mp4', date:'2026-07-22', risk:{score:34,label:'PRECAUCIÓN',tier:1} },
-  { id:'ep007', n:7,  title:'El diario de las cinco: España que se rompe',              cast:'Manolo (solo) · 05:00 h',                  dur:'~8 min',  src:'eslamanera-ep007.mp4', date:'2026-07-22', risk:{score:38,label:'PRECAUCIÓN',tier:1} },
-  { id:'ep006', n:6,  title:'Los medios de Sánchez y la propaganda del gobierno',       cast:'Manolo · Lola · Paco · Arturo',            dur:'~4 min',  src:'eslamanera-ep006.mp4', date:'2026-07-21', risk:{score:24,label:'SEGURO',tier:0} },
-  { id:'ep005', n:5,  title:'La ideología de género en los colegios',                   cast:'Manolo · Lola · Paco · Carmen',            dur:'~4 min',  src:'eslamanera-ep005.mp4', date:'2026-07-21', risk:{score:24,label:'SEGURO',tier:0} },
-  { id:'ep004', n:4,  title:'El sueldo de los españoles va para impuestos',             cast:'Manolo · Lola · Paco · Carmen · Arturo',   dur:'~4 min',  src:'eslamanera-ep004.mp4', date:'2026-07-21', risk:{score:30,label:'PRECAUCIÓN',tier:1} },
-  { id:'ep003', n:3,  title:'La familia de toda la vida',                               cast:'Manolo · Lola · Paco · Carmen',            dur:'~5 min',  src:'eslamanera-ep003.mp4', date:'2026-07-20', risk:{score:10,label:'SEGURO',tier:0} },
-  { id:'ep002', n:2,  title:'Sánchez y la ruina de España',                            cast:'Manolo · Lola · Paco · Carmen · Ramón',    dur:'~4 min',  src:'eslamanera-ep002.mp4', date:'2026-07-20', risk:{score:53,label:'LÍMITE',tier:2} },
-  { id:'ep001', n:1,  title:'La inmigración nos está matando',                          cast:'Manolo · Lola · Paco · Carmen · Ramón',    dur:'~5 min',  src:'eslamanera-ep001.mp4', date:'2026-07-20', risk:{score:20,label:'SEGURO',tier:0} },
+  { id:'ep013', n:13, title:'Las siete: Carmen y la España que no entiende lo que le hacen', cast:'Manolo · Carmen', dur:'~10 min', src:'eslamanera-ep013.mp4', date:'2026-07-24', time:'07:00', risk:{score:28,label:'SEGURO',tier:0} },
+  { id:'ep012', n:12, title:'Las nueve: toros, divorcio famoso y el verano de Sánchez', cast:'Manolo · Lola · Paco · Carmen', dur:'~10 min', src:'eslamanera-ep012.mp4', date:'2026-07-24', time:'09:00', risk:{score:12,label:'SEGURO',tier:0} },
+  { id:'ep011', n:11, title:'Las siete: Milei y el espejo español',                     cast:'Manolo · Paco · Arturo',        dur:'~8 min',  src:'eslamanera-ep011.mp4', date:'2026-07-24', time:'07:00', risk:{score:20,label:'SEGURO',tier:0} },
+  { id:'ep010', n:10, title:'Las cinco: la España que madruga',                         cast:'Manolo (solo)',                 dur:'~7 min',  src:'eslamanera-ep010.mp4', date:'2026-07-24', time:'05:00', risk:{score:22,label:'SEGURO',tier:0} },
+  { id:'ep009', n:9,  title:'Las nueve: amores, escándalos y la jet set patria',        cast:'Manolo · Lola · Paco · Carmen', dur:'~8 min',  src:'eslamanera-ep009.mp4', date:'2026-07-24', time:'09:00', risk:{score:11,label:'SEGURO',tier:0} },
+  { id:'ep008', n:8,  title:'Las siete: el empleo que se va y el gasto que queda',      cast:'Manolo · Paco · Arturo',        dur:'~8 min',  src:'eslamanera-ep008.mp4', date:'2026-07-22', time:'07:00', risk:{score:34,label:'PRECAUCIÓN',tier:1} },
+  { id:'ep007', n:7,  title:'El diario de las cinco: España que se rompe',              cast:'Manolo (solo)',                 dur:'~8 min',  src:'eslamanera-ep007.mp4', date:'2026-07-22', time:'05:00', risk:{score:38,label:'PRECAUCIÓN',tier:1} },
+  { id:'ep006', n:6,  title:'Los medios de Sánchez y la propaganda del gobierno',       cast:'Manolo · Lola · Paco · Arturo', dur:'~4 min',  src:'eslamanera-ep006.mp4', date:'2026-07-21', time:'09:00', risk:{score:24,label:'SEGURO',tier:0} },
+  { id:'ep005', n:5,  title:'La ideología de género en los colegios',                   cast:'Manolo · Lola · Paco · Carmen', dur:'~4 min',  src:'eslamanera-ep005.mp4', date:'2026-07-21', time:'09:00', risk:{score:24,label:'SEGURO',tier:0} },
+  { id:'ep004', n:4,  title:'El sueldo de los españoles va para impuestos',             cast:'Manolo · Lola · Paco · Carmen · Arturo', dur:'~4 min', src:'eslamanera-ep004.mp4', date:'2026-07-21', time:'09:00', risk:{score:30,label:'PRECAUCIÓN',tier:1} },
+  { id:'ep003', n:3,  title:'La familia de toda la vida',                               cast:'Manolo · Lola · Paco · Carmen', dur:'~5 min',  src:'eslamanera-ep003.mp4', date:'2026-07-20', time:'09:00', risk:{score:10,label:'SEGURO',tier:0} },
+  { id:'ep002', n:2,  title:'Sánchez y la ruina de España',                            cast:'Manolo · Lola · Paco · Carmen · Ramón', dur:'~4 min', src:'eslamanera-ep002.mp4', date:'2026-07-20', time:'09:00', risk:{score:53,label:'LÍMITE',tier:2} },
+  { id:'ep001', n:1,  title:'La inmigración nos está matando',                          cast:'Manolo · Lola · Paco · Carmen · Ramón', dur:'~5 min', src:'eslamanera-ep001.mp4', date:'2026-07-20', time:'09:00', risk:{score:20,label:'SEGURO',tier:0} },
 ];
 
 const NOCLOUD = [
@@ -451,11 +452,12 @@ function toggleDescartats(btn) {
 window.toggleDescartats = toggleDescartats;
 
 /* ── card template ───────────────────────────────── */
-function fmtDate(d) {
+function fmtDatetime(d, t) {
   if (!d) return '';
   const [y,m,day] = d.split('-');
   const months = ['','ene','feb','mar','abr','may','jun','jul','ago','sep','oct','nov','dic'];
-  return `${parseInt(day)} ${months[parseInt(m)]} ${y}`;
+  const datePart = `${parseInt(day)} ${months[parseInt(m)]} ${y}`;
+  return t ? `${datePart} · ${t} h` : datePart;
 }
 function cardHTML(ep) {
   const vote = getVote(ep.id);
@@ -467,7 +469,7 @@ function cardHTML(ep) {
     ? `<div class="risk-badge risk-${ep.risk.tier}">${ep.risk.score}/100 ${ep.risk.label}</div>`
     : '';
   const dateLine = ep.date
-    ? `<div class="ep-date">${fmtDate(ep.date)}</div>`
+    ? `<div class="ep-date">${fmtDatetime(ep.date, ep.time)}</div>`
     : '';
   return `
   <div class="card ${cls}">
