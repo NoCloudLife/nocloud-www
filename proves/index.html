@@ -10,26 +10,39 @@
     background: #0d1117;
     color: #e6edf3;
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-    padding: 2rem 1rem;
+    padding: 2rem 1rem 4rem;
     min-height: 100vh;
   }
-  h1 { font-size: 1.1rem; font-weight: 500; color: #8b949e; margin-bottom: 2rem; letter-spacing: 0.04em; }
+  h1 { font-size: 1.1rem; font-weight: 500; color: #8b949e; margin-bottom: 2.5rem; letter-spacing: 0.04em; }
+  .section { margin-bottom: 3rem; }
+  .section-title {
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #58a6ff;
+    border-bottom: 1px solid #21262d;
+    padding-bottom: 0.5rem;
+    margin-bottom: 1.5rem;
+  }
   .grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
     gap: 2rem;
-    max-width: 900px;
+    max-width: 1100px;
   }
-  .card { display: flex; flex-direction: column; gap: 0.75rem; }
-  .card h2 { font-size: 0.9rem; font-weight: 500; color: #cdd9e5; }
+  .grid.wide { grid-template-columns: repeat(auto-fit, minmax(360px, 1fr)); }
+  .card { display: flex; flex-direction: column; gap: 0.6rem; }
+  .card h2 { font-size: 0.85rem; font-weight: 500; color: #cdd9e5; }
+  .card .meta { font-size: 0.72rem; color: #8b949e; }
   video {
     width: 100%;
-    border-radius: 12px;
+    border-radius: 10px;
     background: #161b22;
     display: block;
   }
   .dl {
-    font-size: 0.75rem;
+    font-size: 0.72rem;
     color: #58a6ff;
     text-decoration: none;
     align-self: flex-start;
@@ -39,20 +52,53 @@
 </head>
 <body>
 <h1>PROVES / en revisió</h1>
-<div class="grid">
 
-  <div class="card">
-    <h2>Expense reclassification</h2>
-    <video src="nocloud-short-expense-reclass.mp4" controls playsinline></video>
-    <a class="dl" href="nocloud-short-expense-reclass.mp4" download>Baixar MP4</a>
+<div class="section">
+  <div class="section-title">Es la manera de hacerme rico — Radio Castiza</div>
+  <div class="grid wide">
+
+    <div class="card">
+      <h2>Ep. 1 — La inmigración nos está matando</h2>
+      <div class="meta">Manolo · Lola · Paco · Carmen · Ramón · ~5 min</div>
+      <video src="eslamanera-ep001.mp4" controls playsinline></video>
+      <a class="dl" href="eslamanera-ep001.mp4" download>Baixar MP4</a>
+    </div>
+
+    <div class="card">
+      <h2>Ep. 2 — Sánchez y la ruina de España</h2>
+      <div class="meta">Manolo · Lola · Paco · Carmen · Ramón · ~4 min</div>
+      <video src="eslamanera-ep002.mp4" controls playsinline></video>
+      <a class="dl" href="eslamanera-ep002.mp4" download>Baixar MP4</a>
+    </div>
+
+    <div class="card">
+      <h2>Ep. 3 — La familia de toda la vida</h2>
+      <div class="meta">Manolo · Lola · Paco · Carmen · ~5 min</div>
+      <video src="eslamanera-ep003.mp4" controls playsinline></video>
+      <a class="dl" href="eslamanera-ep003.mp4" download>Baixar MP4</a>
+    </div>
+
   </div>
-
-  <div class="card">
-    <h2>App store</h2>
-    <video src="nocloud-short-app-store.mp4" controls playsinline></video>
-    <a class="dl" href="nocloud-short-app-store.mp4" download>Baixar MP4</a>
-  </div>
-
 </div>
+
+<div class="section">
+  <div class="section-title">NoCloud — Shorts de producto</div>
+  <div class="grid">
+
+    <div class="card">
+      <h2>Expense reclassification</h2>
+      <video src="nocloud-short-expense-reclass.mp4" controls playsinline></video>
+      <a class="dl" href="nocloud-short-expense-reclass.mp4" download>Baixar MP4</a>
+    </div>
+
+    <div class="card">
+      <h2>App store</h2>
+      <video src="nocloud-short-app-store.mp4" controls playsinline></video>
+      <a class="dl" href="nocloud-short-app-store.mp4" download>Baixar MP4</a>
+    </div>
+
+  </div>
+</div>
+
 </body>
 </html>
