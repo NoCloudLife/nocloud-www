@@ -151,6 +151,30 @@ body::before {
   color: var(--muted);
 }
 
+/* ── risk badge ───────────────────────────────────── */
+.risk-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-family: var(--font-mono);
+  font-size: .6rem;
+  font-weight: 700;
+  letter-spacing: .08em;
+  padding: 2px 7px;
+  border-radius: 3px;
+  width: fit-content;
+}
+.risk-0  { color: #16a34a; background: rgba(22,163,74,.10); border: 1px solid rgba(22,163,74,.3); }
+.risk-1  { color: #ca8a04; background: rgba(202,138,4,.10); border: 1px solid rgba(202,138,4,.3); }
+.risk-2  { color: #ea580c; background: rgba(234,88,12,.10); border: 1px solid rgba(234,88,12,.3); }
+.risk-3  { color: #dc2626; background: rgba(220,38,38,.10); border: 1px solid rgba(220,38,38,.3); }
+.risk-4  { color: #7c3aed; background: rgba(124,58,237,.10); border: 1px solid rgba(124,58,237,.3); }
+.ep-date {
+  font-family: var(--font-mono);
+  font-size: .6rem;
+  color: var(--muted);
+}
+
 /* ── episode card ─────────────────────────────────── */
 .card {
   display: flex;
@@ -388,15 +412,18 @@ body::before {
 <script>
 /* ── episode data ────────────────────────────────── */
 const ESLM = [
-  { id:'ep009', n:9, title:'Las nueve: amores, escándalos y la jet set patria',   cast:'Manolo · Lola · Paco · Carmen · 09:00 h', dur:'~8 min', src:'eslamanera-ep009.mp4' },
-  { id:'ep008', n:8, title:'Las siete: el empleo que se va y el gasto que queda', cast:'Manolo · Paco · Arturo · 07:00 h', dur:'~8 min', src:'eslamanera-ep008.mp4' },
-  { id:'ep007', n:7, title:'El diario de las cinco: España que se rompe',         cast:'Manolo (solo) · 05:00 h', dur:'~8 min', src:'eslamanera-ep007.mp4' },
-  { id:'ep006', n:6, title:'Los medios de Sánchez y la propaganda del gobierno',  cast:'Manolo · Lola · Paco · Arturo', dur:'~4 min', src:'eslamanera-ep006.mp4' },
-  { id:'ep005', n:5, title:'La ideología de género en los colegios',              cast:'Manolo · Lola · Paco · Carmen', dur:'~4 min', src:'eslamanera-ep005.mp4' },
-  { id:'ep004', n:4, title:'El sueldo de los españoles va para impuestos',        cast:'Manolo · Lola · Paco · Carmen · Arturo', dur:'~4 min', src:'eslamanera-ep004.mp4' },
-  { id:'ep003', n:3, title:'La familia de toda la vida',                          cast:'Manolo · Lola · Paco · Carmen', dur:'~5 min', src:'eslamanera-ep003.mp4' },
-  { id:'ep002', n:2, title:'Sánchez y la ruina de España',                       cast:'Manolo · Lola · Paco · Carmen · Ramón', dur:'~4 min', src:'eslamanera-ep002.mp4' },
-  { id:'ep001', n:1, title:'La inmigración nos está matando',                     cast:'Manolo · Lola · Paco · Carmen · Ramón', dur:'~5 min', src:'eslamanera-ep001.mp4' },
+  { id:'ep012', n:12, title:'Las nueve: toros, divorcio famoso y el verano de Sánchez', cast:'Manolo · Lola · Paco · Carmen · 09:00 h', dur:'~10 min', src:'eslamanera-ep012.mp4', date:'2026-07-24', risk:{score:12,label:'SEGURO',tier:0} },
+  { id:'ep011', n:11, title:'Las siete: Milei y el espejo español',                     cast:'Manolo · Paco · Arturo · 07:00 h',         dur:'~8 min',  src:'eslamanera-ep011.mp4', date:'2026-07-24', risk:{score:20,label:'SEGURO',tier:0} },
+  { id:'ep010', n:10, title:'Las cinco: la España que madruga',                         cast:'Manolo (solo) · 05:00 h',                  dur:'~7 min',  src:'eslamanera-ep010.mp4', date:'2026-07-24', risk:{score:22,label:'SEGURO',tier:0} },
+  { id:'ep009', n:9,  title:'Las nueve: amores, escándalos y la jet set patria',        cast:'Manolo · Lola · Paco · Carmen · 09:00 h',  dur:'~8 min',  src:'eslamanera-ep009.mp4', date:'2026-07-24', risk:{score:11,label:'SEGURO',tier:0} },
+  { id:'ep008', n:8,  title:'Las siete: el empleo que se va y el gasto que queda',      cast:'Manolo · Paco · Arturo · 07:00 h',         dur:'~8 min',  src:'eslamanera-ep008.mp4', date:'2026-07-22', risk:{score:34,label:'PRECAUCIÓN',tier:1} },
+  { id:'ep007', n:7,  title:'El diario de las cinco: España que se rompe',              cast:'Manolo (solo) · 05:00 h',                  dur:'~8 min',  src:'eslamanera-ep007.mp4', date:'2026-07-22', risk:{score:38,label:'PRECAUCIÓN',tier:1} },
+  { id:'ep006', n:6,  title:'Los medios de Sánchez y la propaganda del gobierno',       cast:'Manolo · Lola · Paco · Arturo',            dur:'~4 min',  src:'eslamanera-ep006.mp4', date:'2026-07-21', risk:{score:24,label:'SEGURO',tier:0} },
+  { id:'ep005', n:5,  title:'La ideología de género en los colegios',                   cast:'Manolo · Lola · Paco · Carmen',            dur:'~4 min',  src:'eslamanera-ep005.mp4', date:'2026-07-21', risk:{score:24,label:'SEGURO',tier:0} },
+  { id:'ep004', n:4,  title:'El sueldo de los españoles va para impuestos',             cast:'Manolo · Lola · Paco · Carmen · Arturo',   dur:'~4 min',  src:'eslamanera-ep004.mp4', date:'2026-07-21', risk:{score:30,label:'PRECAUCIÓN',tier:1} },
+  { id:'ep003', n:3,  title:'La familia de toda la vida',                               cast:'Manolo · Lola · Paco · Carmen',            dur:'~5 min',  src:'eslamanera-ep003.mp4', date:'2026-07-20', risk:{score:10,label:'SEGURO',tier:0} },
+  { id:'ep002', n:2,  title:'Sánchez y la ruina de España',                            cast:'Manolo · Lola · Paco · Carmen · Ramón',    dur:'~4 min',  src:'eslamanera-ep002.mp4', date:'2026-07-20', risk:{score:53,label:'LÍMITE',tier:2} },
+  { id:'ep001', n:1,  title:'La inmigración nos está matando',                          cast:'Manolo · Lola · Paco · Carmen · Ramón',    dur:'~5 min',  src:'eslamanera-ep001.mp4', date:'2026-07-20', risk:{score:20,label:'SEGURO',tier:0} },
 ];
 
 const NOCLOUD = [
@@ -424,19 +451,35 @@ function toggleDescartats(btn) {
 window.toggleDescartats = toggleDescartats;
 
 /* ── card template ───────────────────────────────── */
+function fmtDate(d) {
+  if (!d) return '';
+  const [y,m,day] = d.split('-');
+  const months = ['','ene','feb','mar','abr','may','jun','jul','ago','sep','oct','nov','dic'];
+  return `${parseInt(day)} ${months[parseInt(m)]} ${y}`;
+}
 function cardHTML(ep) {
   const vote = getVote(ep.id);
   const isUp   = vote === 'up';
   const isDown = vote === 'down';
   const cls    = isUp ? 'card--up' : isDown ? 'card--down' : '';
   const n      = String(ep.n).padStart(3, '0');
+  const riskBadge = ep.risk
+    ? `<div class="risk-badge risk-${ep.risk.tier}">${ep.risk.score}/100 ${ep.risk.label}</div>`
+    : '';
+  const dateLine = ep.date
+    ? `<div class="ep-date">${fmtDate(ep.date)}</div>`
+    : '';
   return `
   <div class="card ${cls}">
     <div class="card-video">
       <video src="${ep.src}" controls playsinline preload="none"></video>
     </div>
     <div class="card-panel">
-      <div class="ep-id">EP·${n}</div>
+      <div style="display:flex;align-items:center;gap:.5rem;flex-wrap:wrap;">
+        <div class="ep-id">EP·${n}</div>
+        ${riskBadge}
+        ${dateLine}
+      </div>
       ${isUp ? `<div class="badge-yt"><span class="dot"></span>PENDENT YT</div>` : ''}
       <h2 class="ep-title">${ep.title}</h2>
       <div class="ep-cast">${ep.cast}</div>
